@@ -18,10 +18,22 @@ Route::get('/', function () {
 
 Route::resource("junior", 'JuniorsController');
 Route::resource("senior", 'SeniorsController');
-Route::resource("employe", 'EmployesController');
+Route::resource("employe", 'EmployeesController');
+
 
 Route::resource('intervention', 'InterventionsController');
 Route::resource('formation', 'FormationsController');
-Route::resource('request', 'RequestController');
+Route::resource('request', 'RequestsController');
+
+Route::resource('page', 'PagesController');
+
+Route::resource('feedback', 'FeedbacksController');
+Route::resource('report', 'ReportsController');
 
 
+Route::resource('topic', 'TopicsController');
+Route::resource('subject', 'SubjectsController');
+
+Route::resource('subscription', 'SubscriptionsController');
+Route::resource('message', 'MessagesController');
+Route::resource('notification','NotificationsController');
