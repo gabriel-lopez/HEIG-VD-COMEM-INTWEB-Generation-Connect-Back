@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::resource("junior", 'JuniorsController');
+Route::resource("senior", 'SeniorsController');
+Route::resource("employe", 'EmployesController');
+
+Route::resource('intervention', 'InterventionsController');
+Route::resource('formation', 'FormationsController');
+Route::resource('request', 'RequestController');
+
+
