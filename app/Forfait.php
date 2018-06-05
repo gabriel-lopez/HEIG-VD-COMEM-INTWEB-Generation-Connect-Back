@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Forfait extends Model
 {
+    public $timestamps = true;
+
     protected $fillable = [
-        'nom', 'description', 'prix'
+        'nom',
+        'description',
+        'prix'
     ];
 
     protected $hidden = [
@@ -16,13 +20,15 @@ class Forfait extends Model
         'updated_at',
     ];
 
+    public static $rules = [
+        'nom' => 'required|string|max:255',
+        'description' => 'required|string',
+        'prix' => 'required|numeric|',
+    ];
 
-    public $timestamps = true;
-
-    public function usesTimestamps()
+    public function senior()
     {
-        return true;
+        return $this->hasMany("\App\Senior");
     }
-
 
 }
