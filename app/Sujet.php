@@ -22,7 +22,7 @@ class Sujet extends Model
         'description' => 'required|string'
     ];
 
-    public function Matiere()
+    public function matiere()
     {
         return $this->hasMany('\App\Matiere');
     }

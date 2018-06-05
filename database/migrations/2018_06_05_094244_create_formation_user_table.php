@@ -15,11 +15,11 @@ class CreateFormationUserTable extends Migration
             $table->integer('formation_id')->unsigned();
             $table->integer('user_id')->unsigned();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('formation_id')->references('id')->on('formations');
-
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('formation_id')->references('id')->on('formations');
 
             $table->primary(['formation_id', 'user_id']);
         });

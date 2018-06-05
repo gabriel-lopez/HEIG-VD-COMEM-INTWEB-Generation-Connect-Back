@@ -4,17 +4,18 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePagesTable extends Migration
+class CreateMessagesTable extends Migration
 {
     public function up()
     {
-        Schema::create('pages', function (Blueprint $table)
+        Schema::create('messages', function (Blueprint $table)
         {
             $table->increments('id');
 
-            $table->string("nom")->unique();
-            $table->text("contenu");
-            $table->integer("employe_id");
+            $table->string('email', 254);
+            $table->enum('status', ["nontraite", "traite", "resolu"]);
+            $table->text('contenu');
+            $table->integer("employe_id")->unsigned()->nullable();
 
             $table->timestamps();
             $table->softDeletes();
@@ -25,6 +26,6 @@ class CreatePagesTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('messages');
     }
 }

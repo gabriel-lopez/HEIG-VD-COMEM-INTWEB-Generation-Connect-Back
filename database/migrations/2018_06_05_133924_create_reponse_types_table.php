@@ -4,27 +4,24 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePagesTable extends Migration
+class CreateReponseTypesTable extends Migration
 {
     public function up()
     {
-        Schema::create('pages', function (Blueprint $table)
+        Schema::create('reponse_types', function (Blueprint $table)
         {
             $table->increments('id');
 
-            $table->string("nom")->unique();
-            $table->text("contenu");
-            $table->integer("employe_id");
+            $table->string('objet', 255);
+            $table->text('contenu');
 
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('employe_id')->references('id')->on('employes');
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('reponse_types');
     }
 }

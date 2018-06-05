@@ -7,13 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Requete extends Model
 {
     protected $fillable = [
-        'type', 'matiere_id', 'senior_id'
-    ];
-
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-        'deleted_at'
+        'type',
+        'matiere_id',
+        'senior_id'
     ];
 
     protected $rules = [
@@ -21,6 +17,12 @@ class Requete extends Model
         'matiere_id' => 'required|exists:matieres,id',
         'soumis_par' => 'required|exists:seniors,id',
 
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     public function plageHoraire()
@@ -47,5 +49,4 @@ class Requete extends Model
     {
         return $this->belongsToMany('\App\Intervention');
     }
-
 }

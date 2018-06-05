@@ -4,27 +4,27 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePagesTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     public function up()
     {
-        Schema::create('pages', function (Blueprint $table)
+        Schema::create('notifications', function (Blueprint $table)
         {
             $table->increments('id');
 
-            $table->string("nom")->unique();
+            $table->enum("type", ["web", "email", "sms"]);
             $table->text("contenu");
-            $table->integer("employe_id");
+            $table->integer("user_id")->unsigned();
 
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('employe_id')->references('id')->on('employes');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('notifications');
     }
 }
