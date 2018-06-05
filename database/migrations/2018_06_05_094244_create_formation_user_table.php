@@ -18,10 +18,10 @@ class CreateFormationUserTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('formation_id')->references('id')->on('formations');
 
-            $table->primary(['formation_id', 'user_id']);
-
             $table->timestamps();
             $table->softDeletes();
+
+            $table->primary(['formation_id', 'user_id']);
         });
     }
 
