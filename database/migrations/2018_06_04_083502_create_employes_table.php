@@ -6,24 +6,21 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateEmployesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('employes', function (Blueprint $table) {
+        Schema::create('employes', function (Blueprint $table)
+        {
             $table->increments('id');
+
+            $table->enum('status', ["actif", "inactif"]);
+
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('id')->references('id')->on('users');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('employes');

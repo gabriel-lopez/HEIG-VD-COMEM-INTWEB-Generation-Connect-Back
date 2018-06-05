@@ -4,16 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Senior extends Model
+class Page extends Model
 {
     public $timestamps = true;
 
     protected $fillable = [
-        'preference'
+        'nom',
+        'contenu',
     ];
 
     protected $rules = [
-        'preference' => 'required|in:"email","telephone"',
+        'nom' => 'required|string|min:1|max:255',
+        'contenu' => 'required|string|min:1'
     ];
 
     protected $hidden = [
@@ -28,8 +30,8 @@ class Senior extends Model
         'deleted_at'
     ];
 
-    public function forfait()
+    public function employe()
     {
-        return $this->hasOne('App\Forfait');
+        return $this->belongsTo('\App\Employe');
     }
 }

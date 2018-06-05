@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sujet extends Model
 {
-
     protected $fillable = [
         'nom',
-        'description'];
+        'description'
+    ];
 
     protected $hidden = [
         'created_at',

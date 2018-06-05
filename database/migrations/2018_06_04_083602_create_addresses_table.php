@@ -12,18 +12,15 @@ class CreateAddressesTable extends Migration
         {
             $table->increments('id');
 
-            $table->text('ligne1');
-            $table->text('ligne2');
-            $table->text('ligne3');
-            $table->text('ville');
-            $table->text('pays');
-            $table->text('npa');
-
+            $table->string('ligne1', 255);
+            $table->string('ligne2', 255);
+            $table->string('ligne3', 255);
+            $table->string('ville', 255);
+            $table->string('pays', 255);
+            $table->integer('npa')->unsigned();
 
             $table->timestamps();
             $table->softDeletes();
-
-
         });
     }
 

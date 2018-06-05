@@ -6,16 +6,18 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateSeniorsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('seniors', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('seniors', function (Blueprint $table)
+        {
+            $table->integer('id')->unsigned()->unique();
+
+            $table->enum('preference', ['email', 'telephone']);
+
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('id')->references('id')->on('users');
         });
     }
 

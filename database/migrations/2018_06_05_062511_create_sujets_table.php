@@ -6,22 +6,19 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateSujetsTable extends Migration
 {
-
     public function up()
     {
-        Schema::create('sujets', function (Blueprint $table) {
+        Schema::create('sujets', function (Blueprint $table)
+        {
             $table->increments('id');
 
-            $table->string('nom');
-            $table->string('description');
+            $table->string('nom')->unique();
+            $table->texte('description');
 
             $table->timestamps();
             $table->softDeletes();
-
-
         });
     }
-
 
     public function down()
     {

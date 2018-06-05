@@ -4,30 +4,25 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateForfaitsTable extends Migration
+class CreatePagesTable extends Migration
 {
     public function up()
     {
-        Schema::create('forfaits', function (Blueprint $table)
+        Schema::create('pages', function (Blueprint $table)
         {
             $table->increments('id');
 
-            $table->string('nom','255');
-            $table->text('description');
-            $table->double('prix');
+            $table->string("nom")->unique();
+            $table->text("contenu");
+            $table->integer("employe_id");
 
             $table->timestamps();
             $table->softDeletes();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('forfaits');
+        Schema::dropIfExists('pages');
     }
 }

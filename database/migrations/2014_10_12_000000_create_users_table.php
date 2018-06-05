@@ -6,28 +6,28 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table)
+        {
             $table->increments('id');
-            $table->string('name');
+
+            $table->string('prenom');
+            $table->string('nom');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('telephone');
+            $table->string('motdepasse');
+
+            $table->integer('adresse_habitation_id')->unsigned();
+
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('adresse_habitation_id')->references('id')->on('addresses');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('users');

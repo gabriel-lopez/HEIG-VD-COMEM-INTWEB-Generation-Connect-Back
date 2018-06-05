@@ -6,24 +6,19 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateJuniorsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('juniors', function (Blueprint $table) {
+        Schema::create('juniors', function (Blueprint $table)
+        {
             $table->increments('id');
+
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('id')->references('id')->on('users');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('juniors');

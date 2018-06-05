@@ -22,7 +22,7 @@ class Forfait extends Model
 
     public static $rules = [
         'nom' => 'required|string|max:255',
-        'description' => 'required|string',
+        'description' => 'required|string|min:1',
         'prix' => 'required|numeric|',
     ];
 
@@ -30,5 +30,4 @@ class Forfait extends Model
     {
         return $this->hasMany("\App\Senior");
     }
-
 }

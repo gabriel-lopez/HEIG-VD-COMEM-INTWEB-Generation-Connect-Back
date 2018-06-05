@@ -9,21 +9,43 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    public $timestamps = true;
+
     protected $fillable = [
-        'name', 'email', 'password',
+        'prenom',
+        'nom',
+        'email',
+        'telephone',
+        'motdepasse',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    protected $rules = [
+        'prenom' => 'required|string|max:255',
+        'nom' => 'required|string|max:255',
+        'email' => 'required|email|unique:users',
+        'telephone' => 'required|phone:CH',
+        /*
+         * The password contains characters from at least three of the following five categories:
+         * - English uppercase characters (A – Z)
+         * - English lowercase characters (a – z)
+         * - Base 10 digits (0 – 9)
+         * - Non-alphanumeric (For example: !, $, #, or %)
+         * - Unicode characters
+         */
+        'motdepasse' => 'required|confirmed|string|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/',
+    ];
+
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 }

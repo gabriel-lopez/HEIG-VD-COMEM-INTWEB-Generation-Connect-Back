@@ -8,7 +8,6 @@ class Address extends Model
 {
     public $timestamps = true;
 
-
     protected $fillable = [
         'ligne1',
         'ligne2',
@@ -16,7 +15,6 @@ class Address extends Model
         'ville',
         'npa'
     ];
-
 
     protected $hidden = [
         'pays',
@@ -47,6 +45,4 @@ class Address extends Model
     {
         return $this->belongsTo('App\Junior', 'AdresseDeDepart');
     }
-
 }
-
