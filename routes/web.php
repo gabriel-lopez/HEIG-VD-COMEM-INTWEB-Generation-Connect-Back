@@ -34,4 +34,4 @@ Route::resource('notification', 'NotificationController');
 
 
 //Controlleurs publics
-Route::resource('page', 'PagesController');
+Route::resource('page', 'PageController');
