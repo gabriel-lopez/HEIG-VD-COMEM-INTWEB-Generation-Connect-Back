@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class requete extends Model
+class Requete extends Model
 {
     protected $fillable = [
         'type', 'matiere_id', 'senior_id'
@@ -35,7 +35,17 @@ class requete extends Model
 
     public function matiere()
     {
-        return $this->hasOne('\App\matiere',);
+        return $this->hasOne('\App\matiere');
+    }
+
+    public function soumissions()
+    {
+        return $this->belongsToMany('\App\Soumission');
+    }
+
+    public function interventions()
+    {
+        return $this->belongsToMany('\App\Intervention');
     }
 
 }
