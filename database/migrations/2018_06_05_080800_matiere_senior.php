@@ -9,7 +9,7 @@ class MatieresSeniors extends Migration
 
     public function up()
     {
-        Schema::create('matieres_seniors', function (Blueprint $table) {
+        Schema::create('matiere_senior', function (Blueprint $table) {
 
 
             $table->integer('matiere_id');
@@ -30,6 +30,6 @@ class MatieresSeniors extends Migration
 
     public function down()
     {
-        //
+        Schema::dropIfExists('matiere_senior');
     }
 }

@@ -9,7 +9,8 @@ class Matiere extends Model
 
     protected $fillable = [
         'nom',
-        'description'];
+        'description',
+        'sujet_id'];
 
     protected $hidden = [
         'created_at',
@@ -20,7 +21,7 @@ class Matiere extends Model
     public static $rules = [
         'nom' => 'required|string|max:255',
         'description' => 'required|string',
-        'sujet' => 'required|exists:sujets,nom' // le sujet d'une matière doit être dans la liste des sujets stockés dans la base
+        'sujet_id' => 'required|exists:sujets,id' // le sujet d'une matière doit être dans la liste des sujets stockés dans la base
     ];
 
     public function sujet()
@@ -28,17 +29,17 @@ class Matiere extends Model
         return $this->hasOne('\App\Sujet');
     }
 
-    public function senior()
+    public function seniors()
     {
         return $this->belongsToMany('\App\Senior');
     }
 
-    public function junior()
+    public function juniors()
     {
         return $this->belongsToMany('\App\Junior');
     }
 
-    public function requete()
+    public function requetes()
     {
         return $this->hasMany('\App\Requete');
     }

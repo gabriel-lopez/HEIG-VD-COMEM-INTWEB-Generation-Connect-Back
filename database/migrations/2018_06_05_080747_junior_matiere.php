@@ -4,16 +4,12 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class JuniorsMatieres extends Migration
+class JuniorMatiere extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
-        Schema::create('juniors_matieres', function (Blueprint $table) {
+        Schema::create('junior_matiere', function (Blueprint $table) {
 
 
             $table->integer('matiere_id');
@@ -32,13 +28,9 @@ class JuniorsMatieres extends Migration
 
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
-        //
+        Schema::dropIfExists('junior_matiere');
     }
 }
