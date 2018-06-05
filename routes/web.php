@@ -15,25 +15,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Controlleurs utilisateurs
+Route::resource("junior", 'JuniorController');
+Route::resource("senior", 'SeniorController');
+Route::resource("employe", 'EmployeController');
 
-Route::resource("junior", 'JuniorsController');
-Route::resource("senior", 'SeniorsController');
-Route::resource("employe", 'EmployeesController');
+//Controlleurs "métier"
+Route::resource('intervention', 'InterventionController');
+Route::resource('formation', 'FormationController');
+Route::resource('requete', 'RequeteController');
+Route::resource('evaluationservice', 'EvaluationServiceController');
+Route::resource('rapportIntervention', 'RapportInterventionController');
+Route::resource('matiere', 'MatiereController');
+Route::resource('sujet', 'SujetController');
+Route::resource('forfait', 'ForfaitController');
+Route::resource('message', 'MessageController');
+Route::resource('notification', 'NotificationController');
 
 
-Route::resource('intervention', 'InterventionsController');
-Route::resource('formation', 'FormationsController');
-Route::resource('request', 'RequestsController');
-
+//Controlleurs publics
 Route::resource('page', 'PagesController');
-
-Route::resource('feedback', 'FeedbacksController');
-Route::resource('report', 'ReportsController');
-
-
-Route::resource('topic', 'TopicsController');
-Route::resource('subject', 'SubjectsController');
-
-Route::resource('subscription', 'SubscriptionsController');
-Route::resource('message', 'MessagesController');
-Route::resource('notification','NotificationsController');
