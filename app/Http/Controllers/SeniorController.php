@@ -14,18 +14,10 @@ class SeniorController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Senior::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -78,8 +70,11 @@ class SeniorController extends Controller
      * @param  \App\Senior  $senior
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Senior $senior)
+    public function destroy($id)
     {
-        //
+        $senior = Senior::find($id);
+        if(isset($senior)) {
+            $senior->delete();
+        }
     }
 }

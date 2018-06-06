@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Senior extends Model
 {
+    use SoftDeletes;
+
     public $timestamps = true;
 
     protected $fillable = [
@@ -28,8 +31,30 @@ class Senior extends Model
         'deleted_at'
     ];
 
+    public function user()
+    {
+        return $this->hasOne('\App\User');
+    }
+
     public function forfait()
     {
         return $this->hasOne('App\Forfait');
     }
+
+    public function matiere()
+    {
+        return $this->belongsToMany('\app\Matiere');
+    }
+
+    public function soumission()
+    {
+        return $this->hasMany('\App\Matiere');
+    }
+
+    public function requete()
+    {
+        return $this->hasMany('\App\Requete', 'soumis_par');
+    }
+
+
 }
