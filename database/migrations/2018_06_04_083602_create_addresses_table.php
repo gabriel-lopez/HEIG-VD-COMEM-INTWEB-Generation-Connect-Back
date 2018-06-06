@@ -13,8 +13,8 @@ class CreateAddressesTable extends Migration
             $table->increments('id');
 
             $table->string('ligne1', 255);
-            $table->string('ligne2', 255);
-            $table->string('ligne3', 255);
+            $table->string('ligne2', 255)->nullable();
+            $table->string('ligne3', 255)->nullable();
             $table->string('ville', 255);
             $table->string('pays', 255);
             $table->integer('npa')->unsigned();
