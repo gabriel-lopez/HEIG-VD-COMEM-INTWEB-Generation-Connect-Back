@@ -13,8 +13,8 @@ class CreateInterventionsTable extends Migration
             $table->increments('id');
 
             $table->enum('statut', ['planifie','annule','finalise']); //planifié, annulé, finalisé
-            $table->timestamp('finprevu');
-            $table->timestamp('debutprevu');
+            $table->timestamp('finprevu')->nullable();
+            $table->timestamp('debutprevu')->nullable();
             $table->integer('junior_affecte')->unsigned();
             $table->integer('requete_id')->unsigned();
 

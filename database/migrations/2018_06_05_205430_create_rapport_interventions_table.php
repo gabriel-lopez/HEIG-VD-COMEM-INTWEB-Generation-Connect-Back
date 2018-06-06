@@ -15,8 +15,8 @@ class CreateRapportInterventionsTable extends Migration
             $table->boolean('servicerendu');
             $table->text('commentaire');
             $table->time('tempspasse'); //tempspassé
-            $table->timestamp('fin');
-            $table->timestamp('debut');
+            $table->timestamp('fin')->nullable();
+            $table->timestamp('debut')->nullable();
             $table->enum('noteSmiley', ["0", "1", "2", "3"]);
             $table->integer('intervention_id')->unsigned();
 
