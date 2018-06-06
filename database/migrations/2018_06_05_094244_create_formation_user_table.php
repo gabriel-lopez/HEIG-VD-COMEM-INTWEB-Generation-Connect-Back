@@ -10,13 +10,8 @@ class CreateFormationUserTable extends Migration
     {
         Schema::create('formation_user', function (Blueprint $table)
         {
-            $table->increments('id');
-
             $table->integer('formation_id')->unsigned();
             $table->integer('user_id')->unsigned();
-
-            $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('formation_id')->references('id')->on('formations');

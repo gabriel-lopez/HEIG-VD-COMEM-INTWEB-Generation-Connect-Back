@@ -6,32 +6,26 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateInterventionsTable extends Migration
 {
-
     public function up()
     {
-        Schema::create('interventions', function (Blueprint $table) {
+        Schema::create('interventions', function (Blueprint $table)
+        {
             $table->increments('id');
 
             $table->enum('statut', ['planifie','annule','finalise']); //planifié, annulé, finalisé
             $table->timestamp('finprevu');
             $table->timestamp('debutprevu');
-            $table->integer('junior_affecte');
-            $table->integer('requete_id');
+            $table->integer('junior_affecte')->unsigned();
+            $table->integer('requete_id')->unsigned();
 
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('junior_affecte')->references('id')->on('juniors');
-            $table->foreign('lie_a')->references('id')->on('requetes');
-
+            $table->foreign('requete_id')->references('id')->on('requetes');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('interventions');

@@ -13,7 +13,7 @@ class CreateSujetsTable extends Migration
             $table->increments('id');
 
             $table->string('nom')->unique();
-            $table->texte('description');
+            $table->text('description');
 
             $table->timestamps();
             $table->softDeletes();

@@ -6,10 +6,10 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateRapportInterventionsTable extends Migration
 {
-
     public function up()
     {
-        Schema::create('rapports_interventions', function (Blueprint $table) {
+        Schema::create('rapports_interventions', function (Blueprint $table)
+        {
             $table->increments('id');
 
             $table->boolean('servicerendu');
@@ -17,7 +17,7 @@ class CreateRapportInterventionsTable extends Migration
             $table->time('tempspasse'); //tempspassé
             $table->timestamp('fin');
             $table->timestamp('debut');
-            $table->enum('noteSmiley', [0, 1, 2, 3]);
+            $table->enum('noteSmiley', ["0", "1", "2", "3"]);
             $table->integer('intervention_id')->unsigned();
 
             $table->timestamps();
@@ -27,9 +27,8 @@ class CreateRapportInterventionsTable extends Migration
         });
     }
 
-
     public function down()
     {
-        Schema::dropIfExists('rapport_interventions');
+        Schema::dropIfExists('rapports_interventions');
     }
 }
