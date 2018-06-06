@@ -31,6 +31,7 @@ class Junior extends Model
     ];
 
     protected $hidden = [
+        'user_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -41,4 +42,9 @@ class Junior extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function AdresseDeDepart()
+    {
+        return $this->belongsTo('\App\Address');
+    }
 }

@@ -36,7 +36,8 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
-        'password',
+        'adresse_habitation_id',
+        'motdepasse',
         'remember_token',
         'created_at',
         'updated_at',
@@ -48,4 +49,19 @@ class User extends Authenticatable
         'updated_at',
         'deleted_at'
     ];
+
+    public function senior()
+    {
+        return $this->hasOne('\App\Senior');
+    }
+
+    public function junior()
+    {
+        return $this->hasOne('\App\Junior');
+    }
+
+    public function adresse_habitation()
+    {
+        return $this->belongsTo('\App\Address');
+    }
 }

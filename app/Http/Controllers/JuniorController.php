@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Junior;
+use App\User;
 use Illuminate\Http\Request;
 
 class JuniorController extends Controller
@@ -14,7 +15,7 @@ class JuniorController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(User::with('junior', 'adresse_habitation')->has('junior')->get());
     }
 
     /**

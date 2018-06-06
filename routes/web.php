@@ -11,19 +11,19 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function ()
+{
     return view('welcome');
 });
 
 Route::prefix('api')->group(function ()  // api/route
 {
-
-//Controlleurs utilisateurs
+    // Controlleurs utilisateurs
     Route::resource("juniors", 'JuniorController')->except(['create']);
     Route::resource("seniors", 'SeniorController')->except(['create']);
     Route::resource("employes", 'EmployeController')->except(['create']);
 
-//Controlleurs "métier"
+    // Controlleurs "métier"
     Route::resource('interventions', 'InterventionController')->except(['create']);
     Route::resource('formations', 'FormationController')->except(['create']);
     Route::resource('requetes', 'RequeteController')->except(['create']);
@@ -35,7 +35,6 @@ Route::prefix('api')->group(function ()  // api/route
     Route::resource('messages', 'MessageController')->except(['create']);
     Route::resource('notifications', 'NotificationController')->except(['create']);
 
-
-//Controlleurs publics
+    // Controlleurs publics
     Route::resource('pages', 'PageController')->except(['create']);
 });

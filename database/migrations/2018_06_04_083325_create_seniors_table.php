@@ -10,14 +10,14 @@ class CreateSeniorsTable extends Migration
     {
         Schema::create('seniors', function (Blueprint $table)
         {
-            $table->integer('id')->unsigned()->unique();
+            $table->integer('user_id')->unsigned()->unique();
 
             $table->enum('preference', ['email', 'telephone']);
 
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
