@@ -15,23 +15,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::prefix('api')->group(function ()  // api/route
+{
+
 //Controlleurs utilisateurs
-Route::resource("junior", 'JuniorController')->except(['create']);
-Route::resource("senior", 'SeniorController')->except(['create']);
-Route::resource("employe", 'EmployeController')->except(['create']);
+    Route::resource("juniors", 'JuniorController')->except(['create']);
+    Route::resource("seniors", 'SeniorController')->except(['create']);
+    Route::resource("employes", 'EmployeController')->except(['create']);
 
 //Controlleurs "métier"
-Route::resource('intervention', 'InterventionController')->except(['create']);
-Route::resource('formation', 'FormationController')->except(['create']);
-Route::resource('requete', 'RequeteController')->except(['create']);
-Route::resource('evaluationservice', 'EvaluationServiceController')->except(['create']);
-Route::resource('rapportIntervention', 'RapportInterventionController')->except(['create']);
-Route::resource('matiere', 'MatiereController')->except(['create']);
-Route::resource('sujet', 'SujetController')->except(['create']);
-Route::resource('forfait', 'ForfaitController')->except(['create']);
-Route::resource('message', 'MessageController')->except(['create']);
-Route::resource('notification', 'NotificationController')->except(['create']);
+    Route::resource('interventions', 'InterventionController')->except(['create']);
+    Route::resource('formations', 'FormationController')->except(['create']);
+    Route::resource('requetes', 'RequeteController')->except(['create']);
+    Route::resource('evaluationservices', 'EvaluationServiceController')->except(['create']);
+    Route::resource('rapportInterventions', 'RapportInterventionController')->except(['create']);
+    Route::resource('matieres', 'MatiereController')->except(['create']);
+    Route::resource('sujets', 'SujetController')->except(['create']);
+    Route::resource('forfaits', 'ForfaitController')->except(['create']);
+    Route::resource('messages', 'MessageController')->except(['create']);
+    Route::resource('notifications', 'NotificationController')->except(['create']);
 
 
 //Controlleurs publics
-Route::resource('page', 'PageController')->except(['create']);
+    Route::resource('pages', 'PageController')->except(['create']);
+});
