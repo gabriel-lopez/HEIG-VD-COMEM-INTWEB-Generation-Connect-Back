@@ -14,7 +14,7 @@ class ForfaitController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Forfait::all());
     }
 
     /**

@@ -54,4 +54,9 @@ class Junior extends Model
     {
         return $this->belongsTo('\App\Address', 'AdresseFacturation');
     }
+
+    public function matieres()
+    {
+        return $this->belongsToMany('\App\Matiere');
+    }
 }

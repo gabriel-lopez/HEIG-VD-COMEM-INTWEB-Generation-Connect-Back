@@ -15,7 +15,10 @@ class SeniorController extends Controller
      */
     public function index()
     {
-        return response()->json(User::with('senior', 'adresse_habitation')->has('senior')->get());
+        return response()
+            ->json(User::with('senior', 'adresse_habitation', 'senior.forfait')
+            ->has('senior')
+            ->get());
     }
 
     /**

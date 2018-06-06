@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Employe;
+use App\User;
 use Illuminate\Http\Request;
 
 class EmployeController extends Controller
@@ -14,7 +15,10 @@ class EmployeController extends Controller
      */
     public function index()
     {
-        //
+        return response()
+            ->json(User::with('employe', 'adresse_habitation')
+            ->has('employe')
+            ->get());
     }
 
     /**

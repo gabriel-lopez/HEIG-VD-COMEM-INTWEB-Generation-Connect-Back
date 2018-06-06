@@ -11,10 +11,7 @@ class CreateMatiereSeniorTable extends Migration
         Schema::create('matiere_senior', function (Blueprint $table)
         {
             $table->integer('matiere_id')->unsigned();
-            $table->integer('senior_id')->unsigned;
-
-            $table->timestamps();
-            $table->softDeletes();
+            $table->integer('senior_id')->unsigned();
 
             $table->foreign('matiere_id')->references('id')->on('matieres');
             $table->foreign('senior_id')->references('id')->on('seniors');

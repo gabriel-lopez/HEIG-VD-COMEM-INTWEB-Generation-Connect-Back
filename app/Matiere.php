@@ -17,7 +17,7 @@ class Matiere extends Model
         'updated_at'
     ];
 
-    public static $rules = [
+    protected $rules = [
         'nom' => 'required|string|max:255',
         'description' => 'required|string',
         'sujet_id' => 'required|exists:sujets,id' // le sujet d'une matière doit être dans la liste des sujets stockés dans la base

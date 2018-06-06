@@ -13,11 +13,13 @@ class CreateSeniorsTable extends Migration
             $table->integer('user_id')->unsigned()->unique();
 
             $table->enum('preference', ['email', 'telephone']);
+            $table->integer("forfait_id")->unsigned();
 
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('forfait_id')->references('id')->on('forfaits');
         });
     }
 

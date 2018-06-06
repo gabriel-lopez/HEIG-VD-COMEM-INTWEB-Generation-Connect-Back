@@ -14,7 +14,7 @@ class SujetController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Sujet::with('matieres')->get());
     }
 
     /**

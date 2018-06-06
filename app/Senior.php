@@ -21,6 +21,7 @@ class Senior extends Model
 
     protected $hidden = [
         'user_id',
+        'forfait_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -32,20 +33,22 @@ class Senior extends Model
         'deleted_at'
     ];
 
-    public function user()
+    public function forfait()
+    {
+        return $this->belongsTo('App\Forfait');
+    }
+
+    public function matieres()
+    {
+        return $this->belongsToMany('\app\Matiere');
+    }
+
+    /*public function user()
     {
         return $this->hasOne('\App\User');
     }
 
-    public function forfait()
-    {
-        return $this->hasOne('App\Forfait');
-    }
 
-    public function matiere()
-    {
-        return $this->belongsToMany('\app\Matiere');
-    }
 
     public function soumission()
     {
@@ -55,7 +58,5 @@ class Senior extends Model
     public function requete()
     {
         return $this->hasMany('\App\Requete', 'soumis_par');
-    }
-
-
+    }*/
 }

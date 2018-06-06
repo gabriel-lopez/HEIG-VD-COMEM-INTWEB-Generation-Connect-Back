@@ -3,16 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RapportIntervention extends Model
 {
-
-    protected $fillable = [];
+    use SoftDeletes;
 
     protected $table = 'rapports_interventions';
-    protected $dates = [
-        'fin','debut'
-    ];
 
     protected $rules = [
         'servicerendu'=>'required|boolean',
@@ -25,9 +22,22 @@ class RapportIntervention extends Model
 
     ];
 
-public function intervention()
-{
- return $this->hasOne('\App\Intervention');
-}
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
 
+    protected $dates = [
+        'fin',
+        'debut',
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
+
+    public function intervention()
+    {
+        return $this->hasOne('\App\Intervention');
+    }
 }

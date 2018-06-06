@@ -15,7 +15,14 @@ class JuniorController extends Controller
      */
     public function index()
     {
-        return response()->json(User::with('junior', 'adresse_habitation', 'junior.adresse_de_depart', 'junior.adresse_de_facturation')->has('junior')->get());
+        return response()
+            ->json(User::with(
+                'junior',
+                'adresse_habitation',
+                'junior.adresse_de_depart',
+                'junior.adresse_de_facturation')
+            ->has('junior')
+            ->get());
     }
 
     /**

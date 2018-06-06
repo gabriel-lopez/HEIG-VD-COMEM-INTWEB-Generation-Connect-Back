@@ -10,14 +10,14 @@ class CreateEmployesTable extends Migration
     {
         Schema::create('employes', function (Blueprint $table)
         {
-            $table->increments('id');
+            $table->increments('user_id');
 
             $table->enum('status', ["actif", "inactif"]);
 
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

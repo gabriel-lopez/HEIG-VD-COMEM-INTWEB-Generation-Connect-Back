@@ -17,12 +17,12 @@ class Sujet extends Model
         'updated_at'
     ];
 
-    public static $rules = [
+    protected $rules = [
         'nom' => 'required|string|max:255',
         'description' => 'required|string'
     ];
 
-    public function matiere()
+    public function matieres()
     {
         return $this->hasMany('\App\Matiere');
     }

@@ -60,6 +60,11 @@ class User extends Authenticatable
         return $this->hasOne('\App\Junior');
     }
 
+    public function employe()
+    {
+        return $this->hasOne('\App\Employe');
+    }
+
     public function adresse_habitation()
     {
         return $this->belongsTo('\App\Address');

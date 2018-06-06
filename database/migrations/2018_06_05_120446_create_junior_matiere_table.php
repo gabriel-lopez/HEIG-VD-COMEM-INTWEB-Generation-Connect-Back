@@ -10,11 +10,8 @@ class CreateJuniorMatiereTable extends Migration
     {
         Schema::create('junior_matiere', function (Blueprint $table)
         {
-            $table->integer('matiere_id')->unique();
-            $table->integer('junior_id')->unique();
-
-            $table->timestamps();
-            $table->softDeletes();
+            $table->integer('matiere_id');
+            $table->integer('junior_id');
 
             $table->foreign('matiere_id')->references('id')->on('matieres');
             $table->foreign('junior_id')->references('id')->on('juniors');
