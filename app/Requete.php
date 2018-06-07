@@ -27,23 +27,30 @@ class Requete extends Model
 
     public function plageHoraire()
     {
-        return $this->hasOne('\App\PlageHoraire', 'plageHoraire_id');
+        return $this->belongsTo('\App\PlageHoraire', 'plageHoraire_id');
     }
 
     public function senior()
     {
-        return $this->hasOne('\App\Senior', 'soumis_par');
+        return $this->belongsTo('\App\Senior', 'soumis_par');
+    }
+
+    public function soumis_par()
+    {
+        return $this->belongsTo('\App\User', 'soumis_par');
     }
 
     public function matiere()
     {
-        return $this->hasOne('\App\matiere');
+        return $this->belongsTo('\App\matiere');
     }
 
     public function soumissions()
     {
-        return $this->belongsToMany('\App\Soumission');
+        return $this->hasMany('\App\Soumission');
     }
+
+
 
     public function interventions()
     {

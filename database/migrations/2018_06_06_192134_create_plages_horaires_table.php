@@ -12,9 +12,9 @@ class CreatePlagesHorairesTable extends Migration
         {
             $table->increments('id');
 
-            $table->enum("JourSemaine", ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"]);
-            $table->time('HDebut');
-            $table->time('HFin');
+            $table->enum("joursemaine", ["lundi", "mardi", "mercredi", "jeudi", "vendredi"]);
+            $table->time('heuredebut');
+            $table->time('heurefin');
 
             $table->timestamps();
             $table->softDeletes();

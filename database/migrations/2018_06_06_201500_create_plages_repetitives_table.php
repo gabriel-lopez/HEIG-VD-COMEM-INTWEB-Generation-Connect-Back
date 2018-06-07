@@ -12,9 +12,9 @@ class CreatePlagesRepetitivesTable extends Migration
         {
             $table->increments('plage_horaire_id');
 
-            $table->date("DateDebut");
-            $table->date("DateFin");
-            $table->integer("NombreOccurence")->unsigned();
+            $table->date("datedebut");
+            $table->date("datefin");
+            $table->integer("nombreoccurence")->unsigned();
 
             $table->timestamps();
             $table->softDeletes();

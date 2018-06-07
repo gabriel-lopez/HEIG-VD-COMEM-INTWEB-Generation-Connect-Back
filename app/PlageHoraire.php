@@ -23,11 +23,11 @@ class PlageHoraire extends Model
 
     public function plage_unique()
     {
-        return $this->hasOne('\App\PlageUnique');
+        return $this->hasOne('\App\PlageUnique','plage_horaire_id');
     }
 
     public function plage_horaire_repetitive()
     {
-        return $this->hasOne('\App\PlageRepetive');
+        return $this->hasOne('\App\PlageRepetitive', 'plage_horaire_id');
     }
 }

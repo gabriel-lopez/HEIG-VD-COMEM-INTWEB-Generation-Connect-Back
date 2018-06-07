@@ -3,15 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Soumission extends Model
 {
-    protected $fillable = [
-        'requete_id',
-        'junior_id',
-        'acceptation',
-        'proposition'
-    ];
+    public $timestamps = false;
 
     protected $dates = [
         'acceptation',

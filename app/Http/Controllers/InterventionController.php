@@ -47,9 +47,11 @@ class InterventionController extends Controller
      * @param  \App\Intervention  $intervention
      * @return \Illuminate\Http\Response
      */
-    public function show(Intervention $intervention)
+    public function show($id)
     {
-        //
+        return response()
+            ->json(Intervention::with(['user.junior', 'requete.soumis_par.senior'])
+                ->find($id)->makeHidden(['junior_affecte','requete_id']));
     }
 
     /**

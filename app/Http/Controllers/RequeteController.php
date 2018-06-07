@@ -14,7 +14,10 @@ class RequeteController extends Controller
      */
     public function index()
     {
-        //
+        return response()
+            ->json(Requete::with(['soumis_par.senior','matiere', 'soumissions', 'interventions'])
+            ->get()
+            ->makeHidden('matiere_id'));
     }
 
     /**
@@ -41,12 +44,28 @@ class RequeteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Requete  $requete
+     *
      * @return \Illuminate\Http\Response
      */
-    public function show(Requete $requete)
+    public function show($id)
     {
-        //
+        $request = Requete::with(['soumis_par.senior','matiere', 'plageHoraire.plage_unique', 'plageHoraire.plage_horaire_repetitive'])
+            ->find($id)
+            ->makeHidden(['plageHoraire_id', 'matiere_id']);
+
+
+
+        if($request && !($request->plageHoraire->plage_horaire_repetitive))
+        {
+            $request->plageHoraire->makeHidden('plage_horaire_repetitive');
+        }
+        elseif($request && !($request->plageHoraire->plage_unique))
+        {
+            $request->plageHoraire->makeHidden('plage_unique');
+        }
+
+
+        return response()->json($request);
     }
 
     /**

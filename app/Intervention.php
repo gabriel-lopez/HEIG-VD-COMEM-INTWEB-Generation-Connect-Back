@@ -34,7 +34,7 @@ class Intervention extends Model
 
     public function requete()
     {
-        return $this->hasOne('\App\Requete');
+        return $this->belongsTo('\App\Requete');
     }
 
     public function evaluationService()

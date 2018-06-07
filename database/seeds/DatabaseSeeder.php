@@ -162,17 +162,83 @@ class DatabaseSeeder extends Seeder
         $employe1->save();
         //</editor-fold>
 
+        $plageHoraire1 = new \App\PlageHoraire([
+            'joursemaine' => 'lundi',
+            'heuredebut' => Carbon::createFromTime(14,00),
+            'heurefin' => Carbon::createFromTime(15,00),
+
+        ]);
+        $plageHoraire1->save();
+
+
+        $plageHoraire2 = new \App\PlageHoraire([
+            'joursemaine' => 'lundi',
+            'heuredebut' => Carbon::createFromTime(14,00),
+            'heurefin' => Carbon::createFromTime(15,00),
+
+        ]);
+        $plageHoraire2->save();
+
+        $plageUnique1 = new \App\PlageUnique([
+            'plage_horaire_id' => $plageHoraire1->id,
+            'date' => Carbon::now(),
+        ]);
+        $plageUnique1->save();
+
+
+        $plageRepetitive1 = new \App\PlageRepetitive([
+            'plage_horaire_id' => $plageHoraire2->id,
+            'datedebut' => Carbon::now(),
+            'datefin' => Carbon::now()->addDays(30),
+            'nombreoccurence' => 3
+        ]);
+        $plageRepetitive1->save();
+
+        $requete1 = new \App\Requete(
+            [
+             'type' => 'unique',
+             'statut' => 'accepte',
+             'matiere_id' => 1,
+             'soumis_par' => 1,
+             'plageHoraire_id' => 1
+            ]
+        );
+        $requete1->save();
+
+        $requete2 = new \App\Requete(
+            [
+                'type' => 'unique',
+                'statut' => 'accepte',
+                'matiere_id' => 1,
+                'soumis_par' => 1,
+                'plageHoraire_id' => 2
+            ]
+        );
+        $requete2->save();
+
+        $soumission1 = new \App\Soumission(
+            [
+                'requete_id' => $requete1->id,
+                'junior_id' => $junior1->id,
+                'acceptation' => Carbon::now()->subHour(3),
+                'proposition' => Carbon::now()->subHour(4),
+            ]
+        );
+        $soumission1->save();
+
+
         $intervention1 = new \App\Intervention([
             'statut' => 'finalise',
             'finprevu' => Carbon::now(),
             'debutprevu' => Carbon::now()->subHour(1),
             'junior_affecte' => $junior1->id,
-            'requete_id' => '0'
+            'requete_id' => $requete1->id,
         ]);
-        $intervention1->save();
+
+        $requete1->interventions()->save($intervention1);
 
         $evaluationService1 = new \App\EvaluationService(
-            ['senior_id' => $senior1->user_id,
+            ['senior_id' => 1,
                 'intervention_id' => $intervention1->id,
                 'commentaire' => 'Super service, jeune à l\'heure, content',
                 'noteSmiley' => 2]
