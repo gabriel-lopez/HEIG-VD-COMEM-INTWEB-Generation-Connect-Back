@@ -101,7 +101,7 @@ class BouncerSeeder extends Seeder
             'title' => 'create_intervention',
         ]);
 
-        $modifier_contenu_page = Bouncer::ability()->edit([
+        $modifier_contenu_page = Bouncer::ability()->create([
             'name' => '$modifier_contenu_page',
             'title' => '$modifier_contenu_page',
         ]);
