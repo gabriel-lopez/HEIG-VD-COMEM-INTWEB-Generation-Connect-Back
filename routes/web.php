@@ -31,7 +31,7 @@ Route::group(['prefix' => 'api'], function()
     Route::post("login", 'AuthController@login');
 });
 
-Route::group(['prefix' => 'api', 'middleware' => 'auth'], function()
+Route::group(['prefix' => 'api' ,'middleware' => 'auth'], function()
 {
     Route::get("logout", 'AuthController@logout');
 
@@ -45,7 +45,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function()
     Route::resource('formations', 'FormationController')->except(['create']);
     Route::resource('requetes', 'RequeteController')->except(['create']);
     Route::resource('evaluationservices', 'EvaluationServiceController')->except(['create']);
-    Route::resource('rapportInterventions', 'RapportInterventionController')->except(['create']);
+    Route::resource('rapportinterventions', 'RapportInterventionController')->except(['create']);
     Route::resource('matieres', 'MatiereController')->except(['create']);
     Route::resource('sujets', 'SujetController')->except(['create']);
     Route::resource('forfaits', 'ForfaitController')->except(['create']);

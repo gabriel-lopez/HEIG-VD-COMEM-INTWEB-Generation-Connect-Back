@@ -19,11 +19,13 @@ class CreateRapportsInterventionsTable extends Migration
             $table->timestamp('debut')->nullable();
             $table->enum('noteSmiley', ["0", "1", "2", "3"]);
             $table->integer('intervention_id')->unsigned();
+            $table->integer('user_id')->unsigned();
 
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('intervention_id')->references('id')->on('interventions');
+            $table->foreign('user_id')->references('id')->on('user');
         });
     }
 

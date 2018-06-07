@@ -45,6 +45,7 @@ class User extends Authenticatable
     ];
 
     protected $dates = [
+        'pivot',
         'created_at',
         'updated_at',
         'deleted_at'

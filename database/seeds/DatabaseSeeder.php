@@ -13,14 +13,14 @@ class DatabaseSeeder extends Seeder
 
         //<editor-fold desc="Sujets">
         $sujet1 = new \App\Sujet([
-            'nom' => "Sujet #1",
+            'nom' => "Informatique",
             'description' => "Sujet #1 Description",
         ]);
 
         $sujet1->save();
 
         $sujet2 = new \App\Sujet([
-            'nom' => "Sujet #2",
+            'nom' => "Jardinage",
             'description' => "Sujet #2 Description",
         ]);
 
@@ -29,16 +29,16 @@ class DatabaseSeeder extends Seeder
 
         //<editor-fold desc="Matieres">
         $matiere1 = new \App\Matiere([
-            'nom' => "Sujet #1",
-            'description' => "Sujet #1 Description",
+            'nom' => "Skype",
+            'description' => "Papy telephone maison",
             'sujet_id' => $sujet1->id
         ]);
 
         $matiere1->save();
 
         $matiere2 = new \App\Matiere([
-            'nom' => "Sujet #1",
-            'description' => "Sujet #1 Description",
+            'nom' => "Cueillette",
+            'description' => "Aller cueillir des fraises ou des champignons",
             'sujet_id' => $sujet2->id
         ]);
 
@@ -245,6 +245,25 @@ class DatabaseSeeder extends Seeder
         );
         $evaluationService1->save();
 
+        $formation1 = new \App\Formation([
+            'nom' => 'formation initiale',
+            'description' => 'Cette formation doit être suivie par tous les juniors',
+            'plagehoraire_id' => $plageUnique1->plage_horaire_id,
+        ]);
+        $formation1->save();
+        $formation1->users()->save($user2);
 
+        $rapportIntervention1 = new \App\RapportIntervention([
+
+            'servicerendu' => true,
+            'commentaire' => 'On adore les rapports d\'intervention',
+            'tempspasse' => Carbon::createFromTime('2','30'),
+            'fin' => Carbon::now(),
+            'debut' => Carbon::now()->subHour(2)->subMinute(30),
+            'noteSmiley' => 3,
+            'intervention_id' => $intervention1->id,
+            'user_id' => $user2->id]
+            );
+        $rapportIntervention1->save();
     }
 }

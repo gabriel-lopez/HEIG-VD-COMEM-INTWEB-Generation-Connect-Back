@@ -14,7 +14,9 @@ class MatiereController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Matiere::with('sujet')
+        ->get()
+        ->makeHidden('sujet_id'));
     }
 
     /**
@@ -41,12 +43,14 @@ class MatiereController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Matiere  $matiere
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Matiere $matiere)
+    public function show($id)
     {
-        //
+        return response()->json(Matiere::with('sujet')
+            ->find($id)
+            ->makeHidden('sujet_id'));
     }
 
     /**

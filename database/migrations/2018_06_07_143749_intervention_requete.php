@@ -32,7 +32,7 @@ class InterventionRequete extends Migration
     public function down()
     {
         {
-            Schema::dropIfExists('plages_repetitives');
+            Schema::dropIfExists('intervention_requete');
         }
     }
 }

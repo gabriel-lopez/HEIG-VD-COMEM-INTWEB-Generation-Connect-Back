@@ -14,7 +14,14 @@ class SujetController extends Controller
      */
     public function index()
     {
-        return response()->json(Sujet::with('matieres')->get());
+        $sujets = Sujet::with('matieres')->get();
+
+        foreach ($sujets as $sujet) {
+            foreach ($sujet->matieres as $matiere) {
+                $matiere->makeHidden('sujet_id');
+            }
+        }
+        return response()->json($sujets);
     }
 
     /**
@@ -30,7 +37,7 @@ class SujetController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,18 +48,24 @@ class SujetController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Sujet  $sujet
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Sujet $sujet)
+    public function show($id)
     {
-        //
+        $sujet = Sujet::with('matieres')->find($id);
+        if ($sujet) {
+            foreach ($sujet->matieres as $matiere) {
+                $matiere->makeHidden('sujet_id');
+            }
+        }
+        return response()->json($sujet);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Sujet  $sujet
+     * @param  \App\Sujet $sujet
      * @return \Illuminate\Http\Response
      */
     public function edit(Sujet $sujet)
@@ -63,8 +76,8 @@ class SujetController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Sujet  $sujet
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Sujet $sujet
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Sujet $sujet)
@@ -75,7 +88,7 @@ class SujetController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Sujet  $sujet
+     * @param  \App\Sujet $sujet
      * @return \Illuminate\Http\Response
      */
     public function destroy(Sujet $sujet)

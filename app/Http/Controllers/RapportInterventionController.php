@@ -14,7 +14,9 @@ class RapportInterventionController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(RapportIntervention::with(['intervention','user'])
+            ->get()
+            ->makeHidden(['intervention_id','user_id']));
     }
 
     /**
@@ -41,12 +43,16 @@ class RapportInterventionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\RapportIntervention  $rapportIntervention
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(RapportIntervention $rapportIntervention)
+    public function show($id)
     {
-        //
+        $requete = RapportIntervention::with(['intervention','user'])
+            ->find($id);
+        if($requete) $requete->makeHidden(['intervention_id','user_id']);
+
+        return response()->json($requete);
     }
 
     /**

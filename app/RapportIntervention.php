@@ -38,6 +38,11 @@ class RapportIntervention extends Model
 
     public function intervention()
     {
-        return $this->hasOne('\App\Intervention');
+        return $this->belongsTo('\App\Intervention');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('\App\User');
     }
 }

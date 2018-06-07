@@ -14,7 +14,8 @@ class FormationController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Formation::with('plageHoraire.plage_unique')
+        ->get()->makeHidden('plagehoraire_id'));
     }
 
     /**
@@ -41,12 +42,15 @@ class FormationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Formation  $formation
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Formation $formation)
+    public function show($id)
     {
-        //
+        $requete = Formation::with(['plageHoraire.plage_unique', 'users'])
+            ->find($id)->makeHidden(['plagehoraire_id',]);
+        $requete->users->makehidden('pivot');
+        return response()->json($requete);
     }
 
     /**

@@ -41,12 +41,12 @@ class ForfaitController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Forfait  $forfait
+     * @param  integer $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Forfait $forfait)
+    public function show($id)
     {
-        //
+        return response()->json(Forfait::find($id));
     }
 
     /**
@@ -57,7 +57,7 @@ class ForfaitController extends Controller
      */
     public function edit(Forfait $forfait)
     {
-        //
+
     }
 
     /**

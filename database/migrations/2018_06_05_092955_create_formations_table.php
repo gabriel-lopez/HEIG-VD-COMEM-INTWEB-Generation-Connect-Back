@@ -15,10 +15,8 @@ class CreateFormationsTable extends Migration
             $table->string('nom')->unique();
             $table->text("description");
             $table->integer('plagehoraire_id')->unsigned();
-            $table->integer("employe_id")->unsigned();
 
             $table->foreign('plagehoraire_id')->references('id')->on('plageshoraires');
-            $table->foreign('employe_id')->references('id')->on('seniors');
 
             $table->timestamps();
         });

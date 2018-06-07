@@ -25,7 +25,7 @@ class Matiere extends Model
 
     public function sujet()
     {
-        return $this->hasOne('\App\Sujet');
+        return $this->belongsTo('\App\Sujet');
     }
 
     public function seniors()

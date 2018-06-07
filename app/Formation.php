@@ -8,11 +8,7 @@ class Formation extends Model
 {
     public $timestamps = true;
 
-    protected $fillable = [
-        'nom',
-        'plageHoraire',
-        'description',
-    ];
+
 
     protected $rules = [
         'nom' => 'required|in:"actif","inactif"',
@@ -21,6 +17,7 @@ class Formation extends Model
     ];
 
     protected $hidden = [
+        'pivot',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -31,4 +28,14 @@ class Formation extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function plageHoraire()
+    {
+        return $this->belongsTo('\App\PlageHoraire','plagehoraire_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany('\App\User');
+    }
 }

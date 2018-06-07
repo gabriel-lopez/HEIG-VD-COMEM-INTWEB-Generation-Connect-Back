@@ -14,7 +14,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Page::all());
     }
 
     /**
@@ -41,12 +41,12 @@ class PageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Page  $page
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Page $page)
+    public function show($id)
     {
-        //
+        return response()->json(Page::find($id));
     }
 
     /**
