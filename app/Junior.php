@@ -3,21 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class Junior extends Model
 {
-    public $timestamps = true;
+    use SoftDeletes, HasRolesAndAbilities;
 
-    protected $fillable = [
-        'status',
-        'LimiteTempsTransport',
-        'AdresseDepart',
-        'AdresseFacturation',
-        'NoAVS',
-        'BanqueNom',
-        'BanqueBIC',
-        'BanqueIBAN',
-    ];
+    public $timestamps = true;
 
     protected $rules = [
         'status' => 'required|in:"candidat","formation","actif","inactif","refuse"',

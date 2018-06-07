@@ -9,6 +9,8 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
+        $this->call(BouncerSeeder::class);
+
         //<editor-fold desc="Sujets">
         $sujet1 = new \App\Sujet([
             'nom' => "Sujet #1",

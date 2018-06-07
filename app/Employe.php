@@ -3,14 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class Employe extends Model
 {
-    public $timestamps = true;
+    use SoftDeletes, HasRolesAndAbilities;
 
-    protected $fillable = [
-        'status'
-    ];
+    public $timestamps = true;
 
     protected $rules = [
         'status' => 'required|in:"actif","inactif"',

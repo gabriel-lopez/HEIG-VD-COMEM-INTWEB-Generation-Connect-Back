@@ -4,18 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class Senior extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasRolesAndAbilities;
 
     protected $primaryKey = 'user_id';
 
     public $timestamps = true;
-
-    protected $fillable = [
-        'preference'
-    ];
 
     protected $rules = [
         'preference' => 'required|in:"email","telephone"',
