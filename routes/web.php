@@ -26,14 +26,19 @@ Route::get('/{folder}/{resource}', function ($folder, $resource)
     include public_path() . '/frontend/' . $folder . '/' . $resource;
 })->where(['folder' => '^(?!api).*$']);;
 
-
-
-Route::prefix('api')->group(function ()  // api/route
+Route::group(['prefix' => 'api'], function()
 {
+    Route::post("login", 'AuthController@login');
+});
+
+Route::group(['prefix' => 'api', 'middleware' => 'auth'], function()
+{
+    Route::get("logout", 'AuthController@logout');
+
     // Controlleurs utilisateurs
-    Route::resource("juniors", 'JuniorController')->except(['create']);
-    Route::resource("seniors", 'SeniorController')->except(['create']);
-    Route::resource("employes", 'EmployeController')->except(['create']);
+    Route::resource("juniors", 'JuniorController')->except(['create', "store"]);
+    Route::resource("seniors", 'SeniorController')->except(['create', "store"]);
+    Route::resource("employes", 'EmployeController')->except(['create', "store"]);
 
     // Controlleurs "métier"
     Route::resource('interventions', 'InterventionController')->except(['create']);

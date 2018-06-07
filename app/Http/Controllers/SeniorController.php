@@ -38,9 +38,12 @@ class SeniorController extends Controller
      * @param  \App\Senior  $senior
      * @return \Illuminate\Http\Response
      */
-    public function show(Senior $senior)
+    public static function show($id)
     {
-        //
+        return response()
+            ->json(User::with('senior', 'adresse_habitation', 'senior.forfait')
+                ->has('senior')
+                ->find($id));
     }
 
     /**
@@ -78,5 +81,12 @@ class SeniorController extends Controller
         if(isset($senior)) {
             $senior->delete();
         }
+    }
+
+    public static function get($id)
+    {
+        return User::with('senior', 'adresse_habitation', 'senior.forfait')
+            ->has('senior')
+            ->find($id);
     }
 }

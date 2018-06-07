@@ -50,6 +50,11 @@ class User extends Authenticatable
         'deleted_at'
     ];
 
+    public function getAuthPassword()
+    {
+        return $this->motdepasse;
+    }
+
     public function senior()
     {
         return $this->hasOne('\App\Senior');

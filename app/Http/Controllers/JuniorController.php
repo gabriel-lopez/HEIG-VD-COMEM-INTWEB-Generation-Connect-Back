@@ -52,9 +52,16 @@ class JuniorController extends Controller
      * @param  \App\Junior  $junior
      * @return \Illuminate\Http\Response
      */
-    public function show(Junior $junior)
+    public static function show($id)
     {
-        //
+        return response()
+            ->json(User::with(
+                'junior',
+                'adresse_habitation',
+                'junior.adresse_de_depart',
+                'junior.adresse_de_facturation')
+                ->has('junior')
+                ->find($id));
     }
 
     /**
@@ -89,5 +96,16 @@ class JuniorController extends Controller
     public function destroy(Junior $junior)
     {
         //
+    }
+
+    public static function get($id)
+    {
+        return User::with(
+            'junior',
+            'adresse_habitation',
+            'junior.adresse_de_depart',
+            'junior.adresse_de_facturation')
+            ->has('junior')
+            ->find($id);
     }
 }
