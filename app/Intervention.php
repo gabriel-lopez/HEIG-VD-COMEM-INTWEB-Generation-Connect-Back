@@ -15,9 +15,21 @@ class Intervention extends Model
         'requete_id' => 'required|integer|exists:requetes,id',
     ];
 
-    public function junior()
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
+
+    public function user()
     {
-        return $this->hasOne('\App\Junior');
+        return $this->belongsTo('\App\User','junior_affecte');
     }
 
     public function requete()

@@ -11,10 +11,22 @@
 |
 */
 
-Route::get('/', function ()
-{
-    return view('welcome');
+Route::get('/', function () {
+    include public_path() . '/frontend/index.html';
 });
+
+Route::get('/{name}', function ($name)
+{
+    include public_path() . '/frontend/' . $name;
+})->where(['name' => '^(?!api).*$']);
+
+
+Route::get('/{folder}/{resource}', function ($folder, $resource)
+{
+    include public_path() . '/frontend/' . $folder . '/' . $resource;
+})->where(['folder' => '^(?!api).*$']);;
+
+
 
 Route::prefix('api')->group(function ()  // api/route
 {

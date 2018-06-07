@@ -14,7 +14,9 @@ class EvaluationServiceController extends Controller
      */
     public function index()
     {
-        //
+        return response()
+            ->json(EvaluationService::with('user.senior')
+            ->get());
     }
 
     /**
@@ -35,18 +37,22 @@ class EvaluationServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\EvaluationService  $evaluationService
+     * @param  integer $id
      * @return \Illuminate\Http\Response
      */
-    public function show(EvaluationService $evaluationService)
+    public function show($id)
     {
-        //
+
+        return response()
+                ->json(EvaluationService::with(['user.senior', 'intervention'])
+                ->find($id)->makeHidden('intervention_id'));
+
     }
 
     /**

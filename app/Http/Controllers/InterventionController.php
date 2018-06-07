@@ -14,7 +14,10 @@ class InterventionController extends Controller
      */
     public function index()
     {
-        //
+        return response()
+            ->json(Intervention::with(['user.junior'])
+            ->get()->makeHidden('junior_affecte'));
+
     }
 
     /**

@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 
 use Propaganistas\LaravelPhone\PhoneNumber;
+use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -71,9 +72,9 @@ class DatabaseSeeder extends Seeder
         //<editor-fold desc="Adresses">
         $address1 = new \App\Address([
             'ligne1' => "Avenue des Sports 20",
-            'ligne2'=> "",
-            'ligne3'=> "",
-            'ville'=> "Yverdon-les-Bains",
+            'ligne2' => "",
+            'ligne3' => "",
+            'ville' => "Yverdon-les-Bains",
             'npa' => "1401",
             'pays' => "Suisse",
         ]);
@@ -128,7 +129,7 @@ class DatabaseSeeder extends Seeder
 
         $senior1->save();
 
-        $senior1->matieres()->save($matiere1);
+        //$senior1->matieres()->save($matiere1);
         //</editor-fold>
 
         //<editor-fold desc="Juniors">
@@ -158,5 +159,24 @@ class DatabaseSeeder extends Seeder
 
         $employe1->save();
         //</editor-fold>
+
+        $intervention1 = new \App\Intervention([
+            'statut' => 'finalise',
+            'finprevu' => Carbon::now(),
+            'debutprevu' => Carbon::now()->subHour(1),
+            'junior_affecte' => $junior1->id,
+            'requete_id' => '0'
+        ]);
+        $intervention1->save();
+
+        $evaluationService1 = new \App\EvaluationService(
+            ['senior_id' => $senior1->user_id,
+                'intervention_id' => $intervention1->id,
+                'commentaire' => 'Super service, jeune à l\'heure, content',
+                'noteSmiley' => 2]
+        );
+        $evaluationService1->save();
+
+
     }
 }

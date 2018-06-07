@@ -3,15 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EvaluationService extends Model
 {
-    public $timestamps = true;
+    use SoftDeletes;
 
-    protected $fillable = [
-        'commentaire',
-        'noteSmiley',
-    ];
+    public $timestamps = true;
 
     protected $rules = [
         'commentaire' => 'required|text|min:255',
@@ -19,6 +17,7 @@ class EvaluationService extends Model
     ];
 
     protected $hidden = [
+        'senior_id',
         'deleted_at',
         'created_at',
         'updated_at',
@@ -26,7 +25,12 @@ class EvaluationService extends Model
 
     public function senior()
     {
-        return $this->belongsTo("\App\Senior");
+        return $this->hasOne("\App\Senior", 'user_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo("\App\User" , 'senior_id');
     }
 
     public function intervention()

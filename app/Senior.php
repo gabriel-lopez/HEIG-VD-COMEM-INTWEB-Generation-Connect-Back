@@ -9,6 +9,8 @@ class Senior extends Model
 {
     use SoftDeletes;
 
+    protected $primaryKey = 'user_id';
+
     public $timestamps = true;
 
     protected $fillable = [
@@ -43,13 +45,18 @@ class Senior extends Model
         return $this->belongsToMany('\app\Matiere');
     }
 
-    /*public function user()
+    public function EvaluationService()
     {
-        return $this->hasOne('\App\User');
+        return $this->hasMany('\App\EvaluationService');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('\App\User');
     }
 
 
-
+/*
     public function soumission()
     {
         return $this->hasMany('\App\Matiere');
