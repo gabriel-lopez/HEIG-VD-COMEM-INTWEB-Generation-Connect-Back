@@ -11,12 +11,12 @@ class CreateJuniorMatiereTable extends Migration
         Schema::create('junior_matiere', function (Blueprint $table)
         {
             $table->integer('matiere_id');
-            $table->integer('junior_id');
+            $table->integer('junior_user_id');
 
             $table->foreign('matiere_id')->references('id')->on('matieres');
-            $table->foreign('junior_id')->references('id')->on('juniors');
+            $table->foreign('junior_user_id')->references('id')->on('juniors');
 
-            $table->primary(['matiere_id', 'junior_id']);
+            $table->primary(['matiere_id', 'junior_user_id']);
         });
     }
 

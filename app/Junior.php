@@ -12,6 +12,8 @@ class Junior extends Model
 
     public $timestamps = true;
 
+    public $primaryKey = 'user_id';
+
     protected $rules = [
         'status' => 'required|in:"candidat","formation","actif","inactif","refuse"',
         'LimiteTempsTransport' => 'required|integer|min:0',

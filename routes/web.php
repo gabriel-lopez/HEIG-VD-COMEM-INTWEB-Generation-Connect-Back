@@ -32,7 +32,7 @@ Route::group(['prefix' => 'api'], function()
     Route::resource('pages', 'PageController')->except(['create', 'edit', 'store', 'destroy']);
 });
 
-Route::group(['prefix' => 'api' ], /*'middleware' => 'auth'],*/ function()
+Route::group(['prefix' => 'api' ], 'middleware' => 'auth'], function()
 {
     Route::get("logout", 'AuthController@logout');
 

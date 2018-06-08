@@ -220,7 +220,7 @@ class DatabaseSeeder extends Seeder
         $soumission1 = new \App\Soumission(
             [
                 'requete_id' => $requete1->id,
-                'junior_id' => $junior1->id,
+                'junior_id' => $junior1->user_id,
                 'acceptation' => Carbon::now()->subHour(3),
                 'proposition' => Carbon::now()->subHour(4),
             ]
@@ -232,7 +232,7 @@ class DatabaseSeeder extends Seeder
             'statut' => 'finalise',
             'finprevu' => Carbon::now(),
             'debutprevu' => Carbon::now()->subHour(1),
-            'junior_affecte' => $junior1->id,
+            'junior_affecte' => $junior1->user_id,
             'requete_id' => $requete1->id,
         ]);
 
@@ -290,5 +290,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => $user1->id,
             ]);
         $notification1->save();
+
+
     }
 }
