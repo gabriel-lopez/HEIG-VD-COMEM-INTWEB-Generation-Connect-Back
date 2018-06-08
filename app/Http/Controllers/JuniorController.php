@@ -87,8 +87,7 @@ class JuniorController extends Controller
             'junior',
             'adresse_habitation',
             'junior.adresse_de_depart',
-            'junior.adresse_de_facturation',
-            'matieres')
+            'junior.adresse_de_facturation')
             ->has('junior')
             ->find($id);
     }
