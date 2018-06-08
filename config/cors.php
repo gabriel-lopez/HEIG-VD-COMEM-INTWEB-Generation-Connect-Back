@@ -13,11 +13,11 @@ return [
     */
 
     'supportsCredentials' => true,
-    'allowedOrigins' => ["http://locahost", "http://locahost.localdomain"],
+    'allowedOrigins' => ['*'],
     'allowedOriginsPatterns' => [],
     'allowedHeaders' => ['*'],
     'allowedMethods' => ['*'],
     'exposedHeaders' => [],
-    'maxAge' => 300,
+    'maxAge' => 0,
 
 ];
