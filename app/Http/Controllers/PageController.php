@@ -17,18 +17,6 @@ class PageController extends Controller
         return response()->json(Page::all());
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
     /**
      * Display the specified resource.
      *
@@ -39,8 +27,6 @@ class PageController extends Controller
     {
         return response()->json(Page::find($id));
     }
-
-
 
     /**
      * Update the specified resource in storage.
@@ -54,14 +40,7 @@ class PageController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Page  $page
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Page $page)
-    {
-        //
+    public function authorize() {
+        return true;
     }
 }

@@ -29,6 +29,7 @@ Route::get('/{folder}/{resource}', function ($folder, $resource)
 Route::group(['prefix' => 'api'], function()
 {
     Route::post("login", 'AuthController@login');
+    Route::resource('pages', 'PageController')->except(['create', 'edit', 'store', 'destroy']);
 });
 
 Route::group(['prefix' => 'api' ], /*'middleware' => 'auth'],*/ function()
@@ -51,7 +52,4 @@ Route::group(['prefix' => 'api' ], /*'middleware' => 'auth'],*/ function()
     Route::resource('forfaits', 'ForfaitController')->except(['create', 'edit']);
     Route::resource('messages', 'MessageController')->except(['create', 'edit']);
     Route::resource('notifications', 'NotificationController')->except(['create', 'edit']);
-
-    // Controlleurs publics
-    Route::resource('pages', 'PageController')->except(['create', 'edit']);
 });
