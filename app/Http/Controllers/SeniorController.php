@@ -46,16 +46,6 @@ class SeniorController extends Controller
                 ->find($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Senior  $senior
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Senior $senior)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

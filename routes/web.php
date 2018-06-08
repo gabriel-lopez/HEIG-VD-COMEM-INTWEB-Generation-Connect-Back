@@ -41,17 +41,17 @@ Route::group(['prefix' => 'api' ], /*'middleware' => 'auth'],*/ function()
     Route::resource("employes", 'EmployeController')->except(['create', "store"]);
 
     // Controlleurs "métier"
-    Route::resource('interventions', 'InterventionController')->except(['create']);
-    Route::resource('formations', 'FormationController')->except(['create']);
-    Route::resource('requetes', 'RequeteController')->except(['create']);
-    Route::resource('evaluationservices', 'EvaluationServiceController')->except(['create']);
-    Route::resource('rapportinterventions', 'RapportInterventionController')->except(['create']);
-    Route::resource('matieres', 'MatiereController')->except(['create']);
-    Route::resource('sujets', 'SujetController')->except(['create']);
-    Route::resource('forfaits', 'ForfaitController')->except(['create']);
-    Route::resource('messages', 'MessageController')->except(['create']);
-    Route::resource('notifications', 'NotificationController')->except(['create']);
+    Route::resource('interventions', 'InterventionController')->except(['create', 'edit']);
+    Route::resource('formations', 'FormationController')->except(['create', 'edit']);
+    Route::resource('requetes', 'RequeteController')->except(['create', 'edit']);
+    Route::resource('evaluationservices', 'EvaluationServiceController')->except(['create', 'edit']);
+    Route::resource('rapportinterventions', 'RapportInterventionController')->except(['create', 'edit']);
+    Route::resource('matieres', 'MatiereController')->except(['create', 'edit']);
+    Route::resource('sujets', 'SujetController')->except(['create', 'edit']);
+    Route::resource('forfaits', 'ForfaitController')->except(['create', 'edit']);
+    Route::resource('messages', 'MessageController')->except(['create', 'edit']);
+    Route::resource('notifications', 'NotificationController')->except(['create', 'edit']);
 
     // Controlleurs publics
-    Route::resource('pages', 'PageController')->except(['create']);
+    Route::resource('pages', 'PageController')->except(['create', 'edit']);
 });

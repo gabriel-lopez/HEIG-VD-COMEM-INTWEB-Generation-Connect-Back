@@ -35,16 +35,6 @@ class EmployeController extends Controller
                 ->find($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Employe  $employe
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Employe $employe)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

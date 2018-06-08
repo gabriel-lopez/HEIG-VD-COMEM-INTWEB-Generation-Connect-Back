@@ -20,7 +20,8 @@ class JuniorController extends Controller
                 'junior',
                 'adresse_habitation',
                 'junior.adresse_de_depart',
-                'junior.adresse_de_facturation')
+                'junior.adresse_de_facturation',
+                'junior.matieres')
             ->has('junior')
             ->get());
     }
@@ -59,21 +60,12 @@ class JuniorController extends Controller
                 'junior',
                 'adresse_habitation',
                 'junior.adresse_de_depart',
-                'junior.adresse_de_facturation')
+                'junior.adresse_de_facturation',
+                'junior.matieres')
                 ->has('junior')
                 ->find($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Junior  $junior
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Junior $junior)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -104,7 +96,8 @@ class JuniorController extends Controller
             'junior',
             'adresse_habitation',
             'junior.adresse_de_depart',
-            'junior.adresse_de_facturation')
+            'junior.adresse_de_facturation',
+            'matieres')
             ->has('junior')
             ->find($id);
     }

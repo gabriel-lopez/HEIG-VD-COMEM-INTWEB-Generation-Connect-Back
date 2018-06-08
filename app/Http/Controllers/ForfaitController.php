@@ -18,16 +18,6 @@ class ForfaitController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -49,16 +39,7 @@ class ForfaitController extends Controller
         return response()->json(Forfait::find($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Forfait  $forfait
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Forfait $forfait)
-    {
 
-    }
 
     /**
      * Update the specified resource in storage.

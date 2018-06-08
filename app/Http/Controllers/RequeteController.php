@@ -20,15 +20,6 @@ class RequeteController extends Controller
             ->makeHidden('matiere_id'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -68,16 +59,7 @@ class RequeteController extends Controller
         return response()->json($request);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Requete  $requete
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Requete $requete)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.

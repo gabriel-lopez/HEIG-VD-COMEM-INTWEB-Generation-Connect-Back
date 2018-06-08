@@ -17,15 +17,6 @@ class NotificationController extends Controller
         // retourner les notification appartenant à l'utilisateur qui les demande
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -51,16 +42,7 @@ class NotificationController extends Controller
             Notification::with('user')->find($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Notification  $notification
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Notification $notification)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.

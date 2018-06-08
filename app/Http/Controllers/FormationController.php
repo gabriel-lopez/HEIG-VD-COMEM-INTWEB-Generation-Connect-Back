@@ -18,15 +18,6 @@ class FormationController extends Controller
         ->get()->makeHidden('plagehoraire_id'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -53,16 +44,7 @@ class FormationController extends Controller
         return response()->json($requete);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Formation  $formation
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Formation $formation)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.

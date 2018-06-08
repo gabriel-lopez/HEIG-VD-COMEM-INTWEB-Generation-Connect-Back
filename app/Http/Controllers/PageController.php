@@ -16,7 +16,7 @@ class PageController extends Controller
     {
         return response()->json(Page::all());
     }
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -40,16 +40,7 @@ class PageController extends Controller
         return response()->json(Page::find($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Page  $page
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Page $page)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.

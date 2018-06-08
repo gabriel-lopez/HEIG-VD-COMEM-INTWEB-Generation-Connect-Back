@@ -19,15 +19,6 @@ class RapportInterventionController extends Controller
             ->makeHidden(['intervention_id','user_id']));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -55,16 +46,6 @@ class RapportInterventionController extends Controller
         return response()->json($requete);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\RapportIntervention  $rapportIntervention
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RapportIntervention $rapportIntervention)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

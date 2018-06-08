@@ -19,15 +19,7 @@ class MatiereController extends Controller
         ->makeHidden('sujet_id'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -53,16 +45,6 @@ class MatiereController extends Controller
             ->makeHidden('sujet_id'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Matiere  $matiere
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Matiere $matiere)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
