@@ -13,7 +13,7 @@ class CreateMessagesTable extends Migration
             $table->increments('id');
 
             $table->string('email', 254);
-            $table->enum('status', ["nontraite", "traite", "resolu"]);
+            $table->enum('status', ["nontraite", "traite", "resolu"]); // non traité, traité, résolu
             $table->text('contenu');
             $table->integer("employe_id")->unsigned()->nullable();
 

@@ -14,7 +14,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        //
+        // retourner les notification appartenant à l'utilisateur qui les demande
     }
 
     /**
@@ -41,12 +41,14 @@ class NotificationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Notification  $notification
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Notification $notification)
+    public function show($id)
     {
-        //
+        // il faut faire en sorte qu'un juniour ou senior ne puisse accéder qu'à ses notifications
+        return  response()->json(
+            Notification::with('user')->find($id));
     }
 
     /**

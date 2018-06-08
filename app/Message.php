@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    protected $fillable = [
-        'email',
-        'contenu'
-    ];
 
     protected $hidden = [
         'created_at',
@@ -21,4 +17,9 @@ class Message extends Model
         'email' => 'required|email',
         'contenu' => 'required|text',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('\App\User','employe_id');
+    }
 }

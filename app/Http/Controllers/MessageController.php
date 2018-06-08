@@ -14,7 +14,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Message::all());
     }
 
     /**
@@ -35,18 +35,20 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Message  $message
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Message $message)
+    public function show($id)
     {
-        //
+        $requete = Message::with('user.employe')->find($id);
+        if($requete) return response()->json($requete);
+        return response()->make('Erreur 404',404);
     }
 
     /**

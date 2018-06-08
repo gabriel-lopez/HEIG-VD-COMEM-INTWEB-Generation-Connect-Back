@@ -265,5 +265,29 @@ class DatabaseSeeder extends Seeder
             'user_id' => $user2->id]
             );
         $rapportIntervention1->save();
+
+        $message1 = new \App\Message([
+            'email' => 'prospet@envoieunmessage.com',
+            'status' =>'nontraite',
+            'contenu'=> 'Bonjour, je souhaite avoir des informations sur vos services',
+            'employe_id' => null,
+        ]);
+        $message1->save();
+
+
+        $message2 = new \App\Message([
+            'email' => 'prospet2@envoieunmessage.com',
+            'status' =>'traite',
+            'contenu'=> 'Bonjour, je souhaite avoir des informations sur vos services',
+            'employe_id' => $user3->id,
+        ]);
+        $message2->save();
+
+        $notification1 = new \App\Notification([
+            'type' => 'email',
+            'contenu' => 'ceci est une notification',
+            'user_id' => $user1->id,
+            ]);
+        $notification1->save();
     }
 }
