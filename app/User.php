@@ -57,6 +57,15 @@ class User extends Authenticatable
         return $this->motdepasse;
     }
 
+    /**
+     * Enregistre en base de données un nouveau Sinistre selon les $values donnés
+     * @param array $values
+     */
+    public static function createOne(array $values)
+    {
+        
+    }
+
     public function senior()
     {
         return $this->hasOne('\App\Senior');
