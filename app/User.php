@@ -58,7 +58,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Enregistre en base de données un nouveau Sinistre selon les $values donnés
+     * Enregistre en base de données un nouveau User selon les $values donnés
      * @param array $values
      */
     public static function createOne(array $values)

@@ -40,6 +40,15 @@ class Junior extends Model
         'deleted_at'
     ];
 
+    /**
+     * Enregistre en base de données un nouveau Junior selon les $values donnés
+     * @param array $values
+     */
+    public static function createOne(array $values)
+    {
+        
+    }
+
     public function adresse_de_depart()
     {
         return $this->belongsTo('\App\Address', 'AdresseDeDepart');
