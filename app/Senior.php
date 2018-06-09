@@ -8,7 +8,7 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class Senior extends Model
 {
-    use SoftDeletes, HasRolesAndAbilities;
+    use SoftDeletes;
 
     protected $primaryKey = 'user_id';
 

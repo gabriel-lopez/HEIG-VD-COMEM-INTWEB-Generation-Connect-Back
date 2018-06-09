@@ -8,7 +8,7 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class Junior extends Model
 {
-    use SoftDeletes, HasRolesAndAbilities;
+    use SoftDeletes;
 
     public $timestamps = true;
 
@@ -46,7 +46,7 @@ class Junior extends Model
      */
     public static function createOne(array $values)
     {
-        
+
     }
 
     public function adresse_de_depart()

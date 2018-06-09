@@ -8,7 +8,7 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class Employe extends Model
 {
-    use SoftDeletes, HasRolesAndAbilities;
+    use SoftDeletes;
 
     public $timestamps = true;
 
