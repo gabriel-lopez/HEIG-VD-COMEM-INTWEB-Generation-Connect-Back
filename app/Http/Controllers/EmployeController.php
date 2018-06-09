@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Employe;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeController extends Controller
 {
@@ -15,10 +17,20 @@ class EmployeController extends Controller
      */
     public function index()
     {
-        return response()
-            ->json(User::with('employe', 'adresse_habitation')
-            ->has('employe')
-            ->get());
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if($user->can('voir-employe'))
+            {
+                return response()
+                    ->json(User::with('employe', 'adresse_habitation')
+                        ->has('employe')
+                        ->get(), Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
     /**

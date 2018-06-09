@@ -50,17 +50,17 @@ class BouncerSeeder extends Seeder
 
         $voir_junior = Bouncer::ability()->create([
             'name' => 'voir-junior',
-            'title' => 'Voir Junior',
+            'title' => 'Voir Junior(s)',
         ]);
 
         $voir_senior = Bouncer::ability()->create([
             'name' => 'voir-senior',
-            'title' => 'Voir Senior',
+            'title' => 'Voir Senior(s)',
         ]);
 
         $voir_employe = Bouncer::ability()->create([
             'name' => 'voir-employe',
-            'title' => 'Voir Employé',
+            'title' => 'Voir Employé(s)',
         ]);
 
         $create_senior = Bouncer::ability()->create([
