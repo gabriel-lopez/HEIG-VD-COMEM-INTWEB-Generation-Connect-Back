@@ -63,7 +63,7 @@ class User extends Authenticatable
      */
     public static function createOne(array $values)
     {
-        
+
     }
 
     public function senior()
