@@ -90,7 +90,22 @@ class BouncerSeeder extends Seeder
 
         $modifier_employe = Bouncer::ability()->create([
             'name' => 'modifier-employe',
-            'title' => 'modifier-employe',
+            'title' => 'Modifier Employé',
+        ]);
+
+        $supprimer_senior = Bouncer::ability()->create([
+            'name' => 'supprimer-senior',
+            'title' => 'Supprimer Senior',
+        ]);
+
+        $supprimer_junior = Bouncer::ability()->create([
+            'name' => 'modifier-junior',
+            'title' => 'Modifier Junior',
+        ]);
+
+        $supprimer_employe = Bouncer::ability()->create([
+            'name' => 'supprimer-employe',
+            'title' => 'Supprimer Employé',
         ]);
 
         $create_submission = Bouncer::ability()->create([
@@ -134,8 +149,18 @@ class BouncerSeeder extends Seeder
         ]);
 
         $exporter_donnees = Bouncer::ability()->create([
-            'name' => 'exporter_donnees',
+            'name' => 'exporter-donnees',
             'title' => 'exporter_donnees',
+        ]);
+
+        $voir_evalutions = Bouncer::ability()->create([
+            'name' => 'voir-evalutions',
+            'title' => 'Voir les évaluations',
+        ]);
+
+        $creer_evalution = Bouncer::ability()->create([
+            'name' => 'creer-evalution',
+            'title' => 'Créer une évaluation',
         ]);
 
         Bouncer::allow($superadmin)->everything();

@@ -12,9 +12,10 @@ class Employe extends Model
 
     public $timestamps = true;
 
-    protected $rules = [
-        'status' => 'required|in:"actif","inactif"',
-        'role' => ''
+    public $primaryKey = "user_id";
+
+    public static $rules = [
+
     ];
 
     protected $hidden = [

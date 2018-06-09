@@ -41,10 +41,20 @@ class EmployeController extends Controller
      */
     public function show($id)
     {
-        return response()
-            ->json(User::with('employe', 'adresse_habitation')
-                ->has('employe')
-                ->find($id));
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if($user->can('voir-employe'))
+            {
+                return response()
+                    ->json(User::with('employe', 'adresse_habitation')
+                        ->has('employe')
+                        ->find($id), Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
 
@@ -57,7 +67,17 @@ class EmployeController extends Controller
      */
     public function update(Request $request, Employe $employe)
     {
-        //
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if ($user->can(['modifier-employe']))
+            {
+                return response()->json($employe,Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
     /**
@@ -68,7 +88,17 @@ class EmployeController extends Controller
      */
     public function destroy(Employe $employe)
     {
-        //
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if ($user->can(['supprimer-employe']))
+            {
+                return response()->json($employe,Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
     public static function get($id)

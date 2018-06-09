@@ -45,7 +45,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function()
     Route::resource('interventions', 'InterventionController')->except(['create', 'edit']);
     Route::resource('formations', 'FormationController')->except(['create', 'edit']);
     Route::resource('requetes', 'RequeteController')->except(['create', 'edit']);
-    Route::resource('evaluationservices', 'EvaluationServiceController')->except(['create', 'edit']);
+    Route::resource('evaluationservices', 'EvaluationServiceController')->except(['create', 'edit', 'update', 'destroy']);
     Route::resource('rapportinterventions', 'RapportInterventionController')->except(['create', 'edit']);
     Route::resource('matieres', 'MatiereController')->except(['create', 'edit']);
     Route::resource('sujets', 'SujetController')->except(['create', 'edit']);

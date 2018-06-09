@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\EvaluationService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class EvaluationServiceController extends Controller
 {
@@ -14,9 +16,19 @@ class EvaluationServiceController extends Controller
      */
     public function index()
     {
-        return response()
-            ->json(EvaluationService::with('user.senior')
-            ->get());
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if($user->can('voir-evalutions'))
+            {
+                return response()
+                    ->json(EvaluationService::with('user.senior')
+                        ->get(), Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
 
@@ -28,7 +40,18 @@ class EvaluationServiceController extends Controller
      */
     public function store(Request $request)
     {
+        if(Auth::check())
+        {
+            $user = Auth::user();
 
+            if($user->can('creer-evalution'))
+            {
+                return response()
+                    ->json("", Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
     /**
@@ -39,34 +62,18 @@ class EvaluationServiceController extends Controller
      */
     public function show($id)
     {
+        if(Auth::check())
+        {
+            $user = Auth::user();
 
-        return response()
-                ->json(EvaluationService::with(['user.senior', 'intervention'])
-                ->find($id)->makeHidden('intervention_id'));
+            if($user->can('voir-evalutions'))
+            {
+                return response()
+                    ->json(EvaluationService::with(['user.senior', 'intervention'])
+                        ->find($id)->makeHidden('intervention_id'));
+            }
+        }
 
-    }
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EvaluationService  $evaluationService
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, EvaluationService $evaluationService)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\EvaluationService  $evaluationService
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(EvaluationService $evaluationService)
-    {
-        //
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 }
