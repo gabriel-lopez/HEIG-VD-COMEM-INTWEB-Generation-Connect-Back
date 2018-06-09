@@ -158,6 +158,11 @@ class BouncerSeeder extends Seeder
             'title' => 'Modifier une formation',
         ]);
 
+        $supprimer_formation = Bouncer::ability()->create([
+            'name' => 'supprimer-formation',
+            'title' => 'Supprimer une formation',
+        ]);
+
         $exporter_donnees = Bouncer::ability()->create([
             'name' => 'exporter-donnees',
             'title' => 'exporter_donnees',

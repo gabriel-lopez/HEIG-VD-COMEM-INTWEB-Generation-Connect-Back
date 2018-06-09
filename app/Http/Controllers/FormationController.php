@@ -61,13 +61,21 @@ class FormationController extends Controller
      */
     public function show($id)
     {
-        $requete = Formation::with(['plageHoraire.plage_unique', 'users'])
-            ->find($id)->makeHidden(['plagehoraire_id',]);
-        $requete->users->makehidden('pivot');
-        return response()->json($requete);
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if($user->can('voir-formation'))
+            {
+                $requete = Formation::with(['plageHoraire.plage_unique', 'users'])
+                    ->find($id)->makeHidden(['plagehoraire_id',]);
+                $requete->users->makehidden('pivot');
+                return response()->json($requete, Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
-
-
 
     /**
      * Update the specified resource in storage.
@@ -78,7 +86,17 @@ class FormationController extends Controller
      */
     public function update(Request $request, Formation $formation)
     {
-        //
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if($user->can('modifier-formation'))
+            {
+                return response()->json("", Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
     /**
@@ -89,6 +107,16 @@ class FormationController extends Controller
      */
     public function destroy(Formation $formation)
     {
-        //
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if($user->can('supprimer-formation'))
+            {
+                return response()->json("", Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 }
