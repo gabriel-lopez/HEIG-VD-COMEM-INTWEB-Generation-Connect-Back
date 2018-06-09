@@ -10,7 +10,7 @@ class CreateEmployesTable extends Migration
     {
         Schema::create('employes', function (Blueprint $table)
         {
-            $table->increments('user_id');
+            $table->integer('user_id');
 
             $table->enum('status', ["actif", "inactif"]);
 

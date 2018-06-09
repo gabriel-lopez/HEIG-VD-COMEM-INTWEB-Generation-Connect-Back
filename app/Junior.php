@@ -15,6 +15,7 @@ class Junior extends Model
     public $primaryKey = 'user_id';
 
     protected $rules = [
+        'user_id' => 'required|exists:users,id',
         'status' => 'required|in:"candidat","formation","actif","inactif","refuse"',
         'LimiteTempsTransport' => 'required|integer|min:0',
         'AdresseDeDepart' => 'required|exists:addresses,id',
@@ -40,13 +41,38 @@ class Junior extends Model
         'deleted_at'
     ];
 
+    public static function getValidation(Array $inputs)
+    {
+        $validator = Validator::make($inputs, self::$rules);
+
+        $validator->after(function ($validator) use ($inputs)
+        {
+            // contraintes supplémentaires
+        });
+
+        return $validator;
+    }
+
     /**
      * Enregistre en base de données un nouveau Junior selon les $values donnés
      * @param array $values
      */
     public static function createOne(array $values)
     {
+        $new = new self();
 
+        $new->user_id = $values['user_id'];
+        $new->status = $values['status'];
+        $new->LimiteTempsTransport = $values['LimiteTempsTransport'];
+        $new->NoAVS = $values['NoAVS'];
+        $new->BanqueNom = $values['BanqueNom'];
+        $new->BanqueBIC = $values['BanqueBIC'];
+        $new->BanqueIBAN = $values['BanqueIBAN'];
+
+        $new->AdresseDeDepart = $values['AdresseDeDepart'];
+        $new->AdresseFacturation = $values['AdresseFacturation'];
+
+        $new->save();
     }
 
     public function adresse_de_depart()

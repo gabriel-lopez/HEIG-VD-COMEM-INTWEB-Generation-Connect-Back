@@ -2,25 +2,20 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
 
+use Validator;
+
 class User extends Authenticatable
 {
-    use Notifiable, HasRolesAndAbilities;
+    use SoftDeletes, Notifiable, HasRolesAndAbilities;
 
     public $timestamps = true;
 
-    protected $fillable = [
-        'prenom',
-        'nom',
-        'email',
-        'telephone',
-        'motdepasse',
-    ];
-
-    protected $rules = [
+    public static $rules = [
         'prenom' => 'required|string|max:255',
         'nom' => 'required|string|max:255',
         'email' => 'required|email|unique:users',
@@ -33,7 +28,9 @@ class User extends Authenticatable
          * - Non-alphanumeric (For example: !, $, #, or %)
          * - Unicode characters
          */
-        'motdepasse' => 'required|confirmed|string|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/',
+        //'motdepasse' => 'required|confirmed|string|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/',
+        'motdepasse' => 'required|string',
+        'adresse_habitation_id' => 'required|exists:addresses,id'
     ];
 
     protected $hidden = [
@@ -57,13 +54,34 @@ class User extends Authenticatable
         return $this->motdepasse;
     }
 
-    /**
-     * Enregistre en base de données un nouveau User selon les $values donnés
-     * @param array $values
-     */
+    public static function getValidation(Array $inputs)
+    {
+        $validator = Validator::make($inputs, self::$rules);
+
+        $validator->after(function ($validator) use ($inputs)
+        {
+            // contraintes supplémentaires
+        });
+
+        return $validator;
+    }
+
     public static function createOne(array $values)
     {
+        $new = new self();
 
+        $new->prenom = $values['prenom'];
+        $new->nom = $values['nom'];
+        $new->email = $values['email'];
+        $new->telephone = $values['telephone'];
+        $new->motdepasse = bcrypt($values['motdepasse']);
+        $new->remember_token = str_random(10);
+
+        $new->adresse_habitation_id = $values['adresse_habitation_id'];
+
+        $new->save();
+
+        return $new;
     }
 
     public function senior()

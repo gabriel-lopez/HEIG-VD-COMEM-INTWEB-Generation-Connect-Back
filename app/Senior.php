@@ -15,6 +15,7 @@ class Senior extends Model
     public $timestamps = true;
 
     protected $rules = [
+        'user_id' => 'required|exists:users,id',
         'preference' => 'required|in:"email","telephone"',
     ];
 
@@ -31,6 +32,32 @@ class Senior extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public static function getValidation(Array $inputs)
+    {
+        $validator = Validator::make($inputs, self::$rules);
+
+        $validator->after(function ($validator) use ($inputs)
+        {
+            // contraintes supplémentaires
+        });
+
+        return $validator;
+    }
+
+    public static function createOne(array $values)
+    {
+        $new = new self();
+
+        $new->user_id = $values['user_id'];
+        $new->preference = $values['preference'];
+
+        $new->forfait_id = $values['forfait_id'];
+
+        $new->save();
+
+        return $new;
+    }
 
     public function forfait()
     {

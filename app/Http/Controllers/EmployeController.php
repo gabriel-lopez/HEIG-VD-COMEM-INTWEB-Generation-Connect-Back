@@ -47,9 +47,21 @@ class EmployeController extends Controller
 
             if($user->can('creer-employe'))
             {
+                $validate_user = User::getValidation($request->all());
+                $validate_employe = Employe::getValidation($request->all());
 
+                if ($validate_user->fails() || $validate_employe->fails())
+                {
+                    return response()->json(['error' => 'Bad Request'], Response::HTTP_BAD_REQUEST);
+                }
 
-                return response()->json("", Response::HTTP_OK);
+                $new_user = User::createOne($request->all());
+
+                $request->request->add(['user_id' => $new_user->id]);
+
+                $new_employe = Employe::createOne($request->all());
+
+                return response()->json(EmployeController::get($new_user->id), Response::HTTP_OK);
             }
         }
 

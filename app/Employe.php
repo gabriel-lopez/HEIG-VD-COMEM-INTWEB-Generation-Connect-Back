@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
 
+use Validator;
+
 class Employe extends Model
 {
     use SoftDeletes;
@@ -15,7 +17,7 @@ class Employe extends Model
     public $primaryKey = "user_id";
 
     public static $rules = [
-        'user_id' => 'required|exists:users,used_id',
+        'user_id' => 'exists:users,id',
         'status' => 'required|in:"actif","inactif"',
     ];
 
@@ -52,5 +54,7 @@ class Employe extends Model
         $new->status = $values['status'];
 
         $new->save();
+
+        return $new;
     }
 }
