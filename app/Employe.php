@@ -15,7 +15,8 @@ class Employe extends Model
     public $primaryKey = "user_id";
 
     public static $rules = [
-
+        'user_id' => 'required|exists:users,used_id',
+        'status' => 'required|in:"actif","inactif"',
     ];
 
     protected $hidden = [
@@ -30,4 +31,26 @@ class Employe extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public static function getValidation(Array $inputs)
+    {
+        $validator = Validator::make($inputs, self::$rules);
+
+        $validator->after(function ($validator) use ($inputs)
+        {
+            // contraintes supplémentaires
+        });
+
+        return $validator;
+    }
+
+    public static function createOne(array $values)
+    {
+        $new = new self();
+
+        $new->user_id = $values['user_id'];
+        $new->status = $values['status'];
+
+        $new->save();
+    }
 }

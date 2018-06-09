@@ -31,7 +31,6 @@ class FormationController extends Controller
         return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
-
     /**
      * Store a newly created resource in storage.
      *

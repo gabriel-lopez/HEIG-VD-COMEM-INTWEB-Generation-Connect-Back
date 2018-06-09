@@ -34,6 +34,30 @@ class EmployeController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if($user->can('creer-employe'))
+            {
+
+
+                return response()->json("", Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
+    }
+
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Employe  $employe

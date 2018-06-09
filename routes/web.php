@@ -37,9 +37,9 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function()
     Route::get("logout", 'AuthController@logout');
 
     // Controlleurs utilisateurs
-    Route::resource("juniors", 'JuniorController')->except(['create', "store"]);
-    Route::resource("seniors", 'SeniorController')->except(['create', "store"]);
-    Route::resource("employes", 'EmployeController')->except(['create', "store"]);
+    Route::resource("juniors", 'JuniorController')->except(['create', "edit"]);
+    Route::resource("seniors", 'SeniorController')->except(['create', "edit"]);
+    Route::resource("employes", 'EmployeController')->except(['create', "edit"]);
 
     // Controlleurs "métier"
     Route::resource('interventions', 'InterventionController')->except(['create', 'edit']);
