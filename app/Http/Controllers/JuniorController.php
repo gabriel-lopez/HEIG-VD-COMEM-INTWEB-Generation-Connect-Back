@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Junior;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class JuniorController extends Controller
 {
@@ -15,15 +17,25 @@ class JuniorController extends Controller
      */
     public function index()
     {
-        return response()
-            ->json(User::with(
-                'junior',
-                'adresse_habitation',
-                'junior.adresse_de_depart',
-                'junior.adresse_de_facturation',
-                'junior.matieres')
-            ->has('junior')
-            ->get());
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if ($user->can('voir-liste-juniors'))
+            {
+                return response()
+                    ->json(User::with(
+                        'junior',
+                        'adresse_habitation',
+                        'junior.adresse_de_depart',
+                        'junior.adresse_de_facturation',
+                        'junior.matieres')
+                        ->has('junior')
+                        ->get(), Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
 

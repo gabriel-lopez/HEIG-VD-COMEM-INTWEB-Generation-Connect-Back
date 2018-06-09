@@ -50,22 +50,32 @@ class BouncerSeeder extends Seeder
 
         $voir_junior = Bouncer::ability()->create([
             'name' => 'voir-junior',
-            'title' => 'Voir Junior(s)',
+            'title' => 'Voir Junior',
+        ]);
+
+        $voir_liste_juniors = Bouncer::ability()->create([
+            'name' => 'voir-liste-juniors',
+            'title' => 'Voir la liste des juniors',
         ]);
 
         $voir_senior = Bouncer::ability()->create([
             'name' => 'voir-senior',
-            'title' => 'Voir Senior(s)',
+            'title' => 'Voir Senior',
+        ]);
+
+        $voir_liste_seniors = Bouncer::ability()->create([
+            'name' => 'voir-liste-seniors',
+            'title' => 'Voir la liste des seniors',
         ]);
 
         $voir_employe = Bouncer::ability()->create([
             'name' => 'voir-employe',
-            'title' => 'Voir Employé(s)',
+            'title' => 'Voir Employé',
         ]);
 
-        $create_senior = Bouncer::ability()->create([
-            'name' => 'create-senior',
-            'title' => 'create-senior',
+        $creer_senior = Bouncer::ability()->create([
+            'name' => 'creer-senior',
+            'title' => 'Créer Senior',
         ]);
 
         $create_junior = Bouncer::ability()->create([
@@ -165,11 +175,11 @@ class BouncerSeeder extends Seeder
 
         Bouncer::allow($superadmin)->everything();
 
-        Bouncer::allow($directeur)->to($create_senior);
+        /*Bouncer::allow($directeur)->to($creer_employe);
         Bouncer::allow($directeur)->to($create_junior);
         Bouncer::allow($directeur)->to($creer_employe);
 
-        Bouncer::allow($secretariat)->to($create_senior);
+        Bouncer::allow($secretariat)->to($creer_senior);
         Bouncer::allow($secretariat)->to($create_submission);
         Bouncer::allow($secretariat)->to($create_intervention);
         Bouncer::allow($secretariat)->to($modifier_contenu_page);
@@ -181,6 +191,6 @@ class BouncerSeeder extends Seeder
 
         Bouncer::allow($junior)->to($modifier_junior);
 
-        Bouncer::allow($senior)->to($modifier_senior);
+        Bouncer::allow($senior)->to($modifier_senior);*/
     }
 }
