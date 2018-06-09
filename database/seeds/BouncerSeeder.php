@@ -5,6 +5,8 @@ use App\Page;
 use App\Senior;
 use Illuminate\Database\Seeder;
 
+use Silber\Bouncer\BouncerFacade as Bouncer;
+
 class BouncerSeeder extends Seeder
 {
     public function run()
@@ -102,8 +104,8 @@ class BouncerSeeder extends Seeder
         ]);
 
         $modifier_contenu_page = Bouncer::ability()->create([
-            'name' => '$modifier_contenu_page',
-            'title' => '$modifier_contenu_page',
+            'name' => 'modifier_contenu_page',
+            'title' => 'modifier_contenu_page',
         ]);
 
         $voir_candidatures = Bouncer::ability()->create([

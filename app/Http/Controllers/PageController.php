@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Page;
-use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Bouncer;
 
 class PageController extends Controller
 {
@@ -17,7 +16,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        return response()->json(Page::all());
+        return response()->json(Page::all(), Response::HTTP_OK);
     }
 
     /**
@@ -28,7 +27,7 @@ class PageController extends Controller
      */
     public function show($id)
     {
-        return response()->json(Page::find($id));
+        return response()->json(Page::find($id), Response::HTTP_OK);
     }
 
     /**
@@ -42,14 +41,24 @@ class PageController extends Controller
     {
         if(Auth::check())
         {
-            $user = User::find(Auth::user()->id);
+            $user = Auth::user();
 
-            /*if(Bouncer::is($user)->an('superadmin'))
+            if($user->can('modifier_contenu_page'))
             {
+                $validate = Page::getValidation($request->all());
 
-            }*/
+                if ($validate->fails())
+                {
+                    return response()->json(['error' => 'Bad Request'], Response::HTTP_BAD_REQUEST);
+                }
+
+                $page->contenu = $request->input('contenu');
+                $page->save();
+
+                return response()->json($page, Response::HTTP_OK);
+            }
         }
 
-        return response()->json(['error' => 'Unauthorized'],401);
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 }

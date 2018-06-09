@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 use Propaganistas\LaravelPhone\PhoneNumber;
 use Carbon\Carbon;
+use Silber\Bouncer\BouncerFacade as Bouncer;
 
 class DatabaseSeeder extends Seeder
 {
@@ -121,6 +122,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user3->save();
+
+        Bouncer::assign('superadmin')->to($user3);
         //</editor-fold>
 
         //<editor-fold desc="Seniors">

@@ -13,7 +13,7 @@ class CreateEvaluationServicesTable extends Migration
             $table->increments('id');
 
             $table->text('commentaire');
-            $table->enum('noteSmiley', [0, 1, 2, 3]);
+            $table->enum('noteSmiley', ['0', '1', '2', '3']);
 
             $table->integer('senior_id')->unsigned();
             $table->integer('intervention_id')->unsigned();
