@@ -47,7 +47,17 @@ class JuniorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if ($user->can('creer-junior'))
+            {
+                return response()->json("", Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
     /**
@@ -58,15 +68,25 @@ class JuniorController extends Controller
      */
     public static function show($id)
     {
-        return response()
-            ->json(User::with(
-                'junior',
-                'adresse_habitation',
-                'junior.adresse_de_depart',
-                'junior.adresse_de_facturation',
-                'junior.matieres')
-                ->has('junior')
-                ->find($id));
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if ($user->can('voir-junior'))
+            {
+                return response()
+                    ->json(User::with(
+                        'junior',
+                        'adresse_habitation',
+                        'junior.adresse_de_depart',
+                        'junior.adresse_de_facturation',
+                        'junior.matieres')
+                        ->has('junior')
+                        ->find($id), Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
 
@@ -79,7 +99,17 @@ class JuniorController extends Controller
      */
     public function update(Request $request, Junior $junior)
     {
-        //
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if ($user->can('modifier-junior'))
+            {
+                return response()->json("", Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
     /**
@@ -90,7 +120,17 @@ class JuniorController extends Controller
      */
     public function destroy(Junior $junior)
     {
-        //
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if ($user->can('supprimer-junior'))
+            {
+                return response()->json("", Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
     public static function get($id)

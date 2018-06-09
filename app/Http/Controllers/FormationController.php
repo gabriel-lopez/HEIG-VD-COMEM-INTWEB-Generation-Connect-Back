@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Formation;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class FormationController extends Controller
 {
@@ -14,8 +16,19 @@ class FormationController extends Controller
      */
     public function index()
     {
-        return response()->json(Formation::with('plageHoraire.plage_unique')
-        ->get()->makeHidden('plagehoraire_id'));
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if($user->can('voir-liste-formations'))
+            {
+                return response()->json(Formation::with('plageHoraire.plage_unique')
+                    ->get()
+                    ->makeHidden('plagehoraire_id'), Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
 
@@ -27,7 +40,17 @@ class FormationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(Auth::check())
+        {
+            $user = Auth::user();
+
+            if($user->can('creer-formation'))
+            {
+                return response()->json("", Response::HTTP_OK);
+            }
+        }
+
+        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
     /**

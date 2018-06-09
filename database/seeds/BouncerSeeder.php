@@ -75,12 +75,12 @@ class BouncerSeeder extends Seeder
 
         $creer_senior = Bouncer::ability()->create([
             'name' => 'creer-senior',
-            'title' => 'Créer Senior',
+            'title' => 'Créer un Senior',
         ]);
 
-        $create_junior = Bouncer::ability()->create([
-            'name' => 'create-junior',
-            'title' => 'create-junior',
+        $creer_junior = Bouncer::ability()->create([
+            'name' => 'creer-junior',
+            'title' => 'Créer un Junior',
         ]);
 
         $creer_employe = Bouncer::ability()->create([
@@ -143,8 +143,8 @@ class BouncerSeeder extends Seeder
             'title' => 'Modifier les candidatures',
         ]);
 
-        $voir_formations = Bouncer::ability()->create([
-            'name' => 'voir-formations',
+        $voir_liste_formations = Bouncer::ability()->create([
+            'name' => 'voir-liste-formations',
             'title' => 'Voir les formations',
         ]);
 
