@@ -64,6 +64,7 @@ class User extends Authenticatable
         });
 
         return $validator;
+
     }
 
     public static function createOne(array $values)

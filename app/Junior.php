@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
-
+use Validator;
 class Junior extends Model
 {
     use SoftDeletes;
@@ -14,16 +14,16 @@ class Junior extends Model
 
     public $primaryKey = 'user_id';
 
-    protected $rules = [
-        'user_id' => 'required|exists:users,id',
+    protected static $rules = [
+        'user_id' => 'exists:users,id',
         'status' => 'required|in:"candidat","formation","actif","inactif","refuse"',
         'LimiteTempsTransport' => 'required|integer|min:0',
         'AdresseDeDepart' => 'required|exists:addresses,id',
         'AdresseFacturation' => 'required|exists:addresses,id',
-        'NoAVS' => 'required|regex:756\.?[0-9]{4}\.?[0-9]{4}\.?[0-9]{2}',
+        'NoAVS' => 'required|regex:(756\.?[0-9]{4}\.?[0-9]{4}\.?[0-9]{2})',
         'BanqueNom' => 'required|string|max:255',
-        'BanqueBIC' => 'required|string|regex:/^[a-z]{4}[a-z]{2}[0-9a-z]{2}([0-9a-z]{3})?\z/i',
-        'BanqueIBAN' => 'required|regex:756\.?[0-9]{4}\.?[0-9]{4}\.?[0-9]{2}',
+        'BanqueBIC' => 'required|string|bic',
+        'BanqueIBAN' => 'required|iban',
     ];
 
     protected $hidden = [

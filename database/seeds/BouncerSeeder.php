@@ -178,6 +178,21 @@ class BouncerSeeder extends Seeder
             'title' => 'Créer une évaluation',
         ]);
 
+        $creer_sujet = Bouncer::ability()->create([
+            'name' => 'creer-sujet',
+            'title' => 'Créer un sujet',
+        ]);
+
+        $creer_sujet = Bouncer::ability()->create([
+            'name' => 'modifier-sujet',
+            'title' => 'Modifier un sujet',
+        ]);
+
+        $creer_matiere = Bouncer::ability()->create([
+            'name' => 'creer-matiere',
+            'title' => 'Créer une matière',
+        ]);
+
         Bouncer::allow($superadmin)->everything();
 
         /*Bouncer::allow($directeur)->to($creer_employe);

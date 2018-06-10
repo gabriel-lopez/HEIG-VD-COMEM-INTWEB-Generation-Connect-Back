@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
 
 class Matiere extends Model
 {
@@ -13,11 +14,36 @@ class Matiere extends Model
         'updated_at'
     ];
 
-    protected $rules = [
+    protected static $rules = [
         'nom' => 'required|string|max:255',
         'description' => 'required|string',
         'sujet_id' => 'required|exists:sujets,id' // le sujet d'une matière doit être dans la liste des sujets stockés dans la base
     ];
+
+    public static function getValidation($inputs)
+    {
+        return Validator::make($inputs, self::$rules);
+    }
+
+    public static function createOne($inputs)
+    {
+        $new = new self();
+        $new->nom = $inputs['nom'];
+        $new->description = $inputs['description'];
+        $new->sujet_id = $inputs['sujet_id'];
+        $new->save();
+        return $new;
+    }
+
+    public static function updateOne(array $newValues, Matiere $matiere)
+    {
+
+        $matiere->nom = $newValues['nom'];
+        $matiere->description = $newValues['description'];
+        $matiere->sujet_id = $newValues['sujet_id'];
+        $matiere->save();
+        return $matiere;
+    }
 
     public function sujet()
     {

@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
-
+use Validator ;
 class Senior extends Model
 {
     use SoftDeletes;
@@ -14,9 +14,10 @@ class Senior extends Model
 
     public $timestamps = true;
 
-    protected $rules = [
-        'user_id' => 'required|exists:users,id',
+    protected static $rules = [
+        'user_id' => 'exists:users,id',
         'preference' => 'required|in:"email","telephone"',
+        'forfait_id' => 'exists:forfaits,id'
     ];
 
     protected $hidden = [

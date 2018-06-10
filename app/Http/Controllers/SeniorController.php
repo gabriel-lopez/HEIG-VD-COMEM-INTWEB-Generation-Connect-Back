@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Address;
 use App\Senior;
 use App\User;
 use Illuminate\Http\Request;
@@ -17,12 +18,10 @@ class SeniorController extends Controller
      */
     public function index()
     {
-        if(Auth::check())
-        {
+        if (Auth::check()) {
             $user = Auth::user();
 
-            if ($user->can('voir-liste-seniors'))
-            {
+            if ($user->can('voir-liste-seniors')) {
                 return response()
                     ->json(User::with('senior', 'adresse_habitation', 'senior.forfait')
                         ->has('senior')
@@ -30,44 +29,69 @@ class SeniorController extends Controller
             }
         }
 
-        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
+        return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        if(Auth::check())
-        {
+        if (Auth::check()) {
             $user = Auth::user();
 
-            if ($user->can('creer-senior'))
-            {
-                return response()->json("", Response::HTTP_OK);
+            if ($user->can('creer-senior')) {
+
+                $inputs = $request->all();
+
+                if (Address::getValidation($inputs['adresse_habitation'])->fails())
+                    return response()->json(['error' => 'Adresse_Habitation invalide'], Response::HTTP_BAD_REQUEST);
+
+                $adresse = Address::createOne($inputs['adresse_habitation']);
+                $request->request->add(['adresse_habitation_id' => $adresse->id]);
+
+                $validate_user = User::getValidation($request->all());
+
+                $validate_senior = Senior::getValidation($request->all());
+
+                if ($validate_senior->fails()) {
+                    return response()->json(['error' => 'Bad senior properties '], Response::HTTP_BAD_REQUEST);
+                }
+
+                if ($validate_user->fails()) {
+                    return response()->json(['error' => 'Bad user properties'], Response::HTTP_BAD_REQUEST);
+                }
+
+                $new_user = User::createOne($request->all());
+
+                $request->request->add(['user_id' => $new_user->id]);
+
+                $new_employe = Senior::createOne($request->all());
+
+                return SeniorController::show($new_user->id);
             }
         }
 
-        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
+        return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
     }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Senior  $senior
+     * @param  \App\Senior $senior
      * @return \Illuminate\Http\Response
      */
-    public static function show($id)
+    public
+    static function show($id)
     {
-        if(Auth::check())
-        {
+        if (Auth::check()) {
             $user = Auth::user();
 
-            if ($user->can('voir-senior'))
-            {
+            if ($user->can('voir-senior')) {
                 return response()
                     ->json(User::with('senior', 'adresse_habitation', 'senior.forfait')
                         ->has('senior')
@@ -75,65 +99,61 @@ class SeniorController extends Controller
             }
         }
 
-        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
+        return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
     }
 
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Senior  $senior
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Senior $senior
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Senior $senior)
+    public
+    function update(Request $request, Senior $senior)
     {
-        if(Auth::check())
-        {
+        if (Auth::check()) {
             $user = Auth::user();
 
-            if ($user->can('modifier-senior'))
-            {
+            if ($user->can('modifier-senior')) {
                 return response()->json("", Response::HTTP_OK);
             }
         }
 
-        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
+        return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Senior  $senior
+     * @param  \App\Senior $senior
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
-        if(Auth::check())
-        {
+        if (Auth::check()) {
             $user = Auth::user();
 
-            if ($user->can('supprimer-senior'))
-            {
+            if ($user->can('supprimer-senior')) {
                 $senior = Senior::find($id);
 
-                if(isset($senior))
-                {
+                if (isset($senior)) {
                     $senior->delete();
 
                     return response()->json(['error' => 'Ok'], Response::HTTP_OK);
-                }
-                else
-                {
+                } else {
                     return response()->json(['error' => 'Bad Request'], Response::HTTP_BAD_REQUEST);
                 }
             }
         }
 
-        return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
+        return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
     }
 
-    public static function get($id)
+    public
+    static function get($id)
     {
         return User::with('senior', 'adresse_habitation', 'senior.forfait')
             ->has('senior')
