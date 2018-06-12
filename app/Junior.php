@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Silber\Bouncer\Database\HasRolesAndAbilities;
-use Validator;
+use Illuminate\Support\Facades\Validator;
+
 class Junior extends Model
 {
     use SoftDeletes;

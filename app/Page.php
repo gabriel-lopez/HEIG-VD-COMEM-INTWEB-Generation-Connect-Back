@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
-use Validator;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Validator;
 
 class Page extends Model
 {
+    use SoftDeletes;
+
     public $timestamps = true;
 
     public static $rules = [
@@ -26,26 +28,15 @@ class Page extends Model
         'deleted_at'
     ];
 
-    /**
-     * Valide les $inputs pour l'édition d'une Page
-     * @param Array $inputs The inputs to validate
-     * @return Validator
-     */
     public static function getValidation(Array $inputs)
     {
-        // Création du validateur
         $validator = Validator::make($inputs, self::$rules);
-        // Ajout des contraintes supplémentaires
+
         $validator->after(function ($validator) use ($inputs)
         {
-            /*$sinistre = self::find($inputs['reference'], $inputs['date']);
-
-            // Vérification de la non-existence du Sinistre
-            if ($sinistre !== null) {
-                $validator->errors()->add('exists', Message::get('sinistre.exists'));
-            }*/
+            // contraintes supplémentaires
         });
-        // Renvoi du validateur
+
         return $validator;
     }
 

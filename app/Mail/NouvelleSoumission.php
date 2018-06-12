@@ -12,22 +12,16 @@ class NouvelleSoumission extends Mailable
     use Queueable, SerializesModels;
 
     public $user;
+    public $request;
+    public $hash;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct($user)
+    public function __construct($user, $request, $hash)
     {
         $this->user = $user;
+        $this->request = $request;
+        $this->hash = $hash;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
         return $this->view('email');

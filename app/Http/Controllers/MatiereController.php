@@ -9,11 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class MatiereController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //TODO
     public function index()
     {
         return response()->json(Matiere::with('sujet')
@@ -21,24 +17,19 @@ class MatiereController extends Controller
             ->makeHidden('sujet_id'));
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-
-        if (Auth::check()) {
+        if (Auth::check())
+        {
             $user = Auth::user();
 
-            if ($user->can('creer-matiere')) {
+            if ($user->can('creer-matiere'))
+            {
                 $validate_matiere = Matiere::getValidation($request->all());
 
                 // si les inputs ne sont pas valide
-                if ($validate_matiere->fails()) {
+                if ($validate_matiere->fails())
+                {
                     return response()->json(['error' => 'Bad Request'], Response::HTTP_BAD_REQUEST);
                 }
 
@@ -50,38 +41,26 @@ class MatiereController extends Controller
             // Si l'utilisateur n'a pas les droits
             return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
-
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+     public function show($id)
     {
+        //TODO
         $matiere = Matiere::with('sujet')->find($id);
         if ($matiere) $matiere->makeHidden('sujet_id');
         return response()->json($matiere);
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Matiere $matiere
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        if (Auth::check()) {
+        if (Auth::check())
+        {
             $user = Auth::user();
 
             if ($user->can('modifier-matiere'))
             {
                 $matiereAModifier = Matiere::find($id);
+
                 if ($matiereAModifier)
                 {
                     $validate_matiere = Matiere::getValidation($request->all());
@@ -105,14 +84,8 @@ class MatiereController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Matiere $matiere
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Matiere $matiere)
     {
-        //
+        //TODO
     }
 }

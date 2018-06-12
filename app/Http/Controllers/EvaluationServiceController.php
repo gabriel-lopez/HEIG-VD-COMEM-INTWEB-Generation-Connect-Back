@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class EvaluationServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         if(Auth::check())
@@ -31,13 +26,6 @@ class EvaluationServiceController extends Controller
         return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         if(Auth::check())
@@ -46,6 +34,8 @@ class EvaluationServiceController extends Controller
 
             if($user->can('creer-evalution'))
             {
+                // TODO
+
                 return response()
                     ->json("", Response::HTTP_OK);
             }
@@ -54,12 +44,6 @@ class EvaluationServiceController extends Controller
         return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  integer $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         if(Auth::check())

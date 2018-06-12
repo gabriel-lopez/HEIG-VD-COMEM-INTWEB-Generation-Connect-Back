@@ -3,17 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Validator;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Validator;
 
 class Requete extends Model
 {
-    protected $fillable = [
-        'type',
-        'matiere_id',
-        'senior_id'
-    ];
+    use SoftDeletes;
 
-    protected static $rules = [
+    public $timestamps;
+
+    public static $rules = [
         'type' => 'required|in:"urgent","unique","repetitif"',
         'matiere_id' => 'required|exists:matieres,id',
         'soumis_par' => 'required|exists:seniors,user_id',
@@ -27,6 +26,46 @@ class Requete extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
+
+    public static function getValidation($inputs)
+    {
+        $validator = Validator::make($inputs, self::$rules);
+
+        $validator->after(function ($validator) use ($inputs)
+        {
+            // contraintes supplémentaires
+        });
+
+        return $validator;
+    }
+
+    public static function createOne($inputs)
+    {
+        $new = new self();
+
+        $new->type = $inputs['type'];
+        $new->matiere_id = $inputs['matiere_id'];
+        $new->soumis_par = $inputs['soumis_par'];
+        $new->plageHoraire_id = $inputs['plageHoraire_id'];
+        if (isset($inputs['statut']))  // par défaut, le statut vaut nontraite
+        {
+            $new->statut = $inputs['statut'];
+        }
+        if (isset($inputs['commentaire'])) // par défaut, le statut vaut nontraite
+        {
+            $new->commentaire = $inputs['commentaire'];
+        }
+
+        $new->save();
+
+        return $new;
+    }
 
     public function plageHoraire()
     {
@@ -56,30 +95,5 @@ class Requete extends Model
     public function interventions()
     {
         return $this->belongsToMany('\App\Intervention');
-    }
-
-    public static function getValidation($inputs)
-    {
-        $validator = Validator::make($inputs, self::$rules);
-
-        $validator->after(function ($validator) use ($inputs) {
-            // contraintes supplémentaires
-        });
-
-        return $validator;
-
-    }
-
-    public static function createOne($inputs)
-    {
-        $new = new self();
-        $new->type = $inputs['type'];
-        $new->matiere_id = $inputs['matiere_id'];
-        $new->soumis_par = $inputs['soumis_par'];
-        $new->plageHoraire_id = $inputs['plageHoraire_id'];
-        if (isset($inputs['statut'])) $new->statut = $inputs['statut']; // par défaut, le statut vaut nontraite
-        if (isset($inputs['commentaire'])) $new->commentaire = $inputs['commentaire']; // par défaut, le statut vaut nontraite
-        $new->save();
-        return $new;
     }
 }

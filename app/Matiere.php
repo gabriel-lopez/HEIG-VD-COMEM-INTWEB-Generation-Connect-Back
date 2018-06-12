@@ -33,26 +33,37 @@ class Matiere extends Model
 
     public static function getValidation($inputs)
     {
-        return Validator::make($inputs, self::$rules);
+        $validator = Validator::make($inputs, self::$rules);
+
+        $validator->after(function ($validator) use ($inputs)
+        {
+            // contraintes supplémentaires
+        });
+
+        return $validator;
     }
 
     public static function createOne($inputs)
     {
         $new = new self();
+
         $new->nom = $inputs['nom'];
         $new->description = $inputs['description'];
         $new->sujet_id = $inputs['sujet_id'];
+
         $new->save();
+
         return $new;
     }
 
     public static function updateOne(array $newValues, Matiere $matiere)
     {
-
         $matiere->nom = $newValues['nom'];
         $matiere->description = $newValues['description'];
         $matiere->sujet_id = $newValues['sujet_id'];
+
         $matiere->save();
+
         return $matiere;
     }
 

@@ -2,35 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Intervention;
-use App\Notification;
-use App\Requete;
+use App\Mail\NouvelleSoumission;
+use App\Soumission;
 use App\User;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Soumission;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\NouvelleSoumission;
-use Mockery\Matcher\Not;
 
 class SoumissionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
+        //TODO GESTION DES DROITS
         return response()->json(Soumission::all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $user = Auth::user();
@@ -39,35 +26,31 @@ class SoumissionController extends Controller
         {
             $inputs = $request->all();
 
-            if (!Soumission::getValidation($inputs))
+            if (Soumission::getValidation($inputs)->fails())
             {
-                return response()->json(['error' => 'soumission invalide'], Response::HTTP_BAD_REQUEST);
+                return response()->json(['error' => 'Bad Request: Soumission Invalide'], Response::HTTP_BAD_REQUEST);
             }
 
             $soumission = Soumission::createOne($inputs);
+            $user = User::find($inputs[junior_id]);
 
-            $notification = Notification::createOne("", "",  "email");
+            // TODO
+            // $notification = Notification::createOne($soumission->junior_id, $soumission->requete_id,  "email");
+            Mail::to($user->email)->send(new NouvelleSoumission($user, $request, ""));
 
-           // Mail::to(/*User::find($soumission->junior_id)*/ 'etienne.rallu@gmail.com')->send(new NouvelleSoumission('mailDeTest asopidjf'));
-
-            return $this->show($soumission->requete_id, $soumission->junior_id);
+            return response()->json($soumission, Response::HTTP_OK);
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function show($requete_id, $junior_id)
     {
-        return response()->json(Soumission::find($requete_id, $junior_id));
+        //TODO GESTION DES DROITS
+        return response()->json(Soumission::find($requete_id, $junior_id), Response::HTTP_OK);
     }
-
 
     public function acceptation($requete_id, $junior_id, $link_hash = null)
     {
+        //TODO
        /* $soumission = Soumission::find($requete_id, $junior_id);
 
         if(!$soumission)
@@ -93,28 +76,13 @@ class SoumissionController extends Controller
         // retourner la nouvelle intervention créée*/
     }
 
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        //TODO
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        //TODO
     }
 }

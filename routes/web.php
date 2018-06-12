@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function ()
 {
     include public_path() . '/frontend/index.html';
@@ -25,20 +27,19 @@ Route::get('/{name}', function ($name)
 Route::get('/{folder}/{resource}', function ($folder, $resource)
 {
     include public_path() . '/frontend/' . $folder . '/' . $resource;
-})->where(['folder' => '^(?!api).*$']);;
+})->where(['folder' => '^(?!api).*$']);
 
 Route::group(['prefix' => 'api'], function ()
 {
     Route::post("login", 'AuthController@login');
-    Route::resource('pages', 'PageController')->except(['create', 'edit', 'store', 'destroy']);
-
-    Route::get('soumissions/{requete_id}/{junior_id}/{hash}', 'SoumissionController@acceptation');
-
-    Route::post('inscription/junior', 'InscriptionController@senior');
+    Route::post('inscription/junior', 'InscriptionController@junior');
     Route::post('inscription/senior', 'InscriptionController@senior');
 
+    Route::resource('pages', 'PageController')->except(['create', 'edit', 'store', 'destroy']);
+    
+    Route::get('soumissions/{requete_id}/{junior_id}/{hash}', 'SoumissionController@acceptation');
+
     Route::resource('matching', 'MatchingController');
-    Route::get('mail', 'MatchingController@testmail');
 });
 
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function ()
@@ -60,6 +61,6 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function ()
     Route::resource('sujets', 'SujetController')->except(['create', 'edit']);
     Route::resource('forfaits', 'ForfaitController')->except(['create', 'edit']);
     Route::resource('messages', 'MessageController')->except(['create', 'edit']);
-    Route::resource('notifications', 'NotificationController')->except(['create', 'edit']);
+    Route::resource('notifications', 'NotificationController')->except(['create', 'edit', 'update', 'destroy']);
     Route::resource('soumissions', 'SoumissionController')->except(['create', 'edit']);
 });

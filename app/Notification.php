@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
-use Validator;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Validator;
 
 class Notification extends Model
 {
+    use SoftDeletes;
+
     public $timestamps = true;
 
     public static $rules = [

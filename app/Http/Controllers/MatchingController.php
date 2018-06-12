@@ -16,21 +16,8 @@ use Illuminate\Support\Facades\Mail;
 
 class MatchingController extends Controller
 {
-    public function testmail()
-    {
-        Mail::to("gabriel.lopez@heig-vd.ch")->send(new NouvelleSoumission(User::find(1)->first()));
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-
-
-
         // trying to gecode origin
         /*$place = json_decode(
             GoogleMaps::load('geocoding')
@@ -52,33 +39,16 @@ class MatchingController extends Controller
         return response()->json($route, Response::HTTP_OK);*/
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $requete = Requete::find($id);
@@ -160,37 +130,18 @@ class MatchingController extends Controller
         return response()->json($selected_juniors, Response::HTTP_OK);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        //TODO
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        //TODO
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        //TODO
     }
 }

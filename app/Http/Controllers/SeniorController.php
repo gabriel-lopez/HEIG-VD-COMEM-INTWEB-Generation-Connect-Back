@@ -152,8 +152,7 @@ class SeniorController extends Controller
         return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
     }
 
-    public
-    static function get($id)
+    public static function get($id)
     {
         return User::with('senior', 'adresse_habitation', 'senior.forfait')
             ->has('senior')

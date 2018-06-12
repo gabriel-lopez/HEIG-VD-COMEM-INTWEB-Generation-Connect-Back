@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Silber\Bouncer\Database\HasRolesAndAbilities;
-use Validator ;
+use Illuminate\Support\Facades\Validator;
+
 class Senior extends Model
 {
     use SoftDeletes;
@@ -14,7 +14,7 @@ class Senior extends Model
 
     public $timestamps = true;
 
-    protected static $rules = [
+    public static $rules = [
         'user_id' => 'exists:users,id',
         'preference' => 'required|in:"email","telephone"',
         'forfait_id' => 'exists:forfaits,id'
@@ -79,7 +79,6 @@ class Senior extends Model
     {
         return $this->belongsTo('\App\User');
     }
-
 
 /*
     public function soumission()

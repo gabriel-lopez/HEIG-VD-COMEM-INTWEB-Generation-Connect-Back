@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class Formation extends Model
 {

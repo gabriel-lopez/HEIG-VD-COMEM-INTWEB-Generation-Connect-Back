@@ -4,13 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class PlageHoraire extends Model
 {
     use SoftDeletes;
 
     protected $table = 'plages_horaires';
+
+    public $timestamps = true;
+
+    public static $rules = [
+        'joursemaine' => 'required|in:lundi,mardi,mercredi,jeudi,vendredi',
+        'heuredebut'=> 'date_format:"H:i"|required',
+        'heurefin' => 'date_format:"H:i"|required|after:heuredebut',
+    ];
 
     protected $hidden = [
         'pivot',
@@ -19,10 +27,10 @@ class PlageHoraire extends Model
         'deleted_at'
     ];
 
-    protected static    $rules = [
-        'joursemaine' => 'required|in:lundi,mardi,mercredi,jeudi,vendredi',
-        'heuredebut'=> 'date_format:"H:i"|required',
-        'heurefin' => 'date_format:"H:i"|required|after:heuredebut',
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     public static function getValidation($inputs)
@@ -40,11 +48,13 @@ class PlageHoraire extends Model
     public static function createOne($inputs)
     {
         $new = new self();
+
         $new->joursemaine = $inputs['joursemaine'];
         $new->heuredebut = $inputs['heuredebut'];
         $new->heurefin = $inputs['heurefin'];
 
         $new->save();
+
         return $new;
     }
 

@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Validator;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Validator;
 
 class Address extends Model
 {
+    use SoftDeletes;
+
     public $timestamps = true;
 
     protected $attributes = [

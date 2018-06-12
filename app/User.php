@@ -5,9 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Validator;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
-
-use Validator;
 
 class User extends Authenticatable
 {

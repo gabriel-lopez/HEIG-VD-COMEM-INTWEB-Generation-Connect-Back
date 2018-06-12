@@ -4,33 +4,23 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Validator;
+use Illuminate\Support\Facades\Validator;
+
 class Soumission extends Model
 {
     public $timestamps = false;
+
+    public static $rules = [
+        'requete_id' => 'required|integer|exists:requetes,id',
+        'junior_id' => 'required|integer|exists:juniors,id',
+        'proposition' => 'required|date',
+        'acceptation' => 'nullable|date|after:soumission',
+    ];
 
     protected $dates = [
         'acceptation',
         'proposition'
     ];
-
-    protected static $rules = [
-        'requete_id' => 'required|integer|exists:requetes,id',
-        'junior_id' => 'required|integer|exists:juniors,id',
-        'acceptation' => 'nullable|date|after:soumission',
-        'proposition' => 'required|date',
-    ];
-
-    public function requete()
-    {
-        return $this->belongsTo('\App\Requete');
-    }
-
-    public function junior()
-    {
-        return $this->hasOne('\App\junior');
-    }
 
     public static function getValidation($inputs)
     {
@@ -57,13 +47,18 @@ class Soumission extends Model
         return $new;
     }
 
-
-    /**
-     * Réécriture de la foncton find pour une clé composée
-     */
     public static function find($requete_id, $junior_id)
     {
-        return Soumission::where('requete_id', '=', $requete_id)
-            ->where('junior_id', '=', $junior_id);
+        return self::where('requete_id', '=', $requete_id)->where('junior_id', '=', $junior_id);
+    }
+
+    public function requete()
+    {
+        return $this->belongsTo('\App\Requete');
+    }
+
+    public function junior()
+    {
+        return $this->hasOne('\App\junior');
     }
 }

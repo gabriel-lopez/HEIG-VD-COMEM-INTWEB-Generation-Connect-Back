@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class InscriptionController extends Controller
 {
+    //TODO
     public function junior(Request $request)
     {
         $file = $request->file('cv');
@@ -26,6 +27,7 @@ class InscriptionController extends Controller
         $file->move($destinationPath, $file->getClientOriginalName());
     }
 
+    //TODO
     public function senior(Request $request)
     {
 

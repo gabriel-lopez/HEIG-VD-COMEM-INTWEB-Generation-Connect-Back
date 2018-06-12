@@ -13,10 +13,7 @@ class AuthController extends Controller
         $email = $request->input('email', '');
         $motdepasse = $request->input('motdepasse', '');
 
-        if (Auth::attempt([
-            'email' => $email,
-            'password' => $motdepasse,
-        ]))
+        if (Auth::attempt(['email' => $email, 'password' => $motdepasse]))
         {
             $user_auth = Auth::user();
 
