@@ -9,6 +9,7 @@
         "alexpechkarev/google-maps": "1.0.9",
         "barryvdh/laravel-cors": "^0.11.0",
         "fideloper/proxy": "^4.0",
+        "guzzlehttp/guzzle": "^6.3",
         "intervention/validation": "^1.2",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",

@@ -50,9 +50,6 @@ class SeniorController extends Controller
                 if (Address::getValidation($inputs['adresse_habitation'])->fails())
                     return response()->json(['error' => 'Adresse_Habitation invalide'], Response::HTTP_BAD_REQUEST);
 
-                $adresse = Address::createOne($inputs['adresse_habitation']);
-                $request->request->add(['adresse_habitation_id' => $adresse->id]);
-
                 $validate_user = User::getValidation($request->all());
 
                 $validate_senior = Senior::getValidation($request->all());
@@ -64,6 +61,9 @@ class SeniorController extends Controller
                 if ($validate_user->fails()) {
                     return response()->json(['error' => 'Bad user properties'], Response::HTTP_BAD_REQUEST);
                 }
+
+                $adresse = Address::createOne($inputs['adresse_habitation']);
+                $request->request->add(['adresse_habitation_id' => $adresse->id]);
 
                 $new_user = User::createOne($request->all());
 

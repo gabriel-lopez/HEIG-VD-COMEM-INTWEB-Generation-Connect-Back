@@ -58,8 +58,6 @@ class JuniorController extends Controller
                 if (Address::getValidation($inputs['adresse_habitation'])->fails())
                     return response()->json(['error' => 'Adresse_Habitation invalide'], Response::HTTP_BAD_REQUEST);
 
-                $adresse = Address::createOne($inputs['adresse_habitation']);
-                $request->request->add(['adresse_habitation_id' => $adresse->id]);
 
                 if (isset($inputs['AdresseDeDepart'])) {
                     $adresseDeDepart = Address::createOne($inputs['AdresseDeDepart']);
@@ -75,6 +73,9 @@ class JuniorController extends Controller
                     $request->request->add(['AdresseFacturation' => $adresse->id]);
                 }
                 if (!isset($inputs['status'])) $request->request->add(['status' => 'candidat']);
+
+                $adresse = Address::createOne($inputs['adresse_habitation']);
+                $request->request->add(['adresse_habitation_id' => $adresse->id]);
 
                 $validate_user = User::getValidation($request->all());
 

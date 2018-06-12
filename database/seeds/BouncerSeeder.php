@@ -193,6 +193,16 @@ class BouncerSeeder extends Seeder
             'title' => 'Créer une matière',
         ]);
 
+        $creer_requete = Bouncer::ability()->create([
+            'name' => 'creer-requete',
+            'title' => 'Créer une requête',
+        ]);
+
+        $voir_requete = Bouncer::ability()->create([
+            'name' => 'voir-requete',
+            'title' => 'Voir une requête',
+        ]);
+
         Bouncer::allow($superadmin)->everything();
 
         /*Bouncer::allow($directeur)->to($creer_employe);

@@ -12,7 +12,7 @@ class CreatePlagesUniquesTable extends Migration
         {
             $table->increments('plage_horaire_id');
 
-            $table->date('Date');
+            $table->date('date');
 
             $table->timestamps();
             $table->softDeletes();

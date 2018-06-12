@@ -14,6 +14,7 @@ class CreateRequetesTable extends Migration
 
             $table->enum('type', ['urgent','unique','repetitif']);
             $table->enum('statut',['nontraite','envoye','accepte']); // nontraité, envoyé, accepté
+            $table->text("commentaire")->nullable();
 
             $table->integer('matiere_id')->unsigned();
             $table->integer('soumis_par')->unsigned();

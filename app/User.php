@@ -20,17 +20,10 @@ class User extends Authenticatable
         'nom' => 'required|string|max:255',
         'email' => 'required|email|unique:users',
         'telephone' => 'required|phone:CH',
-        /*
-         * The password contains characters from at least three of the following five categories:
-         * - English uppercase characters (A – Z)
-         * - English lowercase characters (a – z)
-         * - Base 10 digits (0 – 9)
-         * - Non-alphanumeric (For example: !, $, #, or %)
-         * - Unicode characters
-         */
-        //'motdepasse' => 'required|confirmed|string|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/',
-        'motdepasse' => 'required|string',
-        'adresse_habitation_id' => 'required|exists:addresses,id'
+        //Checks for valid password with a minimum of 6 characters and maximum of 64 characters,
+        // containing at least one digit, one upper case letter, one lower case letter and one special symbol.
+        'motdepasse' => 'required|password',
+        'adresse_habitation_id' => 'exists:addresses,id'
     ];
 
     protected $hidden = [
