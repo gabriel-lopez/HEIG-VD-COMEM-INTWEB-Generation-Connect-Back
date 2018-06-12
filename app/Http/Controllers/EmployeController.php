@@ -43,7 +43,8 @@ class EmployeController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
 
-            if ($user->can('creer-employe')) {
+            if ($user->can('creer-employe'))
+            {
                 $inputs = $request->all();
 
                 if (Address::getValidation($inputs['adresse_habitation'])->fails())

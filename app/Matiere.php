@@ -9,6 +9,7 @@ class Matiere extends Model
 {
 
     protected $hidden = [
+        'pivot',
         'created_at',
         'deleted_at',
         'updated_at'

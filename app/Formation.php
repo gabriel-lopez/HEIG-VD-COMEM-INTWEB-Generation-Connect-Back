@@ -8,8 +8,6 @@ class Formation extends Model
 {
     public $timestamps = true;
 
-
-
     protected $rules = [
         'nom' => 'required|in:"actif","inactif"',
         'plageHoraire' => 'exists:plagehoraires,id',

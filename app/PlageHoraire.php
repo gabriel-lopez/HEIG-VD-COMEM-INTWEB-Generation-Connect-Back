@@ -12,6 +12,7 @@ class PlageHoraire extends Model
     protected $table = 'plages_horaires';
 
     protected $hidden = [
+        'pivot',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -29,5 +30,10 @@ class PlageHoraire extends Model
     public function plage_horaire_repetitive()
     {
         return $this->hasOne('\App\PlageRepetitive', 'plage_horaire_id');
+    }
+
+    public function juniors()
+    {
+        return $this->belongsToMany('\App\Junior');
     }
 }

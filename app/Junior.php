@@ -89,4 +89,9 @@ class Junior extends Model
     {
         return $this->belongsToMany('\App\Matiere');
     }
+
+    public function plageshoraires()
+    {
+        return $this->belongsToMany('\App\PlageHoraire');
+    }
 }

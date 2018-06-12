@@ -123,6 +123,30 @@ class DatabaseSeeder extends Seeder
 
         $user3->save();
 
+        $user4 = new \App\User([
+            'prenom' => "Arthur",
+            'nom' => "Verdon",
+            'email' => "user4@example.com",
+            'telephone' => PhoneNumber::make('0245577600')->ofCountry('CH'),
+            'adresse_habitation_id' => $address1->id,
+            'motdepasse' => bcrypt("user4"),
+            'remember_token' => str_random(10),
+        ]);
+
+        $user4->save();
+
+        $user5 = new \App\User([
+            'prenom' => "Alex",
+            'nom' => "Shams",
+            'email' => "user5@example.com",
+            'telephone' => PhoneNumber::make('0245577600')->ofCountry('CH'),
+            'adresse_habitation_id' => $address1->id,
+            'motdepasse' => bcrypt("user5"),
+            'remember_token' => str_random(10),
+        ]);
+
+        $user5->save();
+
         Bouncer::assign('superadmin')->to($user3);
         //</editor-fold>
 
@@ -155,6 +179,38 @@ class DatabaseSeeder extends Seeder
 
         $junior1->matieres()->save($matiere1);
         $junior1->matieres()->save($matiere2);
+
+        $junior2 = new \App\Junior([
+            'user_id' => $user4->id,
+            'status' => "actif",
+            'LimiteTempsTransport' => '80',
+            'NoAVS' => '756.1234.5678.97',
+            'BanqueNom' => 'UBS Group AG',
+            'BanqueBIC' => 'UBSWCHZH80A',
+            'BanqueIBAN' => 'CH08 0029 8999 9999 9999 Q',
+            'AdresseDeDepart' => $address1->id,
+            'AdresseFacturation' => $address1->id
+        ]);
+
+        $junior2->save();
+
+        $junior2->matieres()->save($matiere2);
+
+        $junior3 = new \App\Junior([
+            'user_id' => $user5->id,
+            'status' => "actif",
+            'LimiteTempsTransport' => '10',
+            'NoAVS' => '756.1234.5678.97',
+            'BanqueNom' => 'UBS Group AG',
+            'BanqueBIC' => 'UBSWCHZH80A',
+            'BanqueIBAN' => 'CH08 0029 8999 9999 9999 Q',
+            'AdresseDeDepart' => $address1->id,
+            'AdresseFacturation' => $address1->id
+        ]);
+
+        $junior3->save();
+
+        $junior3->matieres()->save($matiere1);
         //</editor-fold>
 
         //<editor-fold desc="Employes">
@@ -294,6 +350,6 @@ class DatabaseSeeder extends Seeder
             ]);
         $notification1->save();
 
-
+        $junior1->plageshoraires()->save($plageHoraire1);
     }
 }

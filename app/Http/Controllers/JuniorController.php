@@ -29,7 +29,8 @@ class JuniorController extends Controller
                         'adresse_habitation',
                         'junior.adresse_de_depart',
                         'junior.adresse_de_facturation',
-                        'junior.matieres')
+                        'junior.matieres',
+                        'junior.palgeshoraires')
                         ->has('junior')
                         ->get(), Response::HTTP_OK);
             }
@@ -121,7 +122,8 @@ class JuniorController extends Controller
                         'adresse_habitation',
                         'junior.adresse_de_depart',
                         'junior.adresse_de_facturation',
-                        'junior.matieres')
+                        'junior.matieres',
+                        'junior.plageshoraires')
                         ->has('junior')
                         ->find($id), Response::HTTP_OK);
             }
@@ -179,7 +181,9 @@ class JuniorController extends Controller
             'junior',
             'adresse_habitation',
             'junior.adresse_de_depart',
-            'junior.adresse_de_facturation')
+            'junior.adresse_de_facturation',
+            'junior.matieres',
+            'junior.plageshoraires')
             ->has('junior')
             ->find($id);
     }

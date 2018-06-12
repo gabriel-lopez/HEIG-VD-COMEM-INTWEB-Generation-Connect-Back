@@ -10,13 +10,13 @@ class CreateJuniorPlageHoraireTable extends Migration
     {
         Schema::create('junior_plage_horaire', function (Blueprint $table)
         {
-            $table->integer('junior_id');
+            $table->integer('junior_user_id');
             $table->integer('plage_horaire_id');
 
-            $table->foreign('junior_id')->references('id')->on('juniors');
+            $table->foreign('junior_user_id')->references('id')->on('juniors');
             $table->foreign('plage_horaire_id')->references('id')->on('plages_horaires');
 
-            $table->primary(['junior_id', 'plage_horaire_id']);
+            $table->primary(['junior_user_id', 'plage_horaire_id']);
         });
     }
 

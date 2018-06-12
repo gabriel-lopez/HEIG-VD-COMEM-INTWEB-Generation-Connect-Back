@@ -30,6 +30,11 @@ Route::group(['prefix' => 'api'], function()
 {
     Route::post("login", 'AuthController@login');
     Route::resource('pages', 'PageController')->except(['create', 'edit', 'store', 'destroy']);
+
+    Route::post('inscription/junior', 'InscriptionController@junior');
+    Route::post('inscription/senior', 'InscriptionController@senior');
+
+    Route::resource('matching', 'MatchingController');
 });
 
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function()

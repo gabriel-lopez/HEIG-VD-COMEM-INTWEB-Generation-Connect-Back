@@ -34,7 +34,6 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
-        'adresse_habitation_id',
         'motdepasse',
         'remember_token',
         'created_at',
