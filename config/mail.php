@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@generationconnect.com'),
-        'name' => env('MAIL_FROM_NAME', 'L\'equipe Génération Connect'),
+        'address' => env('MAIL_FROM_ADDRESS', 'noreply@generationconnect.com'),
+        'name' => env('MAIL_FROM_NAME', 'Génération Connect'),
     ],
 
     /*

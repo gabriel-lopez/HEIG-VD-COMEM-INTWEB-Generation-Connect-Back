@@ -51,7 +51,9 @@ class Soumission extends Model
         $new->requete_id = $inputs['requete_id'];
         $new->junior_id = $inputs['junior_id'];
         $new->proposition = Carbon::now();
+
         $new->save();
+
         return $new;
     }
 
@@ -64,5 +66,4 @@ class Soumission extends Model
         return Soumission::where('requete_id', '=', $requete_id)
             ->where('junior_id', '=', $junior_id);
     }
-
 }

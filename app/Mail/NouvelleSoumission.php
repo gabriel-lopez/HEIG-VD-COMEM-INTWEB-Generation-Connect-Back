@@ -11,16 +11,16 @@ class NouvelleSoumission extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $acceptation_link;
+    public $user;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($acceptation_link)
+    public function __construct($user)
     {
-        $this->acceptation_link = $acceptation_link;
+        $this->user = $user;
     }
 
     /**
@@ -30,6 +30,6 @@ class NouvelleSoumission extends Mailable
      */
     public function build()
     {
-        return $this->view('welcome');
+        return $this->view('email');
     }
 }

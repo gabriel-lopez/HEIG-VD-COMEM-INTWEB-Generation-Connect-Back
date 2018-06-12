@@ -38,6 +38,7 @@ Route::group(['prefix' => 'api'], function ()
     Route::post('inscription/senior', 'InscriptionController@senior');
 
     Route::resource('matching', 'MatchingController');
+    Route::get('mail', 'MatchingController@testmail');
 });
 
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function ()

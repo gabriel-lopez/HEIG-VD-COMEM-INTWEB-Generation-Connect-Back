@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Intervention;
+use App\Notification;
 use App\Requete;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Soumission;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NouvelleSoumission;
+use Mockery\Matcher\Not;
 
 class SoumissionController extends Controller
 {
@@ -23,7 +25,6 @@ class SoumissionController extends Controller
         return response()->json(Soumission::all());
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -34,15 +35,21 @@ class SoumissionController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->can('creer-soumission')) {
+        if ($user->can('creer-soumission'))
+        {
             $inputs = $request->all();
 
             if (!Soumission::getValidation($inputs))
+            {
                 return response()->json(['error' => 'soumission invalide'], Response::HTTP_BAD_REQUEST);
+            }
 
             $soumission = Soumission::createOne($inputs);
 
+            $notification = Notification::createOne("", "",  "email");
+
            // Mail::to(/*User::find($soumission->junior_id)*/ 'etienne.rallu@gmail.com')->send(new NouvelleSoumission('mailDeTest asopidjf'));
+
             return $this->show($soumission->requete_id, $soumission->junior_id);
         }
     }

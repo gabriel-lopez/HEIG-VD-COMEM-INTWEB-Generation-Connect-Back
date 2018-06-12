@@ -30,7 +30,7 @@ class JuniorController extends Controller
                         'junior.adresse_de_depart',
                         'junior.adresse_de_facturation',
                         'junior.matieres',
-                        'junior.palgeshoraires')
+                        'junior.plageshoraires')
                         ->has('junior')
                         ->get(), Response::HTTP_OK);
             }

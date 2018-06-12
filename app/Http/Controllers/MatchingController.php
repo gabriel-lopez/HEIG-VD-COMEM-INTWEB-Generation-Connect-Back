@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Address;
 use App\Junior;
+use App\Mail\NouvelleSoumission;
 use App\Matiere;
 use App\PlageHoraire;
 use App\Requete;
@@ -11,9 +12,15 @@ use App\User;
 use GoogleMaps;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 
 class MatchingController extends Controller
 {
+    public function testmail()
+    {
+        Mail::to("gabriel.lopez@heig-vd.ch")->send(new NouvelleSoumission(User::find(1)->first()));
+    }
+
     /**
      * Display a listing of the resource.
      *

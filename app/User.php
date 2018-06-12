@@ -56,7 +56,6 @@ class User extends Authenticatable
         });
 
         return $validator;
-
     }
 
     public static function createOne(array $values)
@@ -95,5 +94,10 @@ class User extends Authenticatable
     public function adresse_habitation()
     {
         return $this->belongsTo('\App\Address');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany('\App\Address');
     }
 }
