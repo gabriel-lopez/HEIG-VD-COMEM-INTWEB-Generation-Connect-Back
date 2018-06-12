@@ -110,7 +110,6 @@ class MatchingController extends Controller
             // verifier si le junior possède la matière
             if ($collection->contains('id', $matiere->id))
             {
-
                 // verifier que le junior est dispo à cette période là
                 return response()->json($junior, Response::HTTP_OK);
 
