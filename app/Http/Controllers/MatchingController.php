@@ -111,7 +111,7 @@ class MatchingController extends Controller
             if ($collection->contains('id', $matiere->id))
             {
                 // verifier que le junior est dispo à cette période là
-                return response()->json($junior, Response::HTTP_OK);
+                // return response()->json($junior, Response::HTTP_OK);
 
                 // verifier que le junior est pas déjà engagé à cette période là
 
