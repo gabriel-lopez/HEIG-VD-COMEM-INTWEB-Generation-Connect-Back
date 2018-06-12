@@ -14,7 +14,7 @@ class Junior extends Model
 
     public $primaryKey = 'user_id';
 
-    protected static $rules = [
+    public static $rules = [
         'user_id' => 'exists:users,id',
         'status' => 'required|in:"candidat","formation","actif","inactif","refuse"',
         'LimiteTempsTransport' => 'required|integer|min:0',
@@ -53,10 +53,6 @@ class Junior extends Model
         return $validator;
     }
 
-    /**
-     * Enregistre en base de données un nouveau Junior selon les $values donnés
-     * @param array $values
-     */
     public static function createOne(array $values)
     {
         $new = new self();

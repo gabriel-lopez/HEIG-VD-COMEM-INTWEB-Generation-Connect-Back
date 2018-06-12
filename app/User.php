@@ -98,6 +98,6 @@ class User extends Authenticatable
 
     public function notifications()
     {
-        return $this->hasMany('\App\Address');
+        return $this->hasMany('\App\Notification');
     }
 }

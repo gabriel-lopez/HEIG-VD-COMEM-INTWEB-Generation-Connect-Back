@@ -3,11 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Intervention extends Model
 {
+    use SoftDeletes;
 
-    protected $rules = [
+    public $timestamps = true;
+
+    public static $rules = [
         'statut' => 'required|in:"planifie","annule","finalise"',
         'finPrevu' => 'required|date|after:debutPrevu',
         'debutPrevu' => 'required|date',
@@ -26,6 +30,33 @@ class Intervention extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public static function getValidation(Array $inputs)
+    {
+        $validator = Validator::make($inputs, self::$rules);
+
+        $validator->after(function ($validator) use ($inputs)
+        {
+            // contraintes supplémentaires
+        });
+
+        return $validator;
+    }
+
+    public static function createOne($inputs)
+    {
+        $new = new self();
+
+        $new->statut = $inputs['statut'];
+        $new->finPrevu = $inputs['finPrevu'];
+        $new->debutPrevu = $inputs['debutPrevu'];
+        $new->junior_affecte = $inputs['junior_affecte'];
+        $new->requete_id = $inputs['requete_id'];
+
+        $new->save();
+
+        return $new;
+    }
 
     public function user()
     {
@@ -46,5 +77,4 @@ class Intervention extends Model
     {
         return $this->belongsTo('\App\RapportIntervention');
     }
-
 }

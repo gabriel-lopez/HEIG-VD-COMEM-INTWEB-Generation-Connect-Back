@@ -3,22 +3,32 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Validator;
 
 class Matiere extends Model
 {
+    use SoftDeletes;
+
+    public $timestamps = true;
+
+    public static $rules = [
+        'nom' => 'required|string|max:255',
+        'description' => 'required|string',
+        'sujet_id' => 'required|exists:sujets,id' // le sujet d'une matière doit être dans la liste des sujets stockés dans la base
+    ];
 
     protected $hidden = [
         'pivot',
         'created_at',
-        'deleted_at',
-        'updated_at'
+        'updated_at',
+        'deleted_at'
     ];
 
-    protected static $rules = [
-        'nom' => 'required|string|max:255',
-        'description' => 'required|string',
-        'sujet_id' => 'required|exists:sujets,id' // le sujet d'une matière doit être dans la liste des sujets stockés dans la base
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     public static function getValidation($inputs)

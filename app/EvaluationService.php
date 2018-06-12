@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Validator;
 
 class EvaluationService extends Model
 {
@@ -11,17 +12,42 @@ class EvaluationService extends Model
 
     public $timestamps = true;
 
-    protected $rules = [
+    public static $rules = [
+        'senior_id' => 'required|exists:seniors,user_id',
         'commentaire' => 'required|text|min:255',
         'noteSmiley' => 'required|enum:0,1,2,3',
     ];
 
     protected $hidden = [
-        'senior_id',
         'deleted_at',
         'created_at',
         'updated_at',
     ];
+
+    public static function getValidation(Array $inputs)
+    {
+        $validator = Validator::make($inputs, self::$rules);
+
+        $validator->after(function ($validator) use ($inputs)
+        {
+            // contraintes supplémentaires
+        });
+
+        return $validator;
+    }
+
+    public static function createOne(array $values)
+    {
+        $new = new self();
+
+        $new->senior_id = $values['senior_id'];
+        $new->commentaire = $values['commentaire'];
+        $new->noteSmiley = $values['noteSmiley'];
+
+        $new->save();
+
+        return $new;
+    }
 
     public function senior()
     {

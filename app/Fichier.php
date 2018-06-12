@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Validator;
 
 class Fichier extends Model
 {
@@ -12,13 +13,14 @@ class Fichier extends Model
     public $timestamps = true;
 
     public static $rules = [
-        "nom" => "required|string|max:255"
+        "nom" => "required|string|max:255",
+        "path" => "required|string"
     ];
 
     protected $hidden = [
-        'deleted_at',
         'created_at',
         'updated_at',
+        'deleted_at',
     ];
 
     protected $dates = [
@@ -26,4 +28,28 @@ class Fichier extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public static function getValidation(Array $inputs)
+    {
+        $validator = Validator::make($inputs, self::$rules);
+
+        $validator->after(function ($validator) use ($inputs)
+        {
+            // contraintes supplémentaires
+        });
+
+        return $validator;
+    }
+
+    public static function createOne($inputs)
+    {
+        $new = new self();
+
+        $new->nom = $inputs['nom'];
+        $new->path = $inputs['path'];
+
+        $new->save();
+
+        return $new;
+    }
 }
