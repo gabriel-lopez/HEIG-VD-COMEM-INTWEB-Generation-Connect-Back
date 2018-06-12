@@ -11,29 +11,29 @@
 |
 */
 
+use App\Http\Controllers\SoumissionController;
+
 Route::get('/', function () {
     include public_path() . '/frontend/index.html';
 });
 
-Route::get('/{name}', function ($name)
-{
+Route::get('/{name}', function ($name) {
     include public_path() . '/frontend/' . $name;
 })->where(['name' => '^(?!api).*$']);
 
 
-Route::get('/{folder}/{resource}', function ($folder, $resource)
-{
+Route::get('/{folder}/{resource}', function ($folder, $resource) {
     include public_path() . '/frontend/' . $folder . '/' . $resource;
 })->where(['folder' => '^(?!api).*$']);;
 
-Route::group(['prefix' => 'api'], function()
-{
+Route::group(['prefix' => 'api'], function () {
     Route::post("login", 'AuthController@login');
     Route::resource('pages', 'PageController')->except(['create', 'edit', 'store', 'destroy']);
+    Route::get('soumissions/{requete_id}/{junior_id}/{hash}', 'SoumissionController@acceptation');
+
 });
 
-Route::group(['prefix' => 'api', 'middleware' => 'auth'], function()
-{
+Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
     Route::get("logout", 'AuthController@logout');
 
     // Controlleurs utilisateurs
@@ -52,4 +52,5 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function()
     Route::resource('forfaits', 'ForfaitController')->except(['create', 'edit']);
     Route::resource('messages', 'MessageController')->except(['create', 'edit']);
     Route::resource('notifications', 'NotificationController')->except(['create', 'edit']);
+    Route::resource('soumissions', 'SoumissionController')->except(['create', 'edit']);
 });

@@ -49,9 +49,6 @@ class EmployeController extends Controller
                 if (Address::getValidation($inputs['adresse_habitation'])->fails())
                     return response()->json(['error' => 'Adresse_Habitation invalide'], Response::HTTP_BAD_REQUEST);
 
-                $adresse = Address::createOne($inputs['adresse_habitation']);
-                $request->request->add(['adresse_habitation_id' => $adresse->id]);
-
                 $validate_user = User::getValidation($request->all());
 
                 $validate_employe = Employe::getValidation($request->all());
@@ -63,6 +60,9 @@ class EmployeController extends Controller
                 if ($validate_user->fails()) {
                     return response()->json(['error' => 'Bad user Request'], Response::HTTP_BAD_REQUEST);
                 }
+
+                $adresse = Address::createOne($inputs['adresse_habitation']);
+                $request->request->add(['adresse_habitation_id' => $adresse->id]);
 
                 $new_user = User::createOne($request->all());
 
