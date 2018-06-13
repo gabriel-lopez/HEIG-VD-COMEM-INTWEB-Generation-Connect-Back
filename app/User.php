@@ -18,7 +18,7 @@ class User extends Authenticatable
         'prenom' => 'required|string|max:255',
         'nom' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
-        //'telephone' => 'required|phone:CH',
+        'telephone' => 'required|phone:CH',
         //Checks for valid password with a minimum of 6 characters and maximum of 64 characters,
         // containing at least one digit, one upper case letter, one lower case letter and one special symbol.
         //'motdepasse' => 'required|password',
