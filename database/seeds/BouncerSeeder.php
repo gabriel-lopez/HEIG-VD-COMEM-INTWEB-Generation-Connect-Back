@@ -217,7 +217,10 @@ class BouncerSeeder extends Seeder
         Bouncer::allow($rh)->to($voir_candidatures);
         Bouncer::allow($rh)->to($modifier_candidature);
         Bouncer::allow($rh)->to($modifier_candidature);
+
         Bouncer::allow($junior)->to($modifier_junior);
+        Bouncer::allow($junior)->to($voir_junior);
+
         Bouncer::allow($senior)->to($modifier_senior);
     }
 }
