@@ -21,9 +21,34 @@
 * Codage: 
 * Moteur: MyISAM
 
+## Configuration logiciel requise
+Pour fonctionner correctement, le projet a besoin que les ressources ou logiciels  suivants soient présents et à jour.
+APACHE
+PHP 7
+MySQL
+Composer
+Git
+
 ## Installation
 
+Dans le dossier ou le projet doit être installé, lancer les commandes suivantes :
+
 `git clone https://github.com/gabriel-lopez/ProjWeb-Back.git`  
-`composer install `   
+`composer install `
+
+Modifier le ficnier `.env`  pour refléter la configuration de votre base de données.
+Par exemple : 
+
+
+`DB_CONNECTION=mysql `
+`DB_HOST=127.0.0.1`
+`DB_PORT=8889`
+`DB_DATABASE=projetweb`
+`DB_USERNAME=root`
+`DB_PASSWORD=root`
+
+Il faut ensuite générer la clé d'APP
 `php artisan key:generate`  
+
+Puis peupler la base de données avec les données de test.
 `php artisan migrate:refresh --seed`

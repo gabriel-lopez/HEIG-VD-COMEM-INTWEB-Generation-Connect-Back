@@ -260,7 +260,7 @@ class DatabaseSeeder extends Seeder
              'type' => 'unique',
              'statut' => 'accepte',
              'matiere_id' => 1,
-             'soumis_par' => 1,
+             'soumis_par' => $senior1->id,
              'plageHoraire_id' => 1
             ]
         );
@@ -271,7 +271,7 @@ class DatabaseSeeder extends Seeder
                 'type' => 'unique',
                 'statut' => 'accepte',
                 'matiere_id' => 1,
-                'soumis_par' => 1,
+                'soumis_par' => $senior1->id,
                 'plageHoraire_id' => 2
             ]
         );
