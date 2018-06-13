@@ -205,8 +205,8 @@ class BouncerSeeder extends Seeder
 
         Bouncer::allow($superadmin)->everything();
 
-        /*Bouncer::allow($directeur)->to($creer_employe);
-        Bouncer::allow($directeur)->to($create_junior);
+        Bouncer::allow($directeur)->to($creer_employe);
+        Bouncer::allow($directeur)->to($creer_junior);
         Bouncer::allow($directeur)->to($creer_employe);
 
         Bouncer::allow($secretariat)->to($creer_senior);
@@ -216,11 +216,8 @@ class BouncerSeeder extends Seeder
 
         Bouncer::allow($rh)->to($voir_candidatures);
         Bouncer::allow($rh)->to($modifier_candidature);
-
         Bouncer::allow($rh)->to($modifier_candidature);
-
         Bouncer::allow($junior)->to($modifier_junior);
-
-        Bouncer::allow($senior)->to($modifier_senior);*/
+        Bouncer::allow($senior)->to($modifier_senior);
     }
 }
