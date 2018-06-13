@@ -36,8 +36,9 @@ Route::group(['prefix' => 'api'], function ()
     Route::post('inscription/senior', 'InscriptionController@senior');
 
     Route::resource('pages', 'PageController')->except(['create', 'edit', 'store', 'destroy']);
-    
+
     Route::get('soumissions/{requete_id}/{junior_id}/{hash}', 'SoumissionController@acceptation');
+    Route::delete('soumissions/{requete_id}/{junior_id}/{hash}', 'SoumissionController@acceptation');
 
     Route::resource('matching', 'MatchingController');
 });
@@ -62,5 +63,5 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function ()
     Route::resource('forfaits', 'ForfaitController')->except(['create', 'edit']);
     Route::resource('messages', 'MessageController')->except(['create', 'edit']);
     Route::resource('notifications', 'NotificationController')->except(['create', 'edit', 'update', 'destroy']);
-    Route::resource('soumissions', 'SoumissionController')->except(['create', 'edit']);
+    Route::resource('soumissions', 'SoumissionController')->except(['create', 'edit', 'update', 'destroy']);
 });
