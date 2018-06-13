@@ -40,26 +40,26 @@ class SeniorController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::check()) {
+        if (Auth::check())
+        {
             $user = Auth::user();
 
-            if ($user->can('creer-senior')) {
-
+            if ($user->can('creer-senior'))
+            {
                 $inputs = $request->all();
 
-                if (Address::getValidation($inputs['adresse_habitation'])->fails())
-                    return response()->json(['error' => 'Adresse_Habitation invalide'], Response::HTTP_BAD_REQUEST);
-
+                $validate_address = Address::getValidation($request->all());
                 $validate_user = User::getValidation($request->all());
-
                 $validate_senior = Senior::getValidation($request->all());
 
-                if ($validate_senior->fails()) {
-                    return response()->json(['error' => 'Bad senior properties '], Response::HTTP_BAD_REQUEST);
+                if ($validate_address->fails())
+                {
+                    return response()->json(['error' => 'Bad Request: Invalid Address'], Response::HTTP_BAD_REQUEST);
                 }
 
-                if ($validate_user->fails()) {
-                    return response()->json(['error' => 'Bad user properties'], Response::HTTP_BAD_REQUEST);
+                if ($validate_user->fails()|| $validate_senior->fails())
+                {
+                    return response()->json(['error' => 'Bad Request: Invalid Senior'], Response::HTTP_BAD_REQUEST);
                 }
 
                 $adresse = Address::createOne($inputs['adresse_habitation']);

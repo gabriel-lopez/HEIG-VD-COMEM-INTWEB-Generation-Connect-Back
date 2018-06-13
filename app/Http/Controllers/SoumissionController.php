@@ -35,12 +35,13 @@ class SoumissionController extends Controller
             }
 
             $soumission = Soumission::createOne($inputs);
+
             $user = User::find($inputs['junior_id']);
 
             //TODO
             // utilisation possible du système à l'avenir
             // $notification = Notification::createOne($soumission->junior_id, $soumission->requete_id,  "email");
-            Mail::to($user->email)->send(new NouvelleSoumission($user, $request, ""));
+            Mail::to(/*$user->email*/'gabriel.lopez@heig-vd.ch')->send(new NouvelleSoumission($user, $request, $soumission->hash));
 
             return response()->json($soumission, Response::HTTP_OK);
         }

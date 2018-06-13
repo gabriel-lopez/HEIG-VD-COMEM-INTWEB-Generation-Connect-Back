@@ -12,9 +12,9 @@ class Soumission extends Model
 
     public static $rules = [
         'requete_id' => 'required|integer|exists:requetes,id',
-        'junior_id' => 'required|integer|exists:juniors,id',
-        'proposition' => 'required|date',
-        'acceptation' => 'nullable|date|after:soumission',
+        'junior_id' => 'required|integer|exists:juniors,user_id',
+        'proposition' => 'nullable|date',
+        'acceptation' => 'nullable|date|after:proposition',
     ];
 
     protected $dates = [
