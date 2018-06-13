@@ -45,7 +45,12 @@ class InscriptionController extends Controller
             return response()->json(['error' => 'Bad Request: Invalid Address'], Response::HTTP_BAD_REQUEST);
         }
 
-        if ($validate_user->fails()|| $validate_senior->fails())
+        if ($validate_user->fails()/*|| $validate_senior->fails()*/)
+        {
+            return response()->json(['error' => 'Bad Request: Invalid User'], Response::HTTP_BAD_REQUEST);
+        }
+
+        if (/*$validate_user->fails()||*/ $validate_senior->fails())
         {
             return response()->json(['error' => 'Bad Request: Invalid Senior'], Response::HTTP_BAD_REQUEST);
         }
