@@ -65,4 +65,5 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function ()
     Route::resource('messages', 'MessageController')->except(['create', 'edit']);
     Route::resource('notifications', 'NotificationController')->except(['create', 'edit', 'update', 'destroy']);
     Route::resource('soumissions', 'SoumissionController')->except(['create', 'edit', 'update', 'destroy']);
+    Route::get('soumissions/{requete_id}/{junior_id}/', 'SoumissionController@acceptation');
 });
