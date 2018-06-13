@@ -50,14 +50,15 @@ class InscriptionController extends Controller
             return response()->json(['error' => 'Bad Request: Invalid Senior'], Response::HTTP_BAD_REQUEST);
         }
 
-        $adresse = Address::createOne($inputs['adresse_habitation']);
+        $adresse = Address::createOne($request->all());
+
         $request->request->add(['adresse_habitation_id' => $adresse->id]);
 
         $new_user = User::createOne($request->all());
 
         $request->request->add(['user_id' => $new_user->id]);
 
-        $new_employe = Senior::createOne($request->all());
+        $new_senior = Senior::createOne($request->all());
 
         return SeniorController::show($new_user->id);
     }
