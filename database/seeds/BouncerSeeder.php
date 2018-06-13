@@ -118,11 +118,6 @@ class BouncerSeeder extends Seeder
             'title' => 'Supprimer Employé',
         ]);
 
-        $create_submission = Bouncer::ability()->create([
-            'name' => 'create_submission',
-            'title' => 'create_submission',
-        ]);
-
         $create_intervention = Bouncer::ability()->create([
             'name' => 'create_intervention',
             'title' => 'create_intervention',
@@ -210,7 +205,7 @@ class BouncerSeeder extends Seeder
         Bouncer::allow($directeur)->to($creer_employe);
 
         Bouncer::allow($secretariat)->to($creer_senior);
-        Bouncer::allow($secretariat)->to($create_submission);
+        Bouncer::allow($secretariat)->to($creer_requete);
         Bouncer::allow($secretariat)->to($create_intervention);
         Bouncer::allow($secretariat)->to($modifier_contenu_page);
 
@@ -218,10 +213,13 @@ class BouncerSeeder extends Seeder
         Bouncer::allow($rh)->to($modifier_candidature);
         Bouncer::allow($rh)->to($modifier_candidature);
 
-        Bouncer::allow($junior)->to($modifier_junior);
         Bouncer::allow($junior)->to($voir_junior);
+        Bouncer::allow($junior)->to($modifier_junior);
+        //Bouncer::allow($senior)->to($);
 
-        Bouncer::allow($senior)->to($modifier_senior);
         Bouncer::allow($senior)->to($voir_senior);
+        Bouncer::allow($senior)->to($modifier_senior);
+        Bouncer::allow($senior)->to($creer_requete);
+        Bouncer::allow($senior)->to($creer_evalution);
     }
 }

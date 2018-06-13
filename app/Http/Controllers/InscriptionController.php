@@ -11,10 +11,39 @@ use Silber\Bouncer\BouncerFacade as Bouncer;
 
 class InscriptionController extends Controller
 {
-    //TODO
     public function junior(Request $request)
     {
-        $file = $request->file('cv');
+        $inputs = $request->all();
+
+        $validate_address = Address::getValidation($request->all());
+        $validate_user = User::getValidation($request->all());
+        $validate_senior = Senior::getValidation($request->all());
+
+        if ($validate_address->fails())
+        {
+            return response()->json(['error' => 'Bad Request: Invalid Address'], Response::HTTP_BAD_REQUEST);
+        }
+
+        if ($validate_user->fails() || $validate_senior->fails())
+        {
+            return response()->json(['error' => 'Bad Request: Invalid Senior'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $adresse = Address::createOne($request->all());
+
+        $request->request->add(['adresse_habitation_id' => $adresse->id]);
+
+        $new_user = User::createOne($request->all());
+
+        $request->request->add(['user_id' => $new_user->id]);
+
+        $new_senior = Senior::createOne($request->all());
+
+        Bouncer::assign('junior')->to($new_user);
+
+        return response()->json(JuniorController::get($new_user->id), Response::HTTP_OK);
+
+        /*$file = $request->file('cv');
 
         //Display File Extension
         echo 'File Extension: '.$file->getClientOriginalExtension();
@@ -29,10 +58,9 @@ class InscriptionController extends Controller
 
         //Move Uploaded File
         $destinationPath = 'uploads';
-        $file->move($destinationPath, $file->getClientOriginalName());
+        $file->move($destinationPath, $file->getClientOriginalName());*/
     }
 
-    //TODO
     public function senior(Request $request)
     {
         $inputs = $request->all();

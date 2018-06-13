@@ -43,10 +43,12 @@ class RequeteController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::check()) {
+        if (Auth::check())
+        {
             $user = Auth::user();
 
-            if ($user->can('creer-requete')) {
+            if ($user->can('creer-requete'))
+            {
                 $inputs = $request->all();
 
                 if (Requete::getValidation($inputs)->fails())
@@ -88,51 +90,27 @@ class RequeteController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-
+        //TODO
         return response()->json($this->get($id));
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Requete $requete
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Requete $requete)
     {
-        //
+        //TODO
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Requete $requete
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Requete $requete)
     {
-        //
+        //TODO
     }
 
-    /**
-     *
-     */
     public function get($id)
     {
         $request = Requete::with(['soumis_par.senior', 'matiere', 'plageHoraire.plage_unique', 'plageHoraire.plage_horaire_repetitive'])
             ->find($id)
             ->makeHidden(['plageHoraire_id', 'matiere_id']);
-
 
         if ($request && !($request->plageHoraire->plage_horaire_repetitive)) {
             $request->plageHoraire->makeHidden('plage_horaire_repetitive');
