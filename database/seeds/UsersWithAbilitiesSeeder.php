@@ -13,20 +13,6 @@ class UsersWithAbilitiesSeeder extends Seeder
      */
     public function run()
     {
-
-        /*
-         * junior@etiennerallu.com
-         * senior@etiennerallu.com
-         * senior@etiennerallu.com
-         *
-         * Hamdan Yasmine <yasmine.hamdan@heig-vd.ch>,
-         * Irina Despot <irinadespot@gmail.com>,
-         * Lopez Gabriel <gabriel.lopez@heig-vd.ch>,
-         * Moreno Izquierdo Juan José <juan.morenoizquierdo@heig-vd.ch>,
-         * Philipona Claude <Claude.Philipona@heig-vd.ch>
-         */
-
-
         $juniorAdresse = new \App\Address([
             'ligne1' => "Avenue Louis-Ruchonnet 2",
             'ligne2' => "",
@@ -36,7 +22,6 @@ class UsersWithAbilitiesSeeder extends Seeder
             'pays' => "Suisse",
         ]);
         $juniorAdresse->save();
-
 
         $junior = new \App\User([
             'prenom' => "Junior",
@@ -64,7 +49,153 @@ class UsersWithAbilitiesSeeder extends Seeder
 
         Bouncer::assign('junior')->to($junior);
 
- //Senior
+        $irinaAdresse = new \App\Address([
+            'ligne1' => "Rue de la Madeleine 17",
+            'ligne2' => "",
+            'ligne3' => "",
+            'ville' => "Vevey",
+            'npa' => "1800",
+            'pays' => "Suisse",
+        ]);
+        $irinaAdresse->save();
+
+        $irina = new \App\User([
+            'prenom' => "Irina",
+            'nom' => "Despot",
+            'email' => "irina.despot@heig.vd.ch",
+            'telephone' => PhoneNumber::make('0795994146')->ofCountry('CH'),
+            'adresse_habitation_id' => $irinaAdresse->id,
+            'motdepasse' => bcrypt("patate123"),
+            'remember_token' => str_random(10),
+        ]);
+        $irina->save();
+
+        $irinaJunior = new \App\Junior([
+            'user_id' => $irina->id,
+            'status' => "actif",
+            'LimiteTempsTransport' => '120',
+            'NoAVS' => '756.1234.5678.97',
+            'BanqueNom' => 'UBS Group AG',
+            'BanqueBIC' => 'UBSWCHZH80A',
+            'BanqueIBAN' => 'CH08 0029 8999 9999 9999 Q',
+            'AdresseDeDepart' => $irinaAdresse->id,
+            'AdresseFacturation' => $irinaAdresse->id
+        ]);
+        $irinaJunior->save();
+
+        Bouncer::assign('junior')->to($irina);
+
+
+        $juanAdresse = new \App\Address([
+            'ligne1' => "Rue Orient-Ville 10",
+            'ligne2' => "",
+            'ligne3' => "",
+            'ville' => "Lausanne",
+            'npa' => "1005",
+            'pays' => "Suisse",
+        ]);
+        $juanAdresse->save();
+
+        $juan = new \App\User([
+            'prenom' => "Juan",
+            'nom' => "Moreno",
+            'email' => "j.j.moreno994@gmail.com",
+            'telephone' => PhoneNumber::make('0795994146')->ofCountry('CH'),
+            'adresse_habitation_id' => $juanAdresse->id,
+            'motdepasse' => bcrypt("patate123"),
+            'remember_token' => str_random(10),
+        ]);
+        $juan->save();
+
+        $juanJunior = new \App\Junior([
+            'user_id' => $juan->id,
+            'status' => "actif",
+            'LimiteTempsTransport' => '120',
+            'NoAVS' => '756.1234.5678.97',
+            'BanqueNom' => 'UBS Group AG',
+            'BanqueBIC' => 'UBSWCHZH80A',
+            'BanqueIBAN' => 'CH08 0029 8999 9999 9999 Q',
+            'AdresseDeDepart' => $juanAdresse->id,
+            'AdresseFacturation' => $juanAdresse->id
+        ]);
+        $juanJunior->save();
+
+        Bouncer::assign('junior')->to($juan);
+
+
+        $etienneAdresse = new \App\Address([
+            'ligne1' => "Rue de Mossel 8",
+            'ligne2' => "",
+            'ligne3' => "",
+            'ville' => "Granges-Marnand",
+            'npa' => "1523",
+            'pays' => "Suisse",
+        ]);
+        $etienneAdresse->save();
+
+        $etienne = new \App\User([
+            'prenom' => "Etienne",
+            'nom' => "Rallu",
+            'email' => "info@etiennerallu.com",
+            'telephone' => PhoneNumber::make('0795994146')->ofCountry('CH'),
+            'adresse_habitation_id' => $etienneAdresse->id,
+            'motdepasse' => bcrypt("patate123"),
+            'remember_token' => str_random(10),
+        ]);
+        $etienne->save();
+
+        $etienneJunior = new \App\Junior([
+            'user_id' => $etienne->id,
+            'status' => "actif",
+            'LimiteTempsTransport' => '120',
+            'NoAVS' => '756.1234.5678.97',
+            'BanqueNom' => 'UBS Group AG',
+            'BanqueBIC' => 'UBSWCHZH80A',
+            'BanqueIBAN' => 'CH08 0029 8999 9999 9999 Q',
+            'AdresseDeDepart' => $etienneAdresse->id,
+            'AdresseFacturation' => $etienneAdresse->id
+        ]);
+        $etienneJunior->save();
+
+        Bouncer::assign('junior')->to($etienne);
+
+        $gabrielAdresse = new \App\Address([
+            'ligne1' => "Rue du Bugnon 55",
+            'ligne2' => "",
+            'ligne3' => "",
+            'ville' => "Renens",
+            'npa' => "1020",
+            'pays' => "Suisse",
+        ]);
+        $gabrielAdresse->save();
+
+        $gabriel = new \App\User([
+            'prenom' => "Gabriel",
+            'nom' => "Lopez",
+            'email' => "ch.gabriel.lopez@outlook.com",
+            'telephone' => PhoneNumber::make('0795994146')->ofCountry('CH'),
+            'adresse_habitation_id' => $gabrielAdresse->id,
+            'motdepasse' => bcrypt("patate123"),
+            'remember_token' => str_random(10),
+        ]);
+        $gabriel->save();
+
+        $gabrielJunior = new \App\Junior([
+            'user_id' => $gabriel->id,
+            'status' => "actif",
+            'LimiteTempsTransport' => '120',
+            'NoAVS' => '756.1234.5678.97',
+            'BanqueNom' => 'UBS Group AG',
+            'BanqueBIC' => 'UBSWCHZH80A',
+            'BanqueIBAN' => 'CH08 0029 8999 9999 9999 Q',
+            'AdresseDeDepart' => $gabrielAdresse->id,
+            'AdresseFacturation' => $gabrielAdresse->id
+        ]);
+        $gabrielJunior->save();
+
+        Bouncer::assign('junior')->to($gabriel);
+
+        //Senior
         $seniorAdresse = new \App\Address([
             'ligne1' => "Rue du Rôtillon 24",
             'ligne2' => "",
@@ -161,7 +292,7 @@ class UsersWithAbilitiesSeeder extends Seeder
 
         Bouncer::assign('rh')->to($rh);
 
- // Formateur formateur@etiennerallu.com
+        // Formateur formateur@etiennerallu.com
         $formateurAdresse = new \App\Address([
             'ligne1' => "Rue Saint-Georges 72",
             'ligne2' => "",
@@ -225,7 +356,7 @@ class UsersWithAbilitiesSeeder extends Seeder
         Bouncer::assign('superadmin')->to($directeur);
 
 
-    // Ajout de matières
+        // Ajout de matières
 
         $matiere1 = new \App\Matiere([
             'nom' => "Word",
@@ -292,6 +423,4 @@ class UsersWithAbilitiesSeeder extends Seeder
         $junior1->matieres()->save($matiere7);
         $junior1->matieres()->save($matiere8);
     }
-
-
 }
