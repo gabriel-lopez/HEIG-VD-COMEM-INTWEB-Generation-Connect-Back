@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Silber\Bouncer\BouncerFacade as Bouncer;
-
+use Propaganistas\LaravelPhone\PhoneNumber;
 class UsersWithAbilitiesSeeder extends Seeder
 {
     /**
@@ -153,7 +153,7 @@ class UsersWithAbilitiesSeeder extends Seeder
         $rh->save();
 
         $rhemploye = new \App\Employe([
-            'user_id' => $rhemploye->id,
+            'user_id' => $rh->id,
             'status' => "actif",
         ]);
         $rhemploye->save();

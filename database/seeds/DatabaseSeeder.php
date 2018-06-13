@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(BouncerSeeder::class);
         $this->call(PagesSeeder::class);
+        $this->call(UsersWithAbilitiesSeeder::class);
 
         //<editor-fold desc="Sujets">
         $sujet1 = new \App\Sujet([
