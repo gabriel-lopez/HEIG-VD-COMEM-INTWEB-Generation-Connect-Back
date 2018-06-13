@@ -92,7 +92,7 @@ class EmployeController extends Controller
         {
             $user = Auth::user();
 
-            if ($user->can(['modifier-employe'])) //TODO
+            if (($user->isA('employe') && $user->id == $employe->user_id) || $user->can(['modifier-employe']))
             {
                 $inputs = $request->all();
 

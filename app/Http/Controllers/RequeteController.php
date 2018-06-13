@@ -30,7 +30,6 @@ class RequeteController extends Controller
                         'soumissions',
                         'interventions'])
                         ->where('soumis_par', '=', $user->id)
-                        ->where('soumis_par', '=', $user->id)
                         ->get());
             }
             else if($user->isA('senior'))

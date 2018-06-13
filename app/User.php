@@ -27,6 +27,7 @@ class User extends Authenticatable
 
     protected $hidden = [
         'motdepasse',
+        'pivot',
         'remember_token',
         'created_at',
         'updated_at',
@@ -34,7 +35,6 @@ class User extends Authenticatable
     ];
 
     protected $dates = [
-        'pivot',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -98,5 +98,10 @@ class User extends Authenticatable
     public function notifications()
     {
         return $this->hasMany('\App\Notification');
+    }
+
+    public function fichiers()
+    {
+        return $this->hasMany('\App\Fichier');
     }
 }

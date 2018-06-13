@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Forfait;
 use App\Formation;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -32,10 +33,20 @@ class FormationController extends Controller
         {
             $user = Auth::user();
 
+            $inputs = $request->all();
+
             if($user->can('creer-formation'))
             {
-                //TODO
-                return response()->json("", Response::HTTP_OK);
+                if(Formation::getValidation($inputs)->fails())
+                {
+                    return response()->json(["error", "Bad Request"], Response::HTTP_BAD_REQUEST);
+                }
+
+                //TODO VALIDER ET CRRER PLAGE HORAIRE
+
+                $new_formation = Formation::createOne($inputs);
+
+                return response()->json($new_formation, Response::HTTP_OK);
             }
         }
 
@@ -48,15 +59,21 @@ class FormationController extends Controller
         {
             $user = Auth::user();
 
-            if($user->can('voir-formation'))
+            $formations = array();
+
+            if(($user->isA("junior")))
             {
-                //TODO
-
-                $requete = Formation::with(['plageHoraire.plage_unique', 'users'])->find($id)->makeHidden(['plagehoraire_id',]);
-                $requete->users->makehidden('pivot');
-
-                return response()->json($requete, Response::HTTP_OK);
+                $formations = Formation::with(['plageHoraire.plage_unique'])
+                    ->find($id)
+                    ->makeHidden(['plagehoraire_id',]);
             }
+            else if ($user->can('voir-formation'))
+            {
+                $formations = Formation::with(['plageHoraire.plage_unique', 'users'])
+                    ->find($id);
+            }
+
+            return response()->json($formations, Response::HTTP_OK);
         }
 
         return response()->json(['error' => 'Unauthorized'],Response::HTTP_UNAUTHORIZED);
@@ -71,6 +88,7 @@ class FormationController extends Controller
             if($user->can('modifier-formation'))
             {
                 //TODO
+                //TODO AVERTIR JUNIORS INSCRITS
 
                 return response()->json("", Response::HTTP_OK);
             }
@@ -88,7 +106,7 @@ class FormationController extends Controller
             if($user->can('supprimer-formation'))
             {
                 //TODO
-
+                //TODO avertir les juniors inscrits que la formation est annulée
                 return response()->json(['error' => 'Ok'], Response::HTTP_OK);
             }
         }

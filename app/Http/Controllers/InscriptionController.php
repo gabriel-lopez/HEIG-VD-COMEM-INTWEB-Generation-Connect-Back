@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Address;
+use App\Fichier;
 use App\Junior;
 use App\Senior;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 use Silber\Bouncer\BouncerFacade as Bouncer;
 
 class InscriptionController extends Controller
@@ -16,7 +18,11 @@ class InscriptionController extends Controller
     {
         $inputs = $request->all();
 
+        $inputs['status'] = "candidat"; // par défaut un junior est candidat
+
+        //TODO
         $validate_address = Address::getValidation($request->all());
+
         $validate_user = User::getValidation($request->all());
         $validate_junior = Junior::getValidation($request->all());
 
@@ -38,28 +44,38 @@ class InscriptionController extends Controller
 
         $request->request->add(['user_id' => $new_user->id]);
 
-        $new_senior = Senior::createOne($request->all());
+        $new_junior = Junior::createOne($request->all());
+
+        $fichier = array();
+
+        if ($request->hasFile('cv'))
+        {
+            $cv = $request->file("cv");
+
+            $extension = $cv->getClientOriginalExtension();
+            $size = $cv->getSize();
+            $mime = $cv->getMimeType();
+
+            if($extension == "pdf" && $mime == "application/pdf" && $size < 5000000)
+            {
+                Storage::disk('local')->put(time() . '_' . $cv->getFilename() . '.' . $extension,  $cv);
+
+                $fichier["name"] = $cv->getClientOriginalName();
+                $fichier["path"] = time() . '_' . $cv->getFilename() . '.' . $extension;
+            }
+            else
+            {
+                return response()->json(["error" => "Bad File"], Response::HTTP_BAD_REQUEST);
+            }
+        }
+
+        $new_fichier = Fichier::createOne($fichier);
+
+        $new_user->fichiers()->save($new_fichier);
 
         Bouncer::assign('junior')->to($new_user);
 
         return response()->json(JuniorController::get($new_user->id), Response::HTTP_OK);
-
-        /*$file = $request->file('cv');
-
-        //Display File Extension
-        echo 'File Extension: '.$file->getClientOriginalExtension();
-        echo '<br>';
-
-        //Display File Size
-        echo 'File Size: '.$file->getSize();
-        echo '<br>';
-
-        //Display File Mime Type
-        echo 'File Mime Type: '.$file->getMimeType();
-
-        //Move Uploaded File
-        $destinationPath = 'uploads';
-        $file->move($destinationPath, $file->getClientOriginalName());*/
     }
 
     public function senior(Request $request)
@@ -75,12 +91,7 @@ class InscriptionController extends Controller
             return response()->json(['error' => 'Bad Request: Invalid Address'], Response::HTTP_BAD_REQUEST);
         }
 
-        if ($validate_user->fails()/*|| $validate_senior->fails()*/)
-        {
-            return response()->json(['error' => 'Bad Request: Invalid User'], Response::HTTP_BAD_REQUEST);
-        }
-
-        if (/*$validate_user->fails()||*/ $validate_senior->fails())
+        if ($validate_user->fails() || $validate_senior->fails())
         {
             return response()->json(['error' => 'Bad Request: Invalid Senior'], Response::HTTP_BAD_REQUEST);
         }

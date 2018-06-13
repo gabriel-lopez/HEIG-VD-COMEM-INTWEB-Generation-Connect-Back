@@ -32,12 +32,18 @@ class EvaluationServiceController extends Controller
         {
             $user = Auth::user();
 
+            $inputs = $request->all();
+
             if($user->can('creer-evalution'))
             {
-                // TODO
+                if(EvaluationService::getValidation($inputs)->fails())
+                {
+                    return response()->json(['error' => 'Bad Request'],Response::HTTP_BAD_REQUEST);
+                }
 
-                return response()
-                    ->json("", Response::HTTP_OK);
+                $new_evaluation = EvaluationService::createOne($inputs);
+
+                return response()->json($new_evaluation, Response::HTTP_OK);
             }
         }
 
@@ -50,7 +56,7 @@ class EvaluationServiceController extends Controller
         {
             $user = Auth::user();
 
-            if($user->can('voir-evalutions'))
+            if($user->can('voir-evalution'))
             {
                 return response()
                     ->json(EvaluationService::with(['user.senior', 'intervention'])
