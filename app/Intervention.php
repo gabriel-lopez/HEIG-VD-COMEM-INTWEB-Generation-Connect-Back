@@ -21,6 +21,7 @@ class Intervention extends Model
     ];
 
     protected $hidden = [
+        'pivot',
         'created_at',
         'updated_at',
         'deleted_at',

@@ -18,20 +18,51 @@ class RequeteController extends Controller
         {
             $user = Auth::user();
 
-            // la liste doit être différente si c'est un junior, un senior ou un admin qui demande
-            return response()
-                ->json(Requete::with(['soumis_par.senior', 'plageHoraire', 'plageHoraire.plage_unique', 'plageHoraire.plage_horaire_repetitive', 'matiere', 'soumissions', 'interventions'])
-                    ->get()
-                    ->makeHidden('matiere_id'));
+            if($user->isA('junior'))
+            {
+                return response()
+                    ->json(Requete::with([
+                        'soumis_par.senior',
+                        'plageHoraire',
+                        'plageHoraire.plage_unique',
+                        'plageHoraire.plage_horaire_repetitive',
+                        'matiere',
+                        'soumissions',
+                        'interventions'])
+                        ->where('soumis_par', '=', $user->id)
+                        ->where('soumis_par', '=', $user->id)
+                        ->get());
+            }
+            else if($user->isA('senior'))
+            {
+                return response()
+                    ->json(Requete::with([
+                        'plageHoraire',
+                        'plageHoraire.plage_unique',
+                        'plageHoraire.plage_horaire_repetitive',
+                        'matiere',
+                        'interventions'])
+                        ->where('soumis_par', '=', $user->id)
+                        ->get());
+            }
+            else if($user->can(['voir-liste-requetes']))
+            {
+                return response()
+                    ->json(Requete::with([
+                        'soumis_par.senior',
+                        'plageHoraire',
+                        'plageHoraire.plage_unique',
+                        'plageHoraire.plage_horaire_repetitive',
+                        'matiere',
+                        'soumissions',
+                        'interventions'])
+                       ->get());
+            }
+
+            return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         if (Auth::check())
@@ -77,6 +108,7 @@ class RequeteController extends Controller
                 $requete = Requete::createOne($inputs);
                 return $this->show($requete->id);
             }
+
             return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
     }

@@ -41,9 +41,14 @@ class EmployeController extends Controller
                 $validation_user = User::getValidation($request->all());
                 $validation_employe = Employe::getValidation($request->all());
 
-                if ($validation_adresse->fails() || $validation_employe->fails() || $validation_user->fails())
+                if ($validation_adresse->fails())
                 {
-                    return response()->json(['error' => 'Bad Request'], Response::HTTP_BAD_REQUEST);
+                    return response()->json(['error' => 'Bad Request: Adresse Invalide'], Response::HTTP_BAD_REQUEST);
+                }
+
+                if ($validation_employe->fails() || $validation_user->fails())
+                {
+                    return response()->json(['error' => 'Bad Request: Employé Invalide'], Response::HTTP_BAD_REQUEST);
                 }
 
                 $new_address = Address::createOne($request->all());
@@ -69,7 +74,7 @@ class EmployeController extends Controller
         {
             $user = Auth::user();
 
-            if ($user->can('voir-employe'))
+            if(($user->isA('employe') && $user->id == $id) || $user->can('voir-employe'))
             {
                 return response()
                     ->json(User::with('employe', 'adresse_habitation')
@@ -87,7 +92,7 @@ class EmployeController extends Controller
         {
             $user = Auth::user();
 
-            if ($user->can(['modifier-employe']))
+            if ($user->can(['modifier-employe'])) //TODO
             {
                 $inputs = $request->all();
 

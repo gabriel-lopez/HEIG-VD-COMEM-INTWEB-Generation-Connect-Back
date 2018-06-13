@@ -99,6 +99,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user1->save();
+        Bouncer::assign("senior")->to($user1);
 
         $user2 = new \App\User([
             'prenom' => "Gabriel",

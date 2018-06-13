@@ -85,7 +85,6 @@ class UsersWithAbilitiesSeeder extends Seeder
 
         Bouncer::assign('junior')->to($irina);
 
-
         $juanAdresse = new \App\Address([
             'ligne1' => "Rue Orient-Ville 10",
             'ligne2' => "",
@@ -121,7 +120,6 @@ class UsersWithAbilitiesSeeder extends Seeder
         $juanJunior->save();
 
         Bouncer::assign('junior')->to($juan);
-
 
         $etienneAdresse = new \App\Address([
             'ligne1' => "Rue de Mossel 8",

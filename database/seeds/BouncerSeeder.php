@@ -195,7 +195,12 @@ class BouncerSeeder extends Seeder
 
         $voir_requete = Bouncer::ability()->create([
             'name' => 'voir-requete',
-            'title' => 'Voir une requête',
+            'title' => 'Voir requête',
+        ]);
+
+        $voir_liste_requete = Bouncer::ability()->create([
+            'name' => 'voir-liste-requetes',
+            'title' => 'Voir la liste des requêtes',
         ]);
 
         Bouncer::allow($superadmin)->everything();
