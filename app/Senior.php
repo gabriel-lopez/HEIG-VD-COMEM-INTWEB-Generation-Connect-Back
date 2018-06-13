@@ -17,7 +17,7 @@ class Senior extends Model
     public static $rules = [
         'user_id' => 'exists:users,id',
         'preference' => 'required|in:"email","telephone"',
-        'forfait_id' => 'exists:forfaits,id'
+        'forfait_id' => 'required|exists:forfaits,id'
     ];
 
     protected $hidden = [
