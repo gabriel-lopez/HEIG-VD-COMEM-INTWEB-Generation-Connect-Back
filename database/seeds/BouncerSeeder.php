@@ -222,5 +222,6 @@ class BouncerSeeder extends Seeder
         Bouncer::allow($junior)->to($voir_junior);
 
         Bouncer::allow($senior)->to($modifier_senior);
+        Bouncer::allow($senior)->to($voir_senior);
     }
 }
