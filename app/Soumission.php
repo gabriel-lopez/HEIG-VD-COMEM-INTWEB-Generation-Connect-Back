@@ -41,6 +41,7 @@ class Soumission extends Model
         $new->requete_id = $inputs['requete_id'];
         $new->junior_id = $inputs['junior_id'];
         $new->proposition = Carbon::now();
+        $new->hash = md5(microtime());
 
         $new->save();
 

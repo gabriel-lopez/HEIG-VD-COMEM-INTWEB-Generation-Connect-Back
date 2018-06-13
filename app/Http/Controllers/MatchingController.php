@@ -118,9 +118,12 @@ class MatchingController extends Controller
                 }
 
                 $candidat = new \stdClass;
+                $route = new \stdClass;
 
                 $candidat->user = $junior;
-                $candidat->route = $routes_transit;
+                $route->duration = $routes_transit->routes[0]->legs[0]->duration->text;
+                $route->distance = $routes_transit->routes[0]->legs[0]->distance->text;
+                $candidat->route = $route;
 
                 // si tout est OK, le junior peut être selectionner
                 array_push($selected_juniors, $candidat);

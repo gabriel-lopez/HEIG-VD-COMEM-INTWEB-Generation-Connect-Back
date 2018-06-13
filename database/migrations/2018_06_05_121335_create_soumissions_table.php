@@ -14,6 +14,7 @@ class CreateSoumissionsTable extends Migration
             $table->integer('junior_id')->unsigned();
             $table->timestamp('acceptation')->nullable();
             $table->timestamp('proposition')->nullable();
+            $table->string('hash');
 
             $table->foreign('requete_id')->references('id')->on('requetes');
             $table->foreign('junior_id')->references('id')->on('juniors');
