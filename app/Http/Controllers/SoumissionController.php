@@ -61,7 +61,7 @@ class SoumissionController extends Controller
 
     public function acceptation($requete_id, $junior_id, $link_hash = null)
     {
-        $soumission = Soumission::find($requete_id, $junior_id);
+        $soumission = Soumission::find($requete_id, $junior_id)->first();
 
         if($soumission == null)
         {
@@ -70,7 +70,7 @@ class SoumissionController extends Controller
 
         $requete = Requete::find($requete_id);
 
-        if(!$requete)
+        if($requete == null)
         {
             return response()->json(['error' => 'Bad Request: Requête Inexistante'], Response::HTTP_BAD_REQUEST);
         }
@@ -91,6 +91,28 @@ class SoumissionController extends Controller
         $requete->statut = 'accepte';
         $requete->save();
 
-        return $intervention;
+        return response()->json([$intervention], Response::HTTP_OK);
+    }
+
+    public function refus($requete_id, $junior_id, $link_hash = null)
+    {
+        $soumission = Soumission::find($requete_id, $junior_id)->first();
+
+        if($soumission == null)
+        {
+            return response()->json(['error' => 'Bad Request: Soumission Inexistante'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $requete = Requete::find($requete_id);
+
+        if($requete == null)
+        {
+            return response()->json(['error' => 'Bad Request: Requête Inexistante'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $soumission->delete();
+
+        $requete->statut = 'nontraite';
+        $requete->save();
     }
 }

@@ -18,9 +18,8 @@ class RequeteController extends Controller
         {
             $user = Auth::user();
 
-            //TODO JOINTURE PLAGE HORRAIRE
             // la liste doit être différente si c'est un junior, un senior ou un admin qui demande
-                        return response()
+            return response()
                 ->json(Requete::with(['soumis_par.senior', 'plageHoraire', 'plageHoraire.plage_unique', 'plageHoraire.plage_horaire_repetitive', 'matiere', 'soumissions', 'interventions'])
                     ->get()
                     ->makeHidden('matiere_id'));
