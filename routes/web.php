@@ -41,6 +41,10 @@ Route::group(['prefix' => 'api'], function ()
     Route::delete('soumissions/{requete_id}/{junior_id}/{hash}', 'SoumissionController@acceptation');
 
     Route::resource('matching', 'MatchingController');
+
+    Route::resource('forfaits', 'ForfaitController')->except(['create', 'edit']);
+    Route::resource('sujets', 'SujetController')->except(['create', 'edit']);
+    Route::resource('matieres', 'MatiereController')->except(['create', 'edit']);
 });
 
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function ()
@@ -58,9 +62,6 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function ()
     Route::resource('requetes', 'RequeteController')->except(['create', 'edit']);
     Route::resource('evaluationservices', 'EvaluationServiceController')->except(['create', 'edit', 'update', 'destroy']);
     Route::resource('rapportinterventions', 'RapportInterventionController')->except(['create', 'edit']);
-    Route::resource('matieres', 'MatiereController')->except(['create', 'edit']);
-    Route::resource('sujets', 'SujetController')->except(['create', 'edit']);
-    Route::resource('forfaits', 'ForfaitController')->except(['create', 'edit']);
     Route::resource('messages', 'MessageController')->except(['create', 'edit']);
     Route::resource('notifications', 'NotificationController')->except(['create', 'edit', 'update', 'destroy']);
     Route::resource('soumissions', 'SoumissionController')->except(['create', 'edit', 'update', 'destroy']);
