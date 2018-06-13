@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Address;
+use App\Junior;
 use App\Senior;
 use App\User;
 use Illuminate\Http\Request;
@@ -17,16 +18,16 @@ class InscriptionController extends Controller
 
         $validate_address = Address::getValidation($request->all());
         $validate_user = User::getValidation($request->all());
-        $validate_senior = Senior::getValidation($request->all());
+        $validate_junior = Junior::getValidation($request->all());
 
         if ($validate_address->fails())
         {
             return response()->json(['error' => 'Bad Request: Invalid Address'], Response::HTTP_BAD_REQUEST);
         }
 
-        if ($validate_user->fails() || $validate_senior->fails())
+        if ($validate_user->fails() || $validate_junior->fails())
         {
-            return response()->json(['error' => 'Bad Request: Invalid Senior'], Response::HTTP_BAD_REQUEST);
+            return response()->json(['error' => 'Bad Request: Invalid Junior'], Response::HTTP_BAD_REQUEST);
         }
 
         $adresse = Address::createOne($request->all());
