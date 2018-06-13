@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Silber\Bouncer\BouncerFacade as Bouncer;
 use Propaganistas\LaravelPhone\PhoneNumber;
+
 class UsersWithAbilitiesSeeder extends Seeder
 {
     /**
@@ -290,9 +291,6 @@ class UsersWithAbilitiesSeeder extends Seeder
         $junior1->matieres()->save($matiere6);
         $junior1->matieres()->save($matiere7);
         $junior1->matieres()->save($matiere8);
-
-
-
     }
 
 

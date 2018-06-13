@@ -7,6 +7,7 @@ use App\Senior;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Silber\Bouncer\BouncerFacade as Bouncer;
 
 class InscriptionController extends Controller
 {
@@ -64,6 +65,8 @@ class InscriptionController extends Controller
         $request->request->add(['user_id' => $new_user->id]);
 
         $new_senior = Senior::createOne($request->all());
+
+        Bouncer::assign('senior')->to($new_user);
 
         return response()->json(SeniorController::get($new_user->id), Response::HTTP_OK);
     }
