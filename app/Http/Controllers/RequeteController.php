@@ -12,28 +12,20 @@ use Illuminate\Http\Response;
 
 class RequeteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-
-        if (Auth::check()) {
+        if (Auth::check())
+        {
             $user = Auth::user();
 
+            //TODO JOINTURE PLAGE HORRAIRE
             // la liste doit être différente si c'est un junior, un senior ou un admin qui demande
-
-
-            return response()
-                ->json(Requete::with(['soumis_par.senior', 'matiere', 'soumissions', 'interventions'])
+                        return response()
+                ->json(Requete::with(['soumis_par.senior', 'plageHoraire', 'plageHoraire.plage_unique', 'plageHoraire.plage_horaire_repetitive', 'matiere', 'soumissions', 'interventions'])
                     ->get()
                     ->makeHidden('matiere_id'));
         }
-
     }
-
 
     /**
      * Store a newly created resource in storage.

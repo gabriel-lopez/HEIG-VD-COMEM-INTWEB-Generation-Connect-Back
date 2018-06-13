@@ -47,7 +47,7 @@
 
         <div class="links">
             <p>Vous pouvez:
-                <a href="http://localhost/ProjWeb-Back/public/api/soumissions/{requete_id}/{junior_id}/{hash}">Accepter</a>
+                <a href="http://localhost/ProjWeb-Back/public/api/soumissions/{{ $request->requete_id }}/{{ $user->id }}/{{ $hash }}">Accepter</a>
                  ou
                 <a href="http://localhost/ProjWeb-Back/public/api/soumissions/{requete_id}/{junior_id}/{hash}">Refuser</a>
             </p>

@@ -23,28 +23,34 @@ class SoumissionController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-
-        if ($user->can('creer-soumission'))
+        if (Auth::check())
         {
-            $inputs = $request->all();
+            $user = Auth::user();
 
-            if (Soumission::getValidation($inputs)->fails())
+            if ($user->can('creer-soumission'))
             {
-                return response()->json(['error' => 'Bad Request: Soumission Invalide'], Response::HTTP_BAD_REQUEST);
+                $inputs = $request->all();
+
+                if (Soumission::getValidation($inputs)->fails())
+                {
+                    return response()->json(['error' => 'Bad Request: Soumission Invalide'], Response::HTTP_BAD_REQUEST);
+                }
+
+                $soumission = Soumission::createOne($inputs);
+
+                $user = User::find($inputs['junior_id']);
+
+                //TODO
+                // utilisation possible du système à l'avenir
+                // $notification = Notification::createOne($soumission->junior_id, $soumission->requete_id,  "email");
+                Mail::to(/*$user->email*/
+                    'gabriel.lopez@heig-vd.ch')->send(new NouvelleSoumission($user, $request, $soumission->hash));
+
+                return response()->json($soumission, Response::HTTP_OK);
             }
-
-            $soumission = Soumission::createOne($inputs);
-
-            $user = User::find($inputs['junior_id']);
-
-            //TODO
-            // utilisation possible du système à l'avenir
-            // $notification = Notification::createOne($soumission->junior_id, $soumission->requete_id,  "email");
-            Mail::to(/*$user->email*/'gabriel.lopez@heig-vd.ch')->send(new NouvelleSoumission($user, $request, $soumission->hash));
-
-            return response()->json($soumission, Response::HTTP_OK);
         }
+
+        return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
     }
 
     public function show($requete_id, $junior_id)
