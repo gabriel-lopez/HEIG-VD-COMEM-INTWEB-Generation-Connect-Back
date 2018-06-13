@@ -292,7 +292,7 @@ class DatabaseSeeder extends Seeder
             'statut' => 'finalise',
             'finprevu' => Carbon::now(),
             'debutprevu' => Carbon::now()->subHour(1),
-            'junior_affecte' => $junior1->user_id,
+            'junior_affecte' => $senior1->user_id,
             'requete_id' => $requete1->id,
         ]);
 
