@@ -65,6 +65,6 @@ class InscriptionController extends Controller
 
         $new_senior = Senior::createOne($request->all());
 
-        return SeniorController::show($new_user->id);
+        return response()->json(SeniorController::get($new_user->id), Response::HTTP_OK);
     }
 }
