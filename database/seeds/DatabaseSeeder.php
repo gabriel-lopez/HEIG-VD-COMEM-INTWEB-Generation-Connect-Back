@@ -260,7 +260,7 @@ class DatabaseSeeder extends Seeder
              'type' => 'unique',
              'statut' => 'accepte',
              'matiere_id' => 1,
-             'soumis_par' => $senior1->user_id,
+             'soumis_par' => $user1->id,
              'plageHoraire_id' => 1
             ]
         );
@@ -269,9 +269,9 @@ class DatabaseSeeder extends Seeder
         $requete2 = new \App\Requete(
             [
                 'type' => 'unique',
-                'statut' => 'accepte',
+                'statut' => 'envoye',
                 'matiere_id' => 1,
-                'soumis_par' => $senior1->user_id,
+                'soumis_par' => $user1->id,
                 'plageHoraire_id' => 2
             ]
         );
