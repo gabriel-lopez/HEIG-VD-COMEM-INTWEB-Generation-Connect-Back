@@ -30,6 +30,31 @@ class InscriptionController extends Controller
     //TODO
     public function senior(Request $request)
     {
+        $inputs = $request->all();
 
+        $validate_address = Address::getValidation($request->all());
+        $validate_user = User::getValidation($request->all());
+        $validate_senior = Senior::getValidation($request->all());
+
+        if ($validate_address->fails())
+        {
+            return response()->json(['error' => 'Bad Request: Invalid Address'], Response::HTTP_BAD_REQUEST);
+        }
+
+        if ($validate_user->fails()|| $validate_senior->fails())
+        {
+            return response()->json(['error' => 'Bad Request: Invalid Senior'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $adresse = Address::createOne($inputs['adresse_habitation']);
+        $request->request->add(['adresse_habitation_id' => $adresse->id]);
+
+        $new_user = User::createOne($request->all());
+
+        $request->request->add(['user_id' => $new_user->id]);
+
+        $new_employe = Senior::createOne($request->all());
+
+        return SeniorController::show($new_user->id);
     }
 }
