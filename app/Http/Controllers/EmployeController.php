@@ -20,7 +20,10 @@ class EmployeController extends Controller
             if ($user->can('voir-liste-employes'))
             {
                 return response()
-                    ->json(User::with('employe', 'adresse_habitation')
+                    ->json(User::with(
+                        'employe',
+                        'adresse_habitation',
+                        'roles')
                         ->has('employe')
                         ->get(), Response::HTTP_OK);
             }
@@ -77,7 +80,10 @@ class EmployeController extends Controller
             if(($user->isA('employe') && $user->id == $id) || $user->can('voir-employe'))
             {
                 return response()
-                    ->json(User::with('employe', 'adresse_habitation')
+                    ->json(User::with(
+                        'employe',
+                        'adresse_habitation',
+                        'roles')
                         ->has('employe')
                         ->find($id), Response::HTTP_OK);
             }
@@ -137,7 +143,10 @@ class EmployeController extends Controller
     //TODO SORTIR CECI DU CONTROLLEUR
     public static function get($id)
     {
-        return User::with('employe', 'adresse_habitation')
+        return User::with(
+            'employe',
+            'adresse_habitation',
+            'roles')
             ->has('employe')
             ->find($id);
     }
