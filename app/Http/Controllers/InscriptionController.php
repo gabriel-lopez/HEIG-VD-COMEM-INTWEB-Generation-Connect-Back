@@ -28,8 +28,8 @@ class InscriptionController extends Controller
         $validate_adresse_depart = Address::getValidation($adresse_habitation);
         $validate_adresse_facturation = Address::getValidation($adresse_habitation);
 
-        $validate_user = User::getValidation($request->all());
-        $validate_junior = Junior::getValidation($request->all());
+        $validate_user = User::getValidation($inputs);
+        $validate_junior = Junior::getValidation($inputs);
 
         if ($validate_adresse_habitation->fails() || $validate_adresse_depart->fails() || $validate_adresse_facturation->fails())
         {
