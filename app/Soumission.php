@@ -50,7 +50,7 @@ class Soumission extends Model
         $new->save();
 
         $requete = Requete::find($inputs['requete_id'])->first();
-        $requete->statut = 'nontraite';
+        $requete->statut = 'envoye';
         $requete->save();
 
         return $new;
