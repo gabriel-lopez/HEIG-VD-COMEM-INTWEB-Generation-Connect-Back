@@ -21,10 +21,14 @@ class Junior extends Model
         'AdresseDeDepart' => 'nullable|exists:addresses,id',
         'AdresseFacturation' => 'nullable|exists:addresses,id',
         'NoAVS' => 'required',
-        'BanqueNom' => 'required|string|max:255',
-        'BanqueBIC' => 'required|string|bic',
-        'BanqueIBAN' => 'required|iban',
+        'BanqueNom' => 'required|string',
+        'BanqueBIC' => 'required|string',
+        'BanqueIBAN' => 'required',
     ]; // |regex:#(756\.?[0-9]{4}\.?[0-9]{4}\.?[0-9]{2})#
+
+    // 'BanqueNom' => 'required|string|max:255',
+    //        'BanqueBIC' => 'required|string|bic',
+    //        'BanqueIBAN' => 'required|iban',
 
     public static $customMessages = [
         'required' => 'The :attribute field is required.'
