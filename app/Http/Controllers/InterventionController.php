@@ -10,7 +10,11 @@ class InterventionController extends Controller
     public function index()
     {
         return response()
-            ->json(Intervention::with(['junior_affecte'])
+            ->json(Intervention::with([
+                'junior_affecte',
+                'requete',
+                'requete.matiere',
+                'requete.matiere.sujet'])
             ->get());
     }
 
@@ -25,7 +29,8 @@ class InterventionController extends Controller
         return response()
             ->json(Intervention::with([
                 'requete.soumis_par.senior',
-                'requete.matiere'
+                'requete.matiere',
+                'junior_affecte'
                 ])
                 ->find($id));
     }
