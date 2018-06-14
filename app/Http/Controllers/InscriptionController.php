@@ -50,7 +50,7 @@ class InscriptionController extends Controller
             $obj = json_decode($plage_horaire);
 
             $inputs_ph = array();
-            $inputs_ph['joursemaine'] = $obj->{'jour'};
+            $inputs_ph['joursemaine'] = strtolower($obj->{'jour'});
             $inputs_ph['heuredebut'] = $obj->{'debut'};
             $inputs_ph['heurefin'] = $obj->{'fin'};
 
