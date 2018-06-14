@@ -22,7 +22,7 @@ class InterventionController extends Controller
                         'requete',
                         'requete.matiere',
                         'requete.matiere.sujet',
-                        'requete.soumis_par'])
+                        'requete.senior'])
                         ->get());
             }
 
