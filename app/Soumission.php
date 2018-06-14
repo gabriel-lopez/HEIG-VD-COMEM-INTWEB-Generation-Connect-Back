@@ -42,11 +42,16 @@ class Soumission extends Model
         $new = new self();
 
         $new->requete_id = $inputs['requete_id'];
+
         $new->junior_id = $inputs['junior_id'];
         $new->proposition = Carbon::now();
         $new->hash = md5(microtime());
 
         $new->save();
+
+        $requete = Requete::find('requete_id')->first();
+        $requete->statut = 'nontraite';
+        $requete->save();
 
         return $new;
     }
