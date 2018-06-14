@@ -43,8 +43,7 @@ class SoumissionController extends Controller
                 //TODO
                 // utilisation possible du système à l'avenir
                 // $notification = Notification::createOne($soumission->junior_id, $soumission->requete_id,  "email");
-                Mail::to(/*$user->email*/
-                    'gabriel.lopez@heig-vd.ch')->send(new NouvelleSoumission($user, $request, $soumission->hash));
+                Mail::to(/*$user->email*/'gabriel.lopez@heig-vd.ch')->send(new NouvelleSoumission($user, $request, $soumission->hash));
 
                 return response()->json($soumission, Response::HTTP_OK);
             }

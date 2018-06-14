@@ -9,6 +9,7 @@ use App\Requete;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 
 class RequeteController extends Controller
 {
@@ -118,6 +119,9 @@ class RequeteController extends Controller
                 }
 
                 $requete = Requete::createOne($inputs);
+
+                //TODO pour chaque employe
+                //Mail::to(/*$user->email*/'gabriel.lopez@heig-vd.ch')->send(new NouvelleRequete($user));
 
                 return $this->show($requete->id);
             }

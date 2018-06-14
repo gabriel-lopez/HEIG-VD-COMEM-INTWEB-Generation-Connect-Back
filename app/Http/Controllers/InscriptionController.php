@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Address;
 use App\Fichier;
 use App\Junior;
+use App\PlageHoraire;
 use App\Senior;
 use App\User;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class InscriptionController extends Controller
         $adresse_habitation = $request->input("adresse_habitation");
         $adresse_depart = $request->input("adresse_depart");
         $adresse_facturation = $request->input("adresse_facturation");
+        $plages_horaires = $request->input("plageshoraires");
 
         $validate_adresse_habitation = Address::getValidation($adresse_habitation);
         $validate_adresse_depart = Address::getValidation($adresse_depart);
@@ -33,14 +35,33 @@ class InscriptionController extends Controller
 
         if ($validate_adresse_habitation->fails() || $validate_adresse_depart->fails() || $validate_adresse_facturation->fails())
         {
-            return response()->json(['error' => 'Bad Request: Invalid Address'], Response::HTTP_BAD_REQUEST);
+            // return response()->json(['error' => 'Bad Request: Invalid Address'], Response::HTTP_BAD_REQUEST);
         }
 
         if ($validate_user->fails() || $validate_junior->fails())
         {
             $messages = $validate_user->messages();
 
-            return response()->json(['error' => 'Bad Request: Invalid Junior', 'msg' => $messages], Response::HTTP_BAD_REQUEST);
+            // return response()->json(['error' => 'Bad Request: Invalid Junior', 'msg' => $messages], Response::HTTP_BAD_REQUEST);
+        }
+
+        foreach ($plages_horaires as &$plage_horaire)
+        {
+            $obj = json_decode($plage_horaire);
+
+            $inputs_ph = array();
+            $inputs_ph['joursemaine'] = $obj->{'jour'};
+            $inputs_ph['heuredebut'] = $obj->{'debut'};
+            $inputs_ph['heurefin'] = $obj->{'fin'};
+
+            $valide_plage_horaire = PlageHoraire::getValidation($inputs_ph);
+
+            if ($valide_plage_horaire->fails())
+            {
+                $messages = $validate_user->messages();
+
+                return response()->json(['error' => 'Bad Request', 'msg' => $messages], Response::HTTP_BAD_REQUEST);
+            }
         }
 
         $new_adresse_habitation = Address::createOne($adresse_habitation);
