@@ -18,13 +18,11 @@ class InscriptionController extends Controller
     {
         $inputs = $request->all();
 
-        $inputs['status'] = 'candidat';
-
         $adresse_habitation = $request->input("adresse_habitation");
         $adresse_depart = $request->input("adresse_depart");
         $adresse_facturation = $request->input("adresse_facturation");
 
-        $inputs['status'] = "candidat"; // par défaut un junior est candidat
+        array_push($inputs, "status", "candidat");
 
         $validate_adresse_habitation = Address::getValidation($adresse_habitation);
         $validate_adresse_depart = Address::getValidation($adresse_habitation);
