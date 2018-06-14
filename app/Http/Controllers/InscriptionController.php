@@ -38,7 +38,9 @@ class InscriptionController extends Controller
 
         if ($validate_user->fails() || $validate_junior->fails())
         {
-            return response()->json(['error' => 'Bad Request: Invalid Junior'], Response::HTTP_BAD_REQUEST);
+            $messages = $validate_user->messages();
+
+            return response()->json(['error' => 'Bad Request: Invalid Junior', 'msg' => $messages], Response::HTTP_BAD_REQUEST);
         }
 
         /*$adresse = Address::createOne($request->all());
