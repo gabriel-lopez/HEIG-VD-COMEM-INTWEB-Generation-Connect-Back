@@ -24,6 +24,11 @@ class InscriptionController extends Controller
         $adresse_depart = $request->input("adresse_depart");
         $adresse_facturation = $request->input("adresse_facturation");
 
+        $plages_horaires = $request->input("plageshoraires");
+
+
+        dd($plages_horaires);
+
         $validate_adresse_habitation = Address::getValidation($adresse_habitation);
         $validate_adresse_depart = Address::getValidation($adresse_depart);
         $validate_adresse_facturation = Address::getValidation($adresse_facturation);
