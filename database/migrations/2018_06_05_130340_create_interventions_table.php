@@ -21,7 +21,7 @@ class CreateInterventionsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('junior_affecte')->references('id')->on('juniors');
+            $table->foreign('junior_affecte_id')->references('id')->on('juniors');
             $table->foreign('requete_id')->references('id')->on('requetes');
         });
     }

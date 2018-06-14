@@ -443,7 +443,7 @@ class UsersWithAbilitiesSeeder extends Seeder
             'statut' => 'finalise',
             'finprevu' => Carbon::now(),
             'debutprevu' => Carbon::now()->subHour(1),
-            'junior_affecte' => 5,
+            'junior_affecte_id' => 5,
             'requete_id' => $requete1->id,
         ]);
         $intervention1->save();
