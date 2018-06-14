@@ -19,20 +19,19 @@ class InscriptionController extends Controller
         $inputs = $request->all();
 
         $adresse_habitation = $request->input("adresse_habitation");
-        $adresse_depart = $request->input("adresse_habitation");
-        $adresse_facturation = $request->input("adresse_habitation");
-
-        dd($adresse_habitation);
+        $adresse_depart = $request->input("adresse_depart");
+        $adresse_facturation = $request->input("adresse_facturation");
 
         $inputs['status'] = "candidat"; // par défaut un junior est candidat
 
-        //TODO
-        $validate_address = Address::getValidation($request->all());
+        $validate_adresse_habitation = Address::getValidation($adresse_habitation);
+        $validate_adresse_depart = Address::getValidation($adresse_habitation);
+        $validate_adresse_facturation = Address::getValidation($adresse_habitation);
 
         $validate_user = User::getValidation($request->all());
         $validate_junior = Junior::getValidation($request->all());
 
-        if ($validate_address->fails())
+        if ($validate_adresse_habitation->fails() || $validate_adresse_depart->fails() || $validate_adresse_facturation->fails())
         {
             return response()->json(['error' => 'Bad Request: Invalid Address'], Response::HTTP_BAD_REQUEST);
         }
@@ -42,7 +41,7 @@ class InscriptionController extends Controller
             return response()->json(['error' => 'Bad Request: Invalid Junior'], Response::HTTP_BAD_REQUEST);
         }
 
-        $adresse = Address::createOne($request->all());
+        /*$adresse = Address::createOne($request->all());
 
         $request->request->add(['adresse_habitation_id' => $adresse->id]);
 
@@ -50,7 +49,7 @@ class InscriptionController extends Controller
 
         $request->request->add(['user_id' => $new_user->id]);
 
-        $new_junior = Junior::createOne($request->all());
+        $new_junior = Junior::createOne($request->all()); */
 
         $fichier = array();
 
@@ -74,6 +73,8 @@ class InscriptionController extends Controller
                 return response()->json(["error" => "Bad File"], Response::HTTP_BAD_REQUEST);
             }
         }
+
+        dd($cv);
 
         $new_fichier = Fichier::createOne($fichier);
 
