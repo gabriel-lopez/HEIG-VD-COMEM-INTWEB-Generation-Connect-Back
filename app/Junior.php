@@ -20,11 +20,11 @@ class Junior extends Model
         'LimiteTempsTransport' => 'required|integer|min:0',
         'AdresseDeDepart' => 'nullable|exists:addresses,id',
         'AdresseFacturation' => 'nullable|exists:addresses,id',
-        'NoAVS' => 'required|regex:#(756\.?[0-9]{4}\.?[0-9]{4}\.?[0-9]{2})#',
+        'NoAVS' => 'required',
         'BanqueNom' => 'required|string|max:255',
         'BanqueBIC' => 'required|string|bic',
         'BanqueIBAN' => 'required|iban',
-    ];
+    ]; // |regex:#(756\.?[0-9]{4}\.?[0-9]{4}\.?[0-9]{2})#
 
     protected $hidden = [
         'user_id',
