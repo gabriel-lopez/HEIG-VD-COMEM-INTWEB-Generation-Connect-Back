@@ -86,9 +86,9 @@ class InscriptionController extends Controller
 
         foreach ($junior_plages_horaires as &$plage_horaire)
         {
-            $new_junior->plageshoraires()->save($plage_horaire);
+            $plage_horaire->juniors()->save($new_junior);
         }
-        
+
         $fichier = array();
 
         if ($request->hasFile('cv'))
