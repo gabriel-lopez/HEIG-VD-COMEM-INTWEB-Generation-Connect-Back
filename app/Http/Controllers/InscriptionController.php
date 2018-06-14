@@ -36,7 +36,14 @@ class InscriptionController extends Controller
             return response()->json(['error' => 'Bad Request: Invalid Address'], Response::HTTP_BAD_REQUEST);
         }
 
-        if ($validate_user->fails() || $validate_junior->fails())
+        if ($validate_user->fails() /*|| $validate_junior->fails()*/)
+        {
+            $messages = $validate_user->messages();
+
+            return response()->json(['error' => 'Bad Request: Invalid USer', 'msg' => $messages], Response::HTTP_BAD_REQUEST);
+        }
+
+        if (/*$validate_user->fails() || */$validate_junior->fails())
         {
             $messages = $validate_user->messages();
 
