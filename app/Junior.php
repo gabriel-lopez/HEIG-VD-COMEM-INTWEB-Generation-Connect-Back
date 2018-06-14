@@ -26,6 +26,10 @@ class Junior extends Model
         'BanqueIBAN' => 'required|iban',
     ]; // |regex:#(756\.?[0-9]{4}\.?[0-9]{4}\.?[0-9]{2})#
 
+    public static $customMessages = [
+        'required' => 'The :attribute field is required.'
+    ];
+
     protected $hidden = [
         'user_id',
         'AdresseDeDepart',
@@ -43,7 +47,7 @@ class Junior extends Model
 
     public static function getValidation(Array $inputs)
     {
-        $validator = Validator::make($inputs, self::$rules);
+        $validator = Validator::make($inputs, self::$rules, self::$customMessages);
 
         $validator->after(function ($validator) use ($inputs)
         {
