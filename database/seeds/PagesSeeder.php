@@ -11,11 +11,10 @@ class PagesSeeder extends Seeder
             'nom' => "accueil",
             'contenu' => "<div class=\"mt-3 px-3\">
 
-
     <div class=\"card-text-black my-5\">
         <h2>
-            <p>Les Juniors au service des Seniors pour les accompagner dans ce nouveau monde de la digitalisation : informatique, téléphonie, télévision, robotisation, programmation, services en ligne.</p>
-            <p>Generation Connect vous propose un service basé sur le relationnel et la sécurité : des agents juniors formés aux compétences sociales et des interventions sécurisées et suivies.</p>
+            <p>Les Juniors au service des Seniors pour les accompagner dans ce nouveau monde de la digitalisation : informatique, téléphonie, télévision, robotisation, programmation, services en ligne etc.</p>
+            <p>Generation Connect vous propose un service basé sur le relationnel et la sécurité. Des agents juniors formés aux compétences sociales interviennent chez les seniors. Les interventions peuvent être ponctuelles ou suivies selon les besoions de chacun.</p>
         </h2>
     </div>
 
@@ -167,7 +166,7 @@ class PagesSeeder extends Seeder
         </ul>
     </div>
 
-    <span data-target=\"postuler\" class=\"btn w-100 mb-3\">Je postule!</span>
+    <a href=\"#postuler\" class=\"btn w-100 mb-3\">Je postule!</a>
 
 </div>",
             'employe_id' => 3
@@ -252,7 +251,7 @@ class PagesSeeder extends Seeder
         </div>
     </div>
 
-    <span data-target=\"inscription\" class=\"btn w-100 mb-3\">Inscription</span>
+    <a href=\"#inscription\" class=\"btn w-100 mb-3\">Inscription</a>
 </div>
 
 
