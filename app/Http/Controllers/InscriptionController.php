@@ -70,9 +70,10 @@ class InscriptionController extends Controller
             if($extension == "pdf" && $mime == "application/pdf" && $size < 5000000)
             {
                 Storage::disk('local')->put(time() . '_' . $cv->getFilename() . '.' . $extension,  $cv);
-                
+
                 $fichier["nom"] = $cv->getClientOriginalName();
                 $fichier["path"] = time() . '_' . $cv->getFilename() . '.' . $extension;
+                $fichier["user_id"] = $new_user->id;
             }
             else
             {

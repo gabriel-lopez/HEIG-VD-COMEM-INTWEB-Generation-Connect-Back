@@ -47,6 +47,7 @@ class Fichier extends Model
 
         $new->nom = $inputs['nom'];
         $new->path = $inputs['path'];
+        $new->user_id = $inputs['user_id'];
 
         $new->save();
 
