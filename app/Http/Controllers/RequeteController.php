@@ -73,26 +73,34 @@ class RequeteController extends Controller
                 $inputs = $request->all();
 
                 if (Requete::getValidation($inputs)->fails())
+                {
                     return response()->json(['error' => 'Requete invalide'], Response::HTTP_BAD_REQUEST);
+                }
 
                 if (!isset($inputs['plage_horaire']))
+                {
                     return response()->json(['error' => 'pas de plage horaire indiqueée'], Response::HTTP_BAD_REQUEST);
+                }
 
-                if ($inputs['type'] == 'urgent' || $inputs['type'] == 'unique') {
+                if ($inputs['type'] == 'urgent' || $inputs['type'] == 'unique')
+                {
                     if (PlageUnique::getValidation($inputs['plage_horaire'])->fails() &&
 
                         PlageHoraire::getValidation($inputs['plage_horaire'])->fails())
 
                         return response()->json(['error' => 'Plage_unique invalide'], Response::HTTP_BAD_REQUEST);
 
-                } else if ($inputs['type'] == 'repetitif') {
+                }
+                else if ($inputs['type'] == 'repetitif')
+                {
                     if (PlageRepetitive::getValidation($inputs['plage_horaire'])->fails() &&
                         PlageHoraire::getValidation($inputs['plage_horaire'])->fails())
                         return response()->json(['error' => 'plage_repetitive invalide'], Response::HTTP_BAD_REQUEST);
-                } else {
+                }
+                else
+                {
                     return response()->json(['error' => 'Bad plage_horaire input'], Response::HTTP_BAD_REQUEST);
                 }
-
 
                 $plage_horaire = PlageHoraire::createOne($inputs['plage_horaire']);
 
@@ -100,11 +108,17 @@ class RequeteController extends Controller
                 $inputs['plageHoraire_id'] = $plage_horaire->id;
 
                 if ($inputs['type'] == 'urgent' || $inputs['type'] == 'unique')
+                {
                     $plage_unique = PlageUnique::createOne($inputs['plage_horaire']);
+                }
+
                 if ($inputs['type'] == 'repetitif')
+                {
                     $plage_unique = PlageRepetitive::createOne($inputs['plage_horaire']);
+                }
 
                 $requete = Requete::createOne($inputs);
+
                 return $this->show($requete->id);
             }
 
@@ -114,18 +128,18 @@ class RequeteController extends Controller
 
     public function show($id)
     {
-        //TODO
+        //TODO droit
         return response()->json($this->get($id));
     }
 
     public function update(Request $request, Requete $requete)
     {
-        //TODO
+        //TODO droit
     }
 
     public function destroy(Requete $requete)
     {
-        //TODO
+        //TODO droit
     }
 
     public function get($id)

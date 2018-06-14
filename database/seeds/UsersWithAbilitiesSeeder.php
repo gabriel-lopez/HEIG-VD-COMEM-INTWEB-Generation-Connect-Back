@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Silber\Bouncer\BouncerFacade as Bouncer;
 use Propaganistas\LaravelPhone\PhoneNumber;
@@ -420,5 +421,40 @@ class UsersWithAbilitiesSeeder extends Seeder
         $junior1->matieres()->save($matiere6);
         $junior1->matieres()->save($matiere7);
         $junior1->matieres()->save($matiere8);
+
+        $requete1 = new \App\Requete([
+            'type' => 'unique',
+            'statut' => 'accepte',
+            'matiere_id' => 1,
+            'soumis_par' => $gabriel->id,
+            'plageHoraire_id' => 1
+        ]);
+        $requete1->save();
+
+        $soumission1 = new \App\Soumission([
+            'requete_id' => $requete1->id,
+            'junior_id' => $gabriel->id,
+            'acceptation' => Carbon::now()->subHour(3),
+            'proposition' => Carbon::now()->subHour(4),
+        ]);
+        $soumission1->save();
+
+        $intervention1 = new \App\Intervention([
+            'statut' => 'finalise',
+            'finprevu' => Carbon::now(),
+            'debutprevu' => Carbon::now()->subHour(1),
+            'junior_affecte' => 5,
+            'requete_id' => $requete1->id,
+        ]);
+        $intervention1->save();
+        $requete1->interventions()->save($intervention1);
+
+        $evaluationService1 = new \App\EvaluationService([
+            'senior_id' => 1,
+            'intervention_id' => $intervention1->id,
+            'commentaire' => 'Super service, jeune à l\'heure, content',
+            'noteSmiley' => 2]
+        );
+        $evaluationService1->save();
     }
 }

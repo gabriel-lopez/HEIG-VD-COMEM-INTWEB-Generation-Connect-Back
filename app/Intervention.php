@@ -60,9 +60,9 @@ class Intervention extends Model
         return $new;
     }
 
-    public function user()
+    public function junior_affecte()
     {
-        return $this->belongsTo('\App\User','junior_affecte');
+        return $this->belongsTo('\App\User');
     }
 
     public function requete()

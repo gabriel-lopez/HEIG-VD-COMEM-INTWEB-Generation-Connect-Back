@@ -256,17 +256,6 @@ class DatabaseSeeder extends Seeder
         ]);
         $plageRepetitive1->save();
 
-        $requete1 = new \App\Requete(
-            [
-             'type' => 'unique',
-             'statut' => 'accepte',
-             'matiere_id' => 1,
-             'soumis_par' => $user1->id,
-             'plageHoraire_id' => 1
-            ]
-        );
-        $requete1->save();
-
         $requete2 = new \App\Requete(
             [
                 'type' => 'unique',
@@ -278,35 +267,6 @@ class DatabaseSeeder extends Seeder
         );
         $requete2->save();
 
-        $soumission1 = new \App\Soumission(
-            [
-                'requete_id' => $requete1->id,
-                'junior_id' => $junior1->user_id,
-                'acceptation' => Carbon::now()->subHour(3),
-                'proposition' => Carbon::now()->subHour(4),
-            ]
-        );
-        $soumission1->save();
-
-
-        $intervention1 = new \App\Intervention([
-            'statut' => 'finalise',
-            'finprevu' => Carbon::now(),
-            'debutprevu' => Carbon::now()->subHour(1),
-            'junior_affecte' => $senior1->user_id,
-            'requete_id' => $requete1->id,
-        ]);
-
-        $requete1->interventions()->save($intervention1);
-
-        $evaluationService1 = new \App\EvaluationService(
-            ['senior_id' => 1,
-                'intervention_id' => $intervention1->id,
-                'commentaire' => 'Super service, jeune à l\'heure, content',
-                'noteSmiley' => 2]
-        );
-        $evaluationService1->save();
-
         $formation1 = new \App\Formation([
             'nom' => 'formation initiale',
             'description' => 'Cette formation doit être suivie par tous les juniors',
@@ -315,7 +275,7 @@ class DatabaseSeeder extends Seeder
         $formation1->save();
         $formation1->users()->save($user2);
 
-        $rapportIntervention1 = new \App\RapportIntervention([
+        /*$rapportIntervention1 = new \App\RapportIntervention([
 
             'servicerendu' => true,
             'commentaire' => 'On adore les rapports d\'intervention',
@@ -326,7 +286,7 @@ class DatabaseSeeder extends Seeder
             'intervention_id' => $intervention1->id,
             'user_id' => $user2->id]
             );
-        $rapportIntervention1->save();
+        $rapportIntervention1->save();*/
 
         $message1 = new \App\Message([
             'email' => 'prospet@envoieunmessage.com',

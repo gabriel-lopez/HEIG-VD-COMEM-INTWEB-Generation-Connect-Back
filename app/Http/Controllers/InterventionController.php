@@ -10,10 +10,9 @@ class InterventionController extends Controller
     public function index()
     {
         return response()
-            ->json(Intervention::with(['user.junior'])
-            ->get()->makeHidden('junior_affecte'));
+            ->json(Intervention::with(['junior_affecte.junior'])
+            ->get());
     }
-
 
     public function store(Request $request)
     {
@@ -25,7 +24,7 @@ class InterventionController extends Controller
         //TODO gestion des droits
         return response()
             ->json(Intervention::with([
-                'user.junior',
+                'junior_affecte.junior',
                 'requete.soumis_par.senior',
                 'requete.matiere'
                 ])
