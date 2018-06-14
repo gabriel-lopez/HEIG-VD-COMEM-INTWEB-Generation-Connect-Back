@@ -18,7 +18,7 @@ class InscriptionController extends Controller
     {
         $inputs = $request->all();
 
-        /*$adresse_habitation = $request->input("adresse_habitation");
+        $adresse_habitation = $request->input("adresse_habitation");
         $adresse_depart = $request->input("adresse_depart");
         $adresse_facturation = $request->input("adresse_facturation");
 
@@ -34,31 +34,28 @@ class InscriptionController extends Controller
         if ($validate_adresse_habitation->fails() || $validate_adresse_depart->fails() || $validate_adresse_facturation->fails())
         {
             return response()->json(['error' => 'Bad Request: Invalid Address'], Response::HTTP_BAD_REQUEST);
-        }*/
-
-        /*if ($validate_user->fails() /*|| $validate_junior->fails())
-        {
-            $messages = $validate_user->messages();
-
-            return response()->json(['error' => 'Bad Request: Invalid USer', 'msg' => $messages], Response::HTTP_BAD_REQUEST);
         }
 
-        if (/*$validate_user->fails() || $validate_junior->fails())
+        if ($validate_user->fails() || $validate_junior->fails())
         {
             $messages = $validate_user->messages();
 
             return response()->json(['error' => 'Bad Request: Invalid Junior', 'msg' => $messages], Response::HTTP_BAD_REQUEST);
-        }*/
+        }
 
-        /*$adresse = Address::createOne($request->all());
+        $adresse_habitation = Address::createOne($validate_adresse_habitation);
+        $adresse_depart = Address::createOne($validate_adresse_depart);
+        $adresse_facturation = Address::createOne($validate_adresse_facturation);
 
-        $request->request->add(['adresse_habitation_id' => $adresse->id]);
+        $request->request->add(['adresse_habitation_id' => $adresse_habitation->id]);
+        $request->request->add(['AdresseDeDepart' => $adresse_depart->id]);
+        $request->request->add(['AdresseFacturation' => $adresse_facturation->id]);
 
         $new_user = User::createOne($request->all());
 
         $request->request->add(['user_id' => $new_user->id]);
 
-        $new_junior = Junior::createOne($request->all()); */
+        $new_junior = Junior::createOne($request->all());
 
         $fichier = array();
 
@@ -83,15 +80,13 @@ class InscriptionController extends Controller
             }
         }
 
-        /*$new_fichier = Fichier::createOne($fichier);
+        $new_fichier = Fichier::createOne($fichier);
 
         $new_user->fichiers()->save($new_fichier);
 
-        Bouncer::assign('junior')->to($new_user);*/
+        Bouncer::assign('junior')->to($new_user);
 
-        dd($request->all());
-
-        return response()->json("",/*JuniorController::get($new_user->id)*/ Response::HTTP_OK);
+        return response()->json(JuniorController::get($new_user->id), Response::HTTP_OK);
     }
 
     public function senior(Request $request)
