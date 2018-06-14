@@ -9,6 +9,7 @@ class InterventionController extends Controller
 {
     public function index()
     {
+        //TODO AUTH + SENIOR CHECK
         return response()
             ->json(Intervention::with([
                 'junior_affecte',
