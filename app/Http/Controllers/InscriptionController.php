@@ -89,7 +89,7 @@ class InscriptionController extends Controller
 
         Bouncer::assign('junior')->to($new_user);*/
 
-        dd($request->all);
+        dd($request->all());
 
         return response()->json("",/*JuniorController::get($new_user->id)*/ Response::HTTP_OK);
     }
