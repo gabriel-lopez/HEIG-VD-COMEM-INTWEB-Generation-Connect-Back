@@ -9,14 +9,30 @@ class InterventionController extends Controller
 {
     public function index()
     {
-        //TODO AUTH + SENIOR CHECK
-        return response()
-            ->json(Intervention::with([
-                'junior_affecte',
-                'requete',
-                'requete.matiere',
-                'requete.matiere.sujet'])
-            ->get());
+        if (Auth::check())
+        {
+            $user = Auth::user();
+
+            if($user->isA('junior'))
+            {
+                return response()
+                    ->json(Intervention::with([
+                        'junior_affecte',
+                        'requete',
+                        'requete.matiere',
+                        'requete.matiere.sujet',
+                        'requete.soumis_par'])
+                        ->get());
+            }
+
+            return response()
+                ->json(Intervention::with([
+                    'junior_affecte',
+                    'requete',
+                    'requete.matiere',
+                    'requete.matiere.sujet'])
+                    ->get());
+        }
     }
 
     public function store(Request $request)
