@@ -107,6 +107,7 @@ class InscriptionController extends Controller
         $new_user->fichiers()->save($new_fichier);
 
         Bouncer::assign('junior')->to($new_user);
+        
 
         return response()->json(JuniorController::get($new_user->id), Response::HTTP_OK);
     }
