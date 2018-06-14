@@ -18,6 +18,8 @@ class InscriptionController extends Controller
     {
         $inputs = $request->all();
 
+        $inputs['status'] = 'candidat';
+
         $adresse_habitation = $request->input("adresse_habitation");
         $adresse_depart = $request->input("adresse_depart");
         $adresse_facturation = $request->input("adresse_facturation");
