@@ -16,7 +16,7 @@ class PageController extends Controller
 
     public function show($id)
     {
-        return response()->json(Page::find($id)->first, Response::HTTP_OK);
+        return response()->json(Page::find($id), Response::HTTP_OK);
     }
 
     public function update(Request $request, Page $page)
