@@ -43,13 +43,13 @@ class InscriptionController extends Controller
             return response()->json(['error' => 'Bad Request: Invalid Junior', 'msg' => $messages], Response::HTTP_BAD_REQUEST);
         }
 
-        $adresse_habitation = Address::createOne($validate_adresse_habitation);
-        $adresse_depart = Address::createOne($validate_adresse_depart);
-        $adresse_facturation = Address::createOne($validate_adresse_facturation);
+        $new_adresse_habitation = Address::createOne($adresse_habitation);
+        $new_adresse_depart = Address::createOne($adresse_depart);
+        $new_adresse_facturation = Address::createOne($adresse_facturation);
 
-        $request->request->add(['adresse_habitation_id' => $adresse_habitation->id]);
-        $request->request->add(['AdresseDeDepart' => $adresse_depart->id]);
-        $request->request->add(['AdresseFacturation' => $adresse_facturation->id]);
+        $request->request->add(['adresse_habitation_id' => $new_adresse_habitation->id]);
+        $request->request->add(['AdresseDeDepart' => $new_adresse_depart->id]);
+        $request->request->add(['AdresseFacturation' => $new_adresse_facturation->id]);
 
         $new_user = User::createOne($request->all());
 
