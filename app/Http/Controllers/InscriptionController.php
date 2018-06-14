@@ -81,9 +81,11 @@ class InscriptionController extends Controller
             {
                 return response()->json(["error" => "Bad File"], Response::HTTP_BAD_REQUEST);
             }
+
+            dd($cv);
         }
 
-        dd($cv);
+
 
         $new_fichier = Fichier::createOne($fichier);
 
