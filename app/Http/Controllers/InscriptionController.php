@@ -85,15 +85,13 @@ class InscriptionController extends Controller
             dd($cv);
         }
 
-
-
-        $new_fichier = Fichier::createOne($fichier);
+        /*$new_fichier = Fichier::createOne($fichier);
 
         $new_user->fichiers()->save($new_fichier);
 
-        Bouncer::assign('junior')->to($new_user);
+        Bouncer::assign('junior')->to($new_user);*/
 
-        return response()->json(JuniorController::get($new_user->id), Response::HTTP_OK);
+        return response()->json("",/*JuniorController::get($new_user->id)*/ Response::HTTP_OK);
     }
 
     public function senior(Request $request)
