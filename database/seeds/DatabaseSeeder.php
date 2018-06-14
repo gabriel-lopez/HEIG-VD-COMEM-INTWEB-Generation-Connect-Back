@@ -256,17 +256,6 @@ class DatabaseSeeder extends Seeder
         ]);
         $plageRepetitive1->save();
 
-        $requete2 = new \App\Requete(
-            [
-                'type' => 'unique',
-                'statut' => 'envoye',
-                'matiere_id' => 1,
-                'soumis_par' => $user1->id,
-                'plageHoraire_id' => 2
-            ]
-        );
-        $requete2->save();
-
         $formation1 = new \App\Formation([
             'nom' => 'formation initiale',
             'description' => 'Cette formation doit être suivie par tous les juniors',

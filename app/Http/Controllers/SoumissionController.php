@@ -77,8 +77,8 @@ class SoumissionController extends Controller
         $inputs = array();
 
         $inputs['statut'] = 'planifie';
-        $inputs['finPrevu'] = '2018-01-01';
-        $inputs['debutPrevu'] = '2018-01-01';
+        $inputs['finPrevu'] = '2018-06-17';
+        $inputs['debutPrevu'] = '2018-06-16';
         $inputs['junior_affecte_id'] = $junior_id;
         $inputs['requete_id']= $requete_id;
 
