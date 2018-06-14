@@ -15,7 +15,7 @@ class Junior extends Model
     public $primaryKey = 'user_id';
 
     public static $rules = [
-        'user_id' => 'exists:users,id',
+        'user_id' => 'nullable|exists:users,id',
         'status' => 'required|in:"candidat","formation","actif","inactif","refuse"',
         'LimiteTempsTransport' => 'required|integer|min:0',
         'AdresseDeDepart' => 'nullable|exists:addresses,id',
