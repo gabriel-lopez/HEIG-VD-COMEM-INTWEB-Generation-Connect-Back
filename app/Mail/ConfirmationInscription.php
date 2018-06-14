@@ -6,23 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NouvelleSoumission extends Mailable
+class NouvelleInscription extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $user;
-    public $request;
-    public $hash;
+    public $type;
 
-    public function __construct($user, $request, $hash)
+    public function __construct($user, $type)
     {
         $this->user = $user;
-        $this->request = $request;
-        $this->hash = $hash;
+        $this->type = $type;
     }
 
     public function build()
     {
-        return $this->view('email');
+        return $this->view('confirmation_inscription_email');
     }
 }
