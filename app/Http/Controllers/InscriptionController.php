@@ -36,14 +36,7 @@ class InscriptionController extends Controller
             return response()->json(['error' => 'Bad Request: Invalid Address'], Response::HTTP_BAD_REQUEST);
         }
 
-        if ($validate_user->fails() /*|| $validate_junior->fails()*/)
-        {
-            $messages = $validate_user->messages();
-
-            return response()->json(['error' => 'Bad Request: Invalid User', 'msg' => $messages], Response::HTTP_BAD_REQUEST);
-        }
-
-        if (/*$validate_user->fails() ||*/ $validate_junior->fails())
+        if ($validate_user->fails() || $validate_junior->fails())
         {
             $messages = $validate_user->messages();
 
@@ -77,8 +70,8 @@ class InscriptionController extends Controller
             if($extension == "pdf" && $mime == "application/pdf" && $size < 5000000)
             {
                 Storage::disk('local')->put(time() . '_' . $cv->getFilename() . '.' . $extension,  $cv);
-
-                $fichier["name"] = $cv->getClientOriginalName();
+                
+                $fichier["nom"] = $cv->getClientOriginalName();
                 $fichier["path"] = time() . '_' . $cv->getFilename() . '.' . $extension;
             }
             else
