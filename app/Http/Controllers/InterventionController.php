@@ -10,7 +10,7 @@ class InterventionController extends Controller
     public function index()
     {
         return response()
-            ->json(Intervention::with(['junior_affecte.junior'])
+            ->json(Intervention::with(['junior_affecte'])
             ->get());
     }
 
@@ -24,12 +24,10 @@ class InterventionController extends Controller
         //TODO gestion des droits
         return response()
             ->json(Intervention::with([
-                'junior_affecte.junior',
                 'requete.soumis_par.senior',
                 'requete.matiere'
                 ])
-                ->find($id)
-                ->makeHidden(['junior_affecte','requete_id']));
+                ->find($id));
     }
 
     public function update(Request $request, Intervention $intervention)

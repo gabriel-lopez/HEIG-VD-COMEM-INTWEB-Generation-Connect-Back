@@ -52,7 +52,7 @@ class Intervention extends Model
         $new->statut = $inputs['statut'];
         $new->finPrevu = $inputs['finPrevu'];
         $new->debutPrevu = $inputs['debutPrevu'];
-        $new->junior_affecte = $inputs['junior_affecte'];
+        $new->junior_affecte_id = $inputs['junior_affecte_id'];
         $new->requete_id = $inputs['requete_id'];
 
         $new->save();
@@ -62,7 +62,7 @@ class Intervention extends Model
 
     public function junior_affecte()
     {
-        return $this->belongsTo('\App\User');
+        return $this->belongsTo('\App\User', 'junior_affecte');
     }
 
     public function requete()

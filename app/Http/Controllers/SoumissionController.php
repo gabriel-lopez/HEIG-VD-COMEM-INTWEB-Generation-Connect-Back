@@ -80,7 +80,7 @@ class SoumissionController extends Controller
         $inputs['statut'] = 'planifie';
         $inputs['finPrevu'] = '2018-01-01';
         $inputs['debutPrevu'] = '2018-01-01';
-        $inputs['junior_affecte'] = $junior_id;
+        $inputs['junior_affecte_id'] = $junior_id;
         $inputs['requete_id']= $requete_id;
 
         $intervention = Intervention::createOne($inputs);
