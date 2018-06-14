@@ -18,7 +18,14 @@ class SoumissionController extends Controller
     public function index()
     {
         //TODO GESTION DES DROITS
-        return response()->json(Soumission::all());
+        return response()->json(Soumission::with([
+            'requete',
+            'requete.matiere',
+            'requete.soumis_par',
+            'requete.plageHoraire'
+        ])
+            //->where('acceptation', '=', null)
+            ->get());
     }
 
     public function store(Request $request)
@@ -41,8 +48,6 @@ class SoumissionController extends Controller
                 $user = User::find($inputs['junior_id']);
 
                 //TODO
-                // utilisation possible du système à l'avenir
-                // $notification = Notification::createOne($soumission->junior_id, $soumission->requete_id,  "email");
                 Mail::to(/*$user->email*/'gabriel.lopez@heig-vd.ch')->send(new NouvelleSoumission($user, $request, $soumission->hash));
 
                 return response()->json($soumission, Response::HTTP_OK);
