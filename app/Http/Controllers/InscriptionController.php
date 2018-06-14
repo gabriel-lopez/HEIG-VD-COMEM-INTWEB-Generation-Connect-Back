@@ -45,8 +45,6 @@ class InscriptionController extends Controller
             return response()->json(['error' => 'Bad Request: Invalid Junior', 'msg' => $messages], Response::HTTP_BAD_REQUEST);
         }
 
-        $junior_plages_horaires = array();
-
         foreach ($plages_horaires as &$plage_horaire)
         {
             $obj = json_decode($plage_horaire);
@@ -64,10 +62,6 @@ class InscriptionController extends Controller
 
                 return response()->json(['error' => 'Bad Request', 'msg' => $messages], Response::HTTP_BAD_REQUEST);
             }
-
-            $plage_horaire_new = PlageHoraire::createOne($inputs_ph);
-
-            array_push($junior_plages_horaires, $plage_horaire_new);
         }
 
         $new_adresse_habitation = Address::createOne($adresse_habitation);
@@ -84,9 +78,18 @@ class InscriptionController extends Controller
 
         $new_junior = Junior::createOne($request->all());
 
-        foreach ($junior_plages_horaires as &$plage_horaire)
+        foreach ($plages_horaires as &$plage_horaire)
         {
-            $plage_horaire->juniors()->save($new_junior);
+            $obj = json_decode($plage_horaire);
+
+            $inputs_ph = array();
+            $inputs_ph['joursemaine'] = strtolower($obj->{'jour'});
+            $inputs_ph['heuredebut'] = $obj->{'debut'};
+            $inputs_ph['heurefin'] = $obj->{'fin'};
+
+            $new_plage_horaire = PlageHoraire::createOne($inputs_ph);
+
+            $new_junior->plageshoraires()->save($new_plage_horaire);
         }
 
         $fichier = array();
