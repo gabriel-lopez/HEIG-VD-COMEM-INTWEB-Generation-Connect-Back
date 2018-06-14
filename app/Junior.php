@@ -20,7 +20,7 @@ class Junior extends Model
         'LimiteTempsTransport' => 'required|integer|min:0',
         'AdresseDeDepart' => 'nullable|exists:addresses,id',
         'AdresseFacturation' => 'nullable|exists:addresses,id',
-        'NoAVS' => 'required',
+        'NoAVS' => 'required|string',
         'BanqueNom' => 'required|string',
         'BanqueBIC' => 'required|string',
         'BanqueIBAN' => 'required',
