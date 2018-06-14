@@ -25,8 +25,8 @@ class InscriptionController extends Controller
         array_push($inputs, "status", "candidat");
 
         $validate_adresse_habitation = Address::getValidation($adresse_habitation);
-        $validate_adresse_depart = Address::getValidation($adresse_habitation);
-        $validate_adresse_facturation = Address::getValidation($adresse_habitation);
+        $validate_adresse_depart = Address::getValidation($adresse_depart);
+        $validate_adresse_facturation = Address::getValidation($adresse_facturation);
 
         $validate_user = User::getValidation($inputs);
         $validate_junior = Junior::getValidation($inputs);
@@ -36,7 +36,14 @@ class InscriptionController extends Controller
             return response()->json(['error' => 'Bad Request: Invalid Address'], Response::HTTP_BAD_REQUEST);
         }
 
-        if ($validate_user->fails() || $validate_junior->fails())
+        if ($validate_user->fails() /*|| $validate_junior->fails()*/)
+        {
+            $messages = $validate_user->messages();
+
+            return response()->json(['error' => 'Bad Request: Invalid User', 'msg' => $messages], Response::HTTP_BAD_REQUEST);
+        }
+
+        if (/*$validate_user->fails() ||*/ $validate_junior->fails())
         {
             $messages = $validate_user->messages();
 
