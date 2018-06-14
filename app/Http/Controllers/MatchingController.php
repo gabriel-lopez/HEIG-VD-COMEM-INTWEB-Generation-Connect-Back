@@ -61,7 +61,7 @@ class MatchingController extends Controller
             'junior.matieres',
             'junior.plageshoraires')
             ->has('junior')
-            ->whereNotIn('junior.status', ['candidat', 'formation'])
+            //->whereNotIn('junior.status', ['candidat', 'formation'])
             ->get();
 
         $address_senior_input = $address->ligne1 . " " .
