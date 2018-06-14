@@ -58,7 +58,7 @@ class InscriptionController extends Controller
 
             if ($valide_plage_horaire->fails())
             {
-                $messages = $validate_user->messages();
+                $messages = $valide_plage_horaire->messages();
 
                 return response()->json(['error' => 'Bad Request', 'msg' => $messages], Response::HTTP_BAD_REQUEST);
             }
@@ -107,7 +107,6 @@ class InscriptionController extends Controller
         $new_user->fichiers()->save($new_fichier);
 
         Bouncer::assign('junior')->to($new_user);
-        
 
         return response()->json(JuniorController::get($new_user->id), Response::HTTP_OK);
     }
