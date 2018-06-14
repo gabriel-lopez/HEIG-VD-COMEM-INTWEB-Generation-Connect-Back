@@ -18,7 +18,7 @@
 
 ## Base de données
 
-* Codage: 
+* Codage: UTF8_MB4_General_CI
 * Moteur: MyISAM
 
 ## Configuration logiciel requise
@@ -40,15 +40,17 @@ Modifier le ficnier `.env`  pour refléter la configuration de votre base de don
 Par exemple : 
 
 
-`DB_CONNECTION=mysql `
-`DB_HOST=127.0.0.1`
-`DB_PORT=8889`
-`DB_DATABASE=projetweb`
-`DB_USERNAME=root`
-`DB_PASSWORD=root`
+`DB_CONNECTION=mysql `  
+`DB_HOST=127.0.0.1`  
+`DB_PORT=8889`  
+`DB_DATABASE=projetweb`  
+`DB_USERNAME=root`  
+`DB_PASSWORD=root`  
 
-Il faut ensuite générer la clé d'APP
+Régler également les paramètres du SMTP dans le fichier '.env' pour que les fonctionalités impliquant des e-mails fonctionnent correctement
+
+Il faut ensuite générer la clé d'APP  
 `php artisan key:generate`  
 
-Puis peupler la base de données avec les données de test.
+Puis peupler la base de données avec les données de test.  
 `php artisan migrate:refresh --seed`
