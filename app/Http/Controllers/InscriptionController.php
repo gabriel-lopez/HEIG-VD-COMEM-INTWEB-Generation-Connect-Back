@@ -76,7 +76,11 @@ class InscriptionController extends Controller
 
         $request->request->add(['user_id' => $new_user->id]);
 
+        global $new_junior;
+
         $new_junior = Junior::createOne($request->all());
+
+        dd($new_junior);
 
         foreach ($plages_horaires as &$plage_horaire)
         {
