@@ -426,7 +426,7 @@ class UsersWithAbilitiesSeeder extends Seeder
             'type' => 'unique',
             'statut' => 'accepte',
             'matiere_id' => 1,
-            'soumis_par' => $gabriel->id,
+            'soumis_par' => $senior->id,
             'plageHoraire_id' => 1
         ]);
         $requete1->save();
