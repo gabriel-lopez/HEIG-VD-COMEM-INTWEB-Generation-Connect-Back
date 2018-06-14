@@ -73,6 +73,8 @@ class Junior extends Model
         $new->AdresseFacturation = $values['AdresseFacturation'];
 
         $new->save();
+
+        return $new;
     }
 
     public function adresse_de_depart()
