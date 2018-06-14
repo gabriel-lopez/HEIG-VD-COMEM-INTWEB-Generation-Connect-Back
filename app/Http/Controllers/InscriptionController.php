@@ -16,14 +16,14 @@ class InscriptionController extends Controller
 {
     public function junior(Request $request)
     {
+        $request->request->add(['status' => 'candidat']);
+
         $inputs = $request->all();
 
         $adresse_habitation = $request->input("adresse_habitation");
         $adresse_depart = $request->input("adresse_depart");
         $adresse_facturation = $request->input("adresse_facturation");
-
-        array_push($inputs, "status", "candidat");
-
+        
         $validate_adresse_habitation = Address::getValidation($adresse_habitation);
         $validate_adresse_depart = Address::getValidation($adresse_depart);
         $validate_adresse_facturation = Address::getValidation($adresse_facturation);
