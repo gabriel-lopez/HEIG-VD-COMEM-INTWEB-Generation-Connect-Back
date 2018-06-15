@@ -6,24 +6,26 @@ use App\Fichier;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class DownloadController extends Controller
 {
     public function show($id)
     {
-        $fichier = Fichier::find($id)->first();
-
-        if($fichier == null)
+        if (Auth::check())
         {
+            $user = Auth::user();
+
+            $fichier = Fichier::find($id);
+
+            if ($fichier != null)
+            {
+                return response()->download(storage_path("app/" . $fichier->path));
+            }
+
             return response()->json(['error' => 'Bad Request'], Response::HTTP_OK);
         }
 
-        //return Storage::url('files/' . $fichier->path);
-
-        //return Storage::download($fichier->path, $fichier->name);
-
-        return response()->download(Storage::get($fichier->path));
+        return response()->json(["error" => "Unauthorized"], Response::HTTP_UNAUTHORIZED);
     }
 
     public function upload(Request $request)
