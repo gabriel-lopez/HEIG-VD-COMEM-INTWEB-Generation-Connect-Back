@@ -44,9 +44,6 @@ Route::group(['prefix' => 'api'], function ()
 
     Route::get('soumissions/accept/{requete_id}/{junior_id}/{hash}', 'SoumissionController@acceptation');
     Route::get('soumissions/decline/{requete_id}/{junior_id}/{hash}', 'SoumissionController@refus');
-
-    Route::get('download/{id}', 'DownloadController@show');
-
 });
 
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function ()
@@ -70,4 +67,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function ()
 
     Route::get('soumissions/accept/{requete_id}/{junior_id}/', 'SoumissionController@acceptation');
     Route::get('soumissions/decline/{requete_id}/{junior_id}/', 'SoumissionController@refus');
+
+    Route::post('download/', 'DownloadController@upload');
+    Route::get('download/{id}', 'DownloadController@show');
 });
