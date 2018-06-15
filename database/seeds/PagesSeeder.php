@@ -173,8 +173,8 @@ class PagesSeeder extends Seeder
         </ul>
     </div>
 </div>
-<div class=\"row\">
-<div class=\"col-4 mx-auto\">
+<div class=\"row my-3\">
+<div class=\"col-4  mx-auto\">
     <a href=\"#postuler\" class=\" btn w-100 mb-3 center-block\">Je postule!</a>
 </div>
 </div>
@@ -264,7 +264,14 @@ class PagesSeeder extends Seeder
         </div>
     </div>
 
-    <a href=\"#inscription\" class=\"btn w-100 mb-3\">Inscription</a>
+<div class=\"row my-3\">
+<div class=\"col-4 mx-auto\">
+ <a href=\"#inscription\" class=\"btn w-100 mb-3 center-block\">Inscription</a>
+    
+</div>
+</div>
+
+   
 </div>
 
 
