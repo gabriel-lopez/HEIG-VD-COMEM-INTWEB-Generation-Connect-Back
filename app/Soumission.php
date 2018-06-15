@@ -5,6 +5,7 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
 class Soumission extends Model
@@ -50,7 +51,8 @@ class Soumission extends Model
         $new->save();
 
         $requete = Requete::find($new->requete_id)->first();
-        dd($requete);
+        //($requete);
+        return response()->json($requete, Response::HTTP_BAD_REQUEST);
         $requete->statut = 'envoye';
         $requete->save();
 
