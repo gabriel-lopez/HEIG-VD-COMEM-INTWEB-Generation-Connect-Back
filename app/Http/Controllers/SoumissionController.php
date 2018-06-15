@@ -97,10 +97,10 @@ class SoumissionController extends Controller
                 //return response()->json(['error' => 'Bad Request'], Response::HTTP_BAD_REQUEST);
             }
 
-            if($user->id != $junior_id)
+            /*if($user->id != $junior_id)
             {
                 return response()->json(["error" => "Unauthorized"], Response::HTTP_UNAUTHORIZED);
-            }
+            }*/
         }
 
         $inputs = array();
