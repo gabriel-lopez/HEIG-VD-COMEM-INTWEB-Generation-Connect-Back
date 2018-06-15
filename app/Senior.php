@@ -80,7 +80,7 @@ class Senior extends Model
         return $this->belongsTo('\App\User');
     }
 
-/*
+    /*
     public function soumission()
     {
         return $this->hasMany('\App\Matiere');

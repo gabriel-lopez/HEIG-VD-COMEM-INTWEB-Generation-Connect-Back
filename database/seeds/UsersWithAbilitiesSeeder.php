@@ -317,7 +317,7 @@ class UsersWithAbilitiesSeeder extends Seeder
 
         Bouncer::assign('formateur')->to($formateur);
 
-// Directeur direction@etiennerallu.com
+        // Directeur direction@etiennerallu.com
 
         $directeurAdresse = new \App\Address([
             'ligne1' => "Point du jour",
@@ -328,7 +328,6 @@ class UsersWithAbilitiesSeeder extends Seeder
             'pays' => "Suisse",
         ]);
         $directeurAdresse->save();
-
 
         $directeur = new \App\User([
             'prenom' => "Paul",
@@ -348,7 +347,6 @@ class UsersWithAbilitiesSeeder extends Seeder
         $directeurEmploye->save();
 
         Bouncer::assign('superadmin')->to($directeur);
-
 
         // Ajout de matières
 

@@ -53,14 +53,15 @@ class Sujet extends Model
         return $new;
     }
 
-    public static function getModifyValidation($sujet, $input)
+    public static function getModifyValidation($sujet, $inputs)
     {
-        if(!$input['nom'] == $sujet['nom']) {
+        if(!$inputs['nom'] == $sujet['nom'])
+        {
             $validator = Validator::make($inputs, self::$rules);
         }
         else
         {
-            $validator = Validator::make($input, ['description' => 'required|string']);
+            $validator = Validator::make($inputs, ['description' => 'required|string']);
         }
 
        return $validator;
