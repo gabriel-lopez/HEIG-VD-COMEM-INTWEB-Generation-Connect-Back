@@ -106,8 +106,8 @@ class SoumissionController extends Controller
         $inputs = array();
 
         $inputs['statut'] = 'planifie';
-        $inputs['finPrevu'] = $requete->plage_unique()->date . " " . $requete->plageHoraire()->heurefin;
-        $inputs['debutPrevu'] = $requete->plage_unique()->date . " " . $requete->plageHoraire()->heuredebut;
+        $inputs['finPrevu'] = $requete->plageHoraire()->plage_unique()->date . " " . $requete->plageHoraire()->heurefin;
+        $inputs['debutPrevu'] = $requete->plageHoraire()->plage_unique()->date . " " . $requete->plageHoraire()->heuredebut;
         $inputs['junior_affecte_id'] = $junior_id;
         $inputs['requete_id']= $requete_id;
 

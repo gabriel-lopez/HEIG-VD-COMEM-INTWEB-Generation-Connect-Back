@@ -51,7 +51,7 @@ class Soumission extends Model
 
         $requete = Requete::find($new->requete_id)->first();
         $requete->statut = 'envoye';
-        $requete->save();
+        $requete->u();
 
         return $new;
     }
