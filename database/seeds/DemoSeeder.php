@@ -133,7 +133,7 @@ class DatabaseSeeder extends Seeder
 
         $junior2->save();
 
-        $junior2->matieres()->save($matiere2);
+        // $junior2->matieres()->save($matiere2);
 
         $junior3 = new \App\Junior([
             'user_id' => $user5->id,
@@ -149,7 +149,7 @@ class DatabaseSeeder extends Seeder
 
         $junior3->save();
 
-        $junior3->matieres()->save($matiere1);
+        //$junior3->matieres()->save($matiere1);
         //</editor-fold>
 
         //<editor-fold desc="Employes">
