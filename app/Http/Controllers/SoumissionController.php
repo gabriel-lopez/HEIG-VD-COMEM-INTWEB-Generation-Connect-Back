@@ -47,9 +47,9 @@ class SoumissionController extends Controller
 
                 $user = User::find($inputs['junior_id']);
 
-                $requete = Requete::find($inputs['requete_id'])->first();
+                /*$requete = Requete::find($inputs['requete_id'])->first();
                 $requete->statut = 'envoye';
-                $requete->save();
+                $requete->save();*/
 
                 //TODO hardcoded email
                 Mail::to(/*$user->email*/'gabriel.lopez@heig-vd.ch')->send(new NouvelleSoumission($user, $request, $soumission->hash));
@@ -110,8 +110,12 @@ class SoumissionController extends Controller
         $inputs = array();
 
         $inputs['statut'] = 'planifie';
-        $inputs['finPrevu'] = '2018-06-21 15:00';
-        $inputs['debutPrevu'] = '2018-06-21 14:00';
+
+        $inputs['finPrevu'] = "2018-06-21";
+        $inputs['debutPrevu'] = "2018-06-21";
+
+        //$inputs['finPrevu'] = '2018-06-21 15:00';
+        //$inputs['debutPrevu'] = '2018-06-21 14:00';
         //$inputs['finPrevu'] = $requete->plageHoraire()->plage_unique()->date . " " . $requete->plageHoraire()->heurefin;
         //$inputs['debutPrevu'] = $requete->plageHoraire()->plage_unique()->date . " " . $requete->plageHoraire()->heuredebut;
         $inputs['junior_affecte_id'] = $junior_id;
