@@ -47,10 +47,6 @@ class SoumissionController extends Controller
 
                 $user = User::find($inputs['junior_id']);
 
-                /*$requete = Requete::find($inputs['requete_id'])->first();
-                $requete->statut = 'envoye';
-                $requete->save();*/
-
                 $requete = Requete::find($inputs['requete_id']);
                 $requete->statut = 'envoye';
                 $requete->save();
@@ -115,8 +111,8 @@ class SoumissionController extends Controller
 
         $inputs['statut'] = 'planifie';
 
-        $inputs['finPrevu'] = "2018-06-21 15:00:00";
-        $inputs['debutPrevu'] = "2018-06-21 17:00:00";
+        $inputs['finPrevu'] = "2018-06-21 17:00:00"; // en dur pour la démo
+        $inputs['debutPrevu'] = "2018-06-21 15:00:00"; // en dur pour la démo
         //$inputs['finPrevu'] = $requete->plageHoraire()->plage_unique()->date . " " . $requete->plageHoraire()->heurefin;
         //$inputs['debutPrevu'] = $requete->plageHoraire()->plage_unique()->date . " " . $requete->plageHoraire()->heuredebut;
         $inputs['junior_affecte_id'] = $junior_id;
