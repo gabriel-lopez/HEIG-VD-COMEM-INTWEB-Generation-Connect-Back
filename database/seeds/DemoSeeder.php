@@ -6,7 +6,7 @@ use Propaganistas\LaravelPhone\PhoneNumber;
 use Carbon\Carbon;
 use Silber\Bouncer\BouncerFacade as Bouncer;
 
-class DatabaseSeeder extends Seeder
+class DemoSeeder extends Seeder
 {
     public function run()
     {
