@@ -47,6 +47,10 @@ class SoumissionController extends Controller
 
                 $user = User::find($inputs['junior_id']);
 
+                $requete = Requete::find($soumission->requete_id)->first();
+                $requete->statut = 'envoye';
+                $requete->save();
+
                 //TODO hardcoded email
                 Mail::to(/*$user->email*/'gabriel.lopez@heig-vd.ch')->send(new NouvelleSoumission($user, $request, $soumission->hash));
 

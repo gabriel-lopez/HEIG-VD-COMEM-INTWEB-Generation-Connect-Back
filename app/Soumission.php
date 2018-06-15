@@ -50,12 +50,6 @@ class Soumission extends Model
 
         $new->save();
 
-        $requete = Requete::find($new->requete_id)->first();
-        //($requete);
-        return response()->json($requete, Response::HTTP_BAD_REQUEST);
-        $requete->statut = 'envoye';
-        $requete->save();
-
         return $new;
     }
 
