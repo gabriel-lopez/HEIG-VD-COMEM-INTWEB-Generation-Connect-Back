@@ -21,9 +21,6 @@
                 margin: 0;
             }
 
-            .full-height {
-                height: 100vh;
-            }
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
@@ -32,10 +29,6 @@
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
             }
         </style>
     </head>
@@ -47,9 +40,9 @@
 
         <div class="links">
             <p>Vous pouvez:
-                <a href="http://localhost/ProjWeb-Back/public/api/soumissions/accept/{{ $request->requete_id }}/{{ $user->id }}/{{ $hash }}">Accepter</a>
+                <a href="http://pingouin.heig-vd.ch/api/soumissions/accept/{{ $request->requete_id }}/{{ $user->id }}/{{ $hash }}">Accepter</a>
                  ou
-                <a href="http://localhost/ProjWeb-Back/public/api/soumissions/decline/{{ $request->requete_id }}/{{ $user->id }}/{{ $hash }}">Refuser</a>
+                <a href="http://pingouin.heig-vd.ch/api/soumissions/decline/{{ $request->requete_id }}/{{ $user->id }}/{{ $hash }}">Refuser</a>
             </p>
         </div>
 

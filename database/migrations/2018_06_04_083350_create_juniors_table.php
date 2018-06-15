@@ -10,7 +10,7 @@ class CreateJuniorsTable extends Migration
     {
         Schema::create('juniors', function (Blueprint $table)
         {
-            $table->increments('user_id');
+            $table->integer('user_id')->unsigned()->unique();
 
             $table->enum('status', ["candidat","formation","actif","inactif","refuse"]);
             $table->integer('LimiteTempsTransport')->unisgned();

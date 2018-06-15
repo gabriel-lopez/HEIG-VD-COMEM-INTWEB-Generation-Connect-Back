@@ -17,7 +17,7 @@ class SoumissionController extends Controller
 {
     public function index()
     {
-        //TODO GESTION DES DROITS
+        //TODO gestions des droits et des différentes listes
         return response()->json(Soumission::with([
             'requete',
             'requete.matiere',
@@ -47,7 +47,7 @@ class SoumissionController extends Controller
 
                 $user = User::find($inputs['junior_id']);
 
-                //TODO
+                //TODO hardcoded email
                 Mail::to(/*$user->email*/'gabriel.lopez@heig-vd.ch')->send(new NouvelleSoumission($user, $request, $soumission->hash));
 
                 return response()->json($soumission, Response::HTTP_OK);
@@ -59,12 +59,23 @@ class SoumissionController extends Controller
 
     public function show($requete_id, $junior_id)
     {
-        //TODO GESTION DES DROITS
+        //TODO Gestion des droits
         return response()->json(Soumission::find($requete_id, $junior_id), Response::HTTP_OK);
     }
 
-    public function acceptation($requete_id, $junior_id, $link_hash = null)
+    public function acceptation($requete_id, $junior_id, $hash = null)
     {
+        $user = null;
+
+        if (Auth::check() && $hash == null)
+        {
+            $user = Auth::user();
+        }
+        else if (!Auth::check() && $hash == null)
+        {
+            return response()->json(["error" => "Unauthorized"], Response::HTTP_UNAUTHORIZED);
+        }
+
         $soumission = Soumission::find($requete_id, $junior_id)->first();
 
         if($soumission == null)
@@ -79,11 +90,24 @@ class SoumissionController extends Controller
             return response()->json(['error' => 'Bad Request: Requête Inexistante'], Response::HTTP_BAD_REQUEST);
         }
 
+        if($hash != null)
+        {
+            if($hash != $soumission->hash)
+            {
+                return response()->json(['error' => 'Bad Request'], Response::HTTP_BAD_REQUEST);
+            }
+
+            if($user->id != $junior_id)
+            {
+                return response()->json(["error" => "Unauthorized"], Response::HTTP_UNAUTHORIZED);
+            }
+        }
+
         $inputs = array();
 
         $inputs['statut'] = 'planifie';
-        $inputs['finPrevu'] = '2018-06-17';
-        $inputs['debutPrevu'] = '2018-06-16';
+        $inputs['finPrevu'] = $requete->plage_unique()->date . " " . $requete->plageHoraire()->heurefin;
+        $inputs['debutPrevu'] = $requete->plage_unique()->date . " " . $requete->plageHoraire()->heuredebut;
         $inputs['junior_affecte_id'] = $junior_id;
         $inputs['requete_id']= $requete_id;
 
@@ -100,6 +124,8 @@ class SoumissionController extends Controller
 
     public function refus($requete_id, $junior_id, $link_hash = null)
     {
+        //TODO Gestion des droits
+
         $soumission = Soumission::find($requete_id, $junior_id)->first();
 
         if($soumission == null)

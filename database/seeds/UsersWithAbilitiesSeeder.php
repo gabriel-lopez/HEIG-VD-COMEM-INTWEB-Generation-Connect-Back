@@ -7,11 +7,6 @@ use Propaganistas\LaravelPhone\PhoneNumber;
 
 class UsersWithAbilitiesSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         $juniorAdresse = new \App\Address([

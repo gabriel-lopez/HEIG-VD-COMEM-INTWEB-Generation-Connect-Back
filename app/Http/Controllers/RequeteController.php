@@ -131,29 +131,39 @@ class RequeteController extends Controller
 
     public function show($id)
     {
-        //TODO droit
+        //TODO gestion des droits et des roles
         return response()->json($this->get($id));
     }
 
     public function update(Request $request, Requete $requete)
     {
-        //TODO droit
+        //TODO gestion des droits et des roles
     }
 
     public function destroy(Requete $requete)
     {
-        //TODO droit
+        //TODO gestion des droits et des roles
     }
 
     public function get($id)
     {
-        $request = Requete::with(['soumis_par.senior', 'matiere', 'plageHoraire.plage_unique', 'plageHoraire.plage_horaire_repetitive'])
+        //TODO gestion des droits et des roles
+
+        $request = Requete::with([
+            'soumis_par.senior',
+            'matiere',
+            'plageHoraire.plage_unique',
+            'plageHoraire.plage_horaire_repetitive'
+        ])
             ->find($id)
             ->makeHidden(['plageHoraire_id', 'matiere_id']);
 
-        if ($request && !($request->plageHoraire->plage_horaire_repetitive)) {
+        if ($request && !($request->plageHoraire->plage_horaire_repetitive))
+        {
             $request->plageHoraire->makeHidden('plage_horaire_repetitive');
-        } elseif ($request && !($request->plageHoraire->plage_unique)) {
+        }
+        else if($request && !($request->plageHoraire->plage_unique))
+        {
             $request->plageHoraire->makeHidden('plage_unique');
         }
         return $request;

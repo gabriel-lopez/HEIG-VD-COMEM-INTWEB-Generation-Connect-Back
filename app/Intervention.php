@@ -14,8 +14,8 @@ class Intervention extends Model
 
     public static $rules = [
         'statut' => 'required|in:"planifie","annule","finalise"',
-        'finPrevu' => 'required|date|after:debutPrevu',
         'debutPrevu' => 'required|date',
+        'finPrevu' => 'required|date|after:debutPrevu',
         'junior_affecte' => 'required|integer|exists:juniors,id',
         'requete_id' => 'required|integer|exists:requetes,id',
     ];

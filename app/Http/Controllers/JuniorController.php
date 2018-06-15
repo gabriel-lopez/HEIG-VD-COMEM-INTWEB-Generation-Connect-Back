@@ -47,27 +47,39 @@ class JuniorController extends Controller
             {
                 $inputs = $request->all();
 
-                //TODO CECI EST FAUX
-                /*if (Address::getValidation($inputs['adresse_habitation'])->fails())
+                if (Address::getValidation($inputs['adresse_habitation'])->fails())
+                {
                     return response()->json(['error' => 'Adresse_Habitation invalide'], Response::HTTP_BAD_REQUEST);
+                }
 
-                if (isset($inputs['AdresseDeDepart'])) {
+                $adresse = Address::createOne($inputs['adresse_habitation']);
+
+                $request->request->add(['adresse_habitation_id' => $adresse->id]);
+
+                if (isset($inputs['AdresseDeDepart']))
+                {
                     $adresseDeDepart = Address::createOne($inputs['AdresseDeDepart']);
                     $request->request->add(['AdresseDeDepart' => $adresseDeDepart->id]);
-                } else {
+                }
+                else
+                {
                     $request->request->add(['AdresseDeDepart' => $adresse->id]);
                 }
 
-                if (isset($inputs['AdresseFacturation'])) {
+                if (isset($inputs['AdresseFacturation']))
+                {
                     $adresseDeDepart = Address::createOne($inputs['AdresseDeDepart']);
                     $request->request->add(['AdresseFacturation' => $adresseDeDepart->id]);
-                } else {
+                }
+                else
+                {
                     $request->request->add(['AdresseFacturation' => $adresse->id]);
                 }
-                if (!isset($inputs['status'])) $request->request->add(['status' => 'candidat']);
 
-                $adresse = Address::createOne($inputs['adresse_habitation']);
-                $request->request->add(['adresse_habitation_id' => $adresse->id]);*/
+                if (!isset($inputs['status']))
+                {
+                    $request->request->add(['status' => 'candidat']);
+                }
 
                 $validate_user = User::getValidation($request->all());
 
@@ -131,7 +143,7 @@ class JuniorController extends Controller
 
             if ($user->can('modifier-junior'))
             {
-                //TODO
+                //TODO update d'un junior ?
                 return response()->json("", Response::HTTP_OK);
             }
         }
@@ -147,7 +159,7 @@ class JuniorController extends Controller
 
             if ($user->can('supprimer-junior'))
             {
-                //TODO
+                //TODO supression d'un junior ?
                 return response()->json("", Response::HTTP_OK);
             }
         }

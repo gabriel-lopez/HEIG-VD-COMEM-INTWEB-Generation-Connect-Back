@@ -15,6 +15,8 @@ class DownloadController extends Controller
         {
             $user = Auth::user();
 
+            //TODO Gestion des roles
+
             $fichier = Fichier::find($id);
 
             if ($fichier != null)
@@ -33,6 +35,8 @@ class DownloadController extends Controller
         if (Auth::check())
         {
             $user = Auth::user();
+
+            //TODO Gestion des roles
 
             if ($request->hasFile('cv'))
             {
