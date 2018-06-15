@@ -96,10 +96,11 @@ class SoumissionController extends Controller
 
         if($hash != null)
         {
-            if($hash != $soumission->hash)
+            // desactivé pour la démo
+            /*if($hash != $soumission->hash)
             {
-                //return response()->json(['error' => 'Bad Request'], Response::HTTP_BAD_REQUEST);
-            }
+                return response()->json(['error' => 'Bad Request'], Response::HTTP_BAD_REQUEST);
+            }*/
 
             /*if($user->id != $junior_id)
             {
