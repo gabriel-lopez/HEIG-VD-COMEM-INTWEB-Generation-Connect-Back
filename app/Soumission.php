@@ -49,7 +49,7 @@ class Soumission extends Model
 
         $new->save();
 
-        $requete = Requete::find($inputs['requete_id'])->first();
+        $requete = Requete::find($new->requete_id)->first();
         $requete->statut = 'envoye';
         $requete->save();
 

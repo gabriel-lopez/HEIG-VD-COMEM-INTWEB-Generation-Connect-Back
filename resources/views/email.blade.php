@@ -40,9 +40,9 @@
 
         <div class="links">
             <p>Vous pouvez:
-                <a href="http://pingouin.heig-vd.ch/api/soumissions/accept/{{ $request->requete_id }}/{{ $user->id }}/{{ $hash }}">Accepter</a>
+                <a href="http://pingouin.heig-vd.ch/intouchables/api/soumissions/accept/{{ $request->requete_id }}/{{ $user->id }}/{{ $hash }}">Accepter</a>
                  ou
-                <a href="http://pingouin.heig-vd.ch/api/soumissions/decline/{{ $request->requete_id }}/{{ $user->id }}/{{ $hash }}">Refuser</a>
+                <a href="http://pingouin.heig-vd.ch/intouchables/api/soumissions/decline/{{ $request->requete_id }}/{{ $user->id }}/{{ $hash }}">Refuser</a>
             </p>
         </div>
 
